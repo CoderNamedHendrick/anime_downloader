@@ -12,13 +12,9 @@ class Search {
   }
 
   String get name => _name;
-  set name(String name) => _name = name;
   String get link => _link;
-  set link(String link) => _link = link;
   String get image => _image;
-  set image(String image) => _image = image;
-  String get release => _release;
-  set release(String release) => _release = release;
+  String get release => _release.replaceAll("\n", "").replaceAll(" ", "");
 
   Search.fromJson(Map<String, dynamic> json) {
     _name = json['name'];

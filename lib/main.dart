@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 void main(){
   API_Service service = API_Service();
   service.search(name: 'World trigger');
-  service.results();
   runApp(Home());
 }
 
