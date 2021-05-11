@@ -26,13 +26,4 @@ class Search {
     _image = json['image'];
     _release = json['release'];
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this._name;
-    data['link'] = this._link;
-    data['image'] = this._image;
-    data['release'] = this._release;
-    return data;
-  }
 }

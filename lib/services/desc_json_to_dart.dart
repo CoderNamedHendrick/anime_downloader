@@ -66,21 +66,6 @@ class Desc {
     }
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this._id;
-    data['name'] = this._name;
-    data['type'] = this._type;
-    data['summary'] = this._summary;
-    data['genre'] = this._genre;
-    data['release'] = this._release;
-    data['status'] = this._status;
-    data['otherNames'] = this._otherNames;
-    if (this._episodes != null) {
-      data['episodes'] = this._episodes.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
 class Episodes {
@@ -100,12 +85,5 @@ class Episodes {
   Episodes.fromJson(Map<String, dynamic> json) {
     _start = json['start'];
     _end = json['end'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['start'] = this._start;
-    data['end'] = this._end;
-    return data;
   }
 }
