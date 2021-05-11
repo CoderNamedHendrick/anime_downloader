@@ -11,14 +11,14 @@ class Desc {
 
   Desc(
       {String id,
-        String name,
-        String type,
-        String summary,
-        String genre,
-        String release,
-        String status,
-        String otherNames,
-        List<Episodes> episodes}) {
+      String name,
+      String type,
+      String summary,
+      String genre,
+      String release,
+      String status,
+      String otherNames,
+      List<Episodes> episodes}) {
     this._id = id;
     this._name = name;
     this._type = type;
@@ -32,13 +32,16 @@ class Desc {
 
   String get id => _id;
   String get name => _name;
-  String get type => _type;
+  String get type =>
+      _type.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "");
   String get summary => _summary;
-  String get genre => _genre;
+  String get genre =>
+      _genre.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "");
   String get release => _release;
-  String get status => _status;
+  String get status => _status.replaceAll("\n", "").replaceAll(" ", "");
   String get otherNames => _otherNames;
-  List<Episodes> get episodes => _episodes;
+  String get episodeStart => _episodes[0].start;
+  String get episodeEnd => _episodes[0].end;
 
   Desc.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
@@ -56,7 +59,6 @@ class Desc {
       });
     }
   }
-
 }
 
 class Episodes {
@@ -68,8 +70,8 @@ class Episodes {
     this._end = end;
   }
 
-  String get start => _start;
-  String get end => _end;
+  String get start => _start.replaceAll("\n", "").replaceAll(" ", "");
+  String get end => _end.replaceAll("\n", "").replaceAll(" ", "");
 
   Episodes.fromJson(Map<String, dynamic> json) {
     _start = json['start'];
