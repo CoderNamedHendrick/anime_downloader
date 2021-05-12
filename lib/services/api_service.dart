@@ -9,70 +9,43 @@ class ApiService{
   ApiService._();
   static final instance = ApiService._();
 
-  Future<void> search({String name}) async {
+  Future<List<Search>> search({String name}) async {
     http.Response response = await http
         .get('https://anime-web-scraper.herokuapp.com/search?name=$name');
     if (response.statusCode == 200) {
       Iterable r = jsonDecode(response.body);
-      List<Search> result = List<Search>.from(r.map((e) => Search.fromJson(e)));
-      for (int i = 0; i < result.length; i++) {
-        print(result[i].name);
-        print(result[i].link);
-        print(result[i].image);
-        print(result[i].release);
-      }
-    } else {
-      print('Couldn\'t get data');
+      return List<Search>.from(r.map((e) => Search.fromJson(e)));
     }
   }
 
-  Future<void> desc({String link}) async {
+  Future<Desc> desc({String link}) async {
     http.Response response = await http
         .get('https://anime-web-scraper.herokuapp.com/desc?link=$link');
     if (response.statusCode == 200) {
       var r = jsonDecode(response.body);
-      var result = Desc.fromJson(r);
-      print(result.id);
-      print(result.name);
-      print(result.type);
-      print(result.summary);
-      print(result.genre);
-      print(result.release);
-      print(result.status);
-      print(result.otherNames);
-      print(result.episodeStart);
-      print(result.episodeEnd);
-    } else {
-      print("Failed");
+      return Desc.fromJson(r);
     }
   }
 
-  Future<void> episodes({String start, String end, String id}) async {
+  Future<List<Episodes>> episodes({String start, String end, String id}) async {
     http.Response response = await http.get(
         'https://anime-web-scraper.herokuapp.com/episodes?start=$start&end=$end&id=$id');
     if (response.statusCode == 200) {
       Iterable r = jsonDecode(response.body);
-      List<Episodes> result =
+      return
           List<Episodes>.from(r.map((e) => Episodes.fromJson(e)));
-      for (int i = 0; i < result.length; i++) {
-        print(result[i].name);
-        print(result[i].link);
-      }
+
     } else {
       print('failed');
     }
   }
 
-  Future<void> downloadLink({String link}) async {
+  Future<List<DownloadLink>> downloadLink({String link}) async {
     http.Response response = await http
         .get('https://anime-web-scraper.herokuapp.com/downloadLink?link=$link');
     if(response.statusCode == 200){
       Iterable r = jsonDecode(response.body);
-      List<DownloadLink> result = List<DownloadLink>.from(r.map((e) => DownloadLink.fromJson(e)));
-      for(int i = 0; i<result.length; i++){
-        print(result[i].name);
-        print(result[i].link);
-      }
+      return List<DownloadLink>.from(r.map((e) => DownloadLink.fromJson(e)));
     }
   }
 }
