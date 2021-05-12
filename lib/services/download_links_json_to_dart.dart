@@ -7,7 +7,11 @@ class DownloadLink {
     this._link = link;
   }
 
-  String get name => _name.replaceAll("\n", "").trim();
+  String get name {
+    _name = _name.replaceAll("\n", "").trim();
+    return _name.replaceRange(8, _name.length-13, "");
+  }
+
   String get link => _link;
 
   DownloadLink.fromJson(Map<String, dynamic> json) {

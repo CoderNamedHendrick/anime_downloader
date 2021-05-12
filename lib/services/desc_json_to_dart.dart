@@ -31,15 +31,15 @@ class Desc {
   }
 
   String get id => _id;
-  String get name => _name.replaceAll(" ", "");
+  String get name => _name.trim();
   String get type =>
-      _type.replaceAll("\n", "").replaceAll("\t", "");
-  String get summary => _summary.replaceFirst(" ", "");
+      _type.replaceAll("\n", "").replaceAll("\t", "").trim();
+  String get summary => _summary.trim();
   String get genre =>
-      _genre.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "");
+      _genre.replaceAll("\n", "").replaceAll("\t", "").trim();
   String get release => _release.replaceAll(" ", "");
-  String get status => _status.replaceAll("\n", "").replaceAll(" ", "");
-  String get otherNames => _otherNames.replaceAll(" ", "");
+  String get status => _status.replaceAll("\n", "").trim();
+  String get otherNames => _otherNames.trim();
   String get episodeStart => _episodes[0].start;
   String get episodeEnd => _episodes[0].end;
 
@@ -70,8 +70,8 @@ class EpisodesDesc {
     this._end = end;
   }
 
-  String get start => _start.replaceAll("\n", "").replaceAll(" ", "");
-  String get end => _end.replaceAll("\n", "").replaceAll(" ", "");
+  String get start => _start.replaceAll("\n", "").trim();
+  String get end => _end.replaceAll("\n", "").trim();
 
   EpisodesDesc.fromJson(Map<String, dynamic> json) {
     _start = json['start'];
