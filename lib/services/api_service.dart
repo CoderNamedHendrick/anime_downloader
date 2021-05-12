@@ -2,15 +2,12 @@ import 'dart:convert';
 import 'package:anime_downloader/services/desc_json_to_dart.dart';
 import 'package:anime_downloader/services/search_json_to_dart.dart';
 import 'package:http/http.dart' as http;
-import 'package:dart_json_mapper/dart_json_mapper.dart'
-    show Json, JsonMapper, JsonProperty, jsonSerializable;
 
 class API_Service {
-
   Future<void> search({String name}) async {
     http.Response response = await http
         .get('https://anime-web-scraper.herokuapp.com/search?name=$name');
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       Iterable r = jsonDecode(response.body);
       List<Search> result = List<Search>.from(r.map((e) => Search.fromJson(e)));
       for (int i = 0; i < result.length; i++) {
@@ -19,26 +16,35 @@ class API_Service {
         print(result[i].image);
         print(result[i].release);
       }
-    } else {print('Couldn\'t get data');}
+    } else {
+      print('Couldn\'t get data');
+    }
   }
 
-  Future<void> desc({String link}) async{
-    http.Response response = await http.get('https://anime-web-scraper.herokuapp.com/desc?link=$link');
-    if(response.statusCode == 200){
-      Iterable r = jsonDecode(response.body);
-      List<Desc> result = List<Desc>.from(r.map((e) => Desc.fromJson(e)));
-      for(int i = 0; i < result.length; i++){
-        print(result[i].id);
-        print(result[i].name);
-        print(result[i].type);
-        print(result[i].summary);
-        print(result[i].genre);
-        print(result[i].release);
-        print(result[i].status);
-        print(result[i].otherNames);
-        print(result[i].episodeStart);
-        print(result[i].episodeEnd);
-      }
+  Future<void> desc({String link}) async {
+    http.Response response = await http
+        .get('https://anime-web-scraper.herokuapp.com/desc?link=$link');
+    if (response.statusCode == 200) {
+      var r = jsonDecode(response.body);
+      var result = Desc.fromJson(r);
+      print(result.id);
+      print(result.name);
+      print(result.type);
+      print(result.summary);
+      print(result.genre);
+      print(result.release);
+      print(result.status);
+      print(result.otherNames);
+      print(result.episodeStart);
+      print(result.episodeEnd);
+    } else {
+      print("Failed");
     }
+  }
+
+  Future<void> episodes({String start, String end, String id}) async {
+    http.Response response = await http.get(
+        'https://anime-web-scraper.herokuapp.com/episodes?start=$start&end=$end&id=$id');
+    if (response.statusCode == 200) {}
   }
 }

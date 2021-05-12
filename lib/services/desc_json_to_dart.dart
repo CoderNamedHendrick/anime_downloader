@@ -31,15 +31,15 @@ class Desc {
   }
 
   String get id => _id;
-  String get name => _name;
+  String get name => _name.replaceAll(" ", "");
   String get type =>
-      _type.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "");
-  String get summary => _summary;
+      _type.replaceAll("\n", "").replaceAll("\t", "");
+  String get summary => _summary.replaceFirst(" ", "");
   String get genre =>
       _genre.replaceAll("\n", "").replaceAll("\t", "").replaceAll(" ", "");
-  String get release => _release;
+  String get release => _release.replaceAll(" ", "");
   String get status => _status.replaceAll("\n", "").replaceAll(" ", "");
-  String get otherNames => _otherNames;
+  String get otherNames => _otherNames.replaceAll(" ", "");
   String get episodeStart => _episodes[0].start;
   String get episodeEnd => _episodes[0].end;
 
