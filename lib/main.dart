@@ -1,3 +1,5 @@
+import 'package:anime_downloader/screens/desc_screen.dart';
+import 'package:anime_downloader/screens/search_page.dart';
 import 'package:anime_downloader/services/api_service.dart';
 import 'package:anime_downloader/services/desc_json_to_dart.dart';
 import 'package:anime_downloader/services/download_links_json_to_dart.dart';
@@ -16,13 +18,13 @@ void main(){
    //     print(search[i].link);
    //   }
    // });
-  Future<Desc> description = ApiService.instance.desc(link: '/category/world-trigger-dub');
-  description.then((value) {
-    Desc desc = value;
-    print(desc.name);
-    print(desc.summary);
-    print(desc.genre);
-  });
+  // Future<Desc> description = ApiService.instance.desc(link: '/category/world-trigger-dub');
+  // description.then((value) {
+  //   Desc desc = value;
+  //   print(desc.name);
+  //   print(desc.summary);
+  //   print(desc.genre);
+  // });
   // Future<List<Episodes>> result = ApiService.instance.episodes(start: '1', end: '12', id: '8933');
   //  result.then((value) {
   //    List<Episodes> search = value.toList();
@@ -46,7 +48,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Container(color: Colors.red,),
+      home: DescriptionScreen(),
     );
   }
 }
