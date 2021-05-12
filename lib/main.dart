@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 void main(){
   API_Service service = API_Service();
   // service.search(name: 'world trigger');
-  // service.desc(link: '/category/world-trigger-2nd-season');
-  // service.episodes(start: '1', end: '12', id: '10016');
-  // service.downloadLink(link: '/world-trigger-2nd-season-episode-2');
+  // service.desc(link: '/category/world-trigger-dub');
+  // service.episodes(start: '1', end: '12', id: '8933');
+  service.downloadLink(link: '/world-trigger-dub-episode-2');
   runApp(Home());
 }
 

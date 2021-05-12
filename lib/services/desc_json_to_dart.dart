@@ -33,12 +33,12 @@ class Desc {
   String get id => _id;
   String get name => _name.trim();
   String get type =>
-      _type.replaceAll("\n", "").replaceAll("\t", "").trim();
+      _type.replaceAll(RegExp('\\s+'), ' ').trim();
   String get summary => _summary.trim();
   String get genre =>
-      _genre.replaceAll("\n", "").replaceAll("\t", "").trim();
+      _genre.replaceAll(RegExp('\\s+'), ' ').trim();
   String get release => _release.replaceAll(" ", "");
-  String get status => _status.replaceAll("\n", "").trim();
+  String get status => _status.replaceAll(RegExp('\\s+'), " ").trim();
   String get otherNames => _otherNames.trim();
   String get episodeStart => _episodes[0].start;
   String get episodeEnd => _episodes[0].end;
