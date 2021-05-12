@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:anime_downloader/services/desc_json_to_dart.dart';
+import 'package:anime_downloader/services/episodes_json_to_dart.dart';
 import 'package:anime_downloader/services/search_json_to_dart.dart';
 import 'package:http/http.dart' as http;
 
@@ -45,6 +46,15 @@ class API_Service {
   Future<void> episodes({String start, String end, String id}) async {
     http.Response response = await http.get(
         'https://anime-web-scraper.herokuapp.com/episodes?start=$start&end=$end&id=$id');
-    if (response.statusCode == 200) {}
+    if (response.statusCode == 200) {
+      Iterable r = jsonDecode(response.body);
+      List<Episodes> result = List<Episodes>.from(r.map((e) => Episodes.fromJson(e)));
+      for(int i = 0; i < result.length; i++){
+        print(result[i].name);
+        print(result[i].link);
+      }
+    } else{
+      print('failed');
+    }
   }
 }

@@ -7,7 +7,7 @@ class Desc {
   String _release;
   String _status;
   String _otherNames;
-  List<Episodes> _episodes;
+  List<EpisodesDesc> _episodes;
 
   Desc(
       {String id,
@@ -18,7 +18,7 @@ class Desc {
       String release,
       String status,
       String otherNames,
-      List<Episodes> episodes}) {
+      List<EpisodesDesc> episodes}) {
     this._id = id;
     this._name = name;
     this._type = type;
@@ -53,19 +53,19 @@ class Desc {
     _status = json['status'];
     _otherNames = json['otherNames'];
     if (json['episodes'] != null) {
-      _episodes = new List<Episodes>();
+      _episodes = new List<EpisodesDesc>();
       json['episodes'].forEach((v) {
-        _episodes.add(new Episodes.fromJson(v));
+        _episodes.add(new EpisodesDesc.fromJson(v));
       });
     }
   }
 }
 
-class Episodes {
+class EpisodesDesc {
   String _start;
   String _end;
 
-  Episodes({String start, String end}) {
+  EpisodesDesc({String start, String end}) {
     this._start = start;
     this._end = end;
   }
@@ -73,7 +73,7 @@ class Episodes {
   String get start => _start.replaceAll("\n", "").replaceAll(" ", "");
   String get end => _end.replaceAll("\n", "").replaceAll(" ", "");
 
-  Episodes.fromJson(Map<String, dynamic> json) {
+  EpisodesDesc.fromJson(Map<String, dynamic> json) {
     _start = json['start'];
     _end = json['end'];
   }
