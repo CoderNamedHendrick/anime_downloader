@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:anime_downloader/services/desc_json_to_dart.dart';
+import 'package:anime_downloader/services/download_links_json_to_dart.dart';
 import 'package:anime_downloader/services/episodes_json_to_dart.dart';
 import 'package:anime_downloader/services/search_json_to_dart.dart';
 import 'package:http/http.dart' as http;
@@ -48,13 +49,27 @@ class API_Service {
         'https://anime-web-scraper.herokuapp.com/episodes?start=$start&end=$end&id=$id');
     if (response.statusCode == 200) {
       Iterable r = jsonDecode(response.body);
-      List<Episodes> result = List<Episodes>.from(r.map((e) => Episodes.fromJson(e)));
-      for(int i = 0; i < result.length; i++){
+      List<Episodes> result =
+          List<Episodes>.from(r.map((e) => Episodes.fromJson(e)));
+      for (int i = 0; i < result.length; i++) {
         print(result[i].name);
         print(result[i].link);
       }
-    } else{
+    } else {
       print('failed');
+    }
+  }
+
+  Future<void> downloadLink({String link}) async {
+    http.Response response = await http
+        .get('https://anime-web-scraper.herokuapp.com/downloadLink?link=$link');
+    if(response.statusCode == 200){
+      Iterable r = jsonDecode(response.body);
+      List<DownloadLink> result = List<DownloadLink>.from(r.map((e) => DownloadLink.fromJson(e)));
+      for(int i = 0; i<result.length; i++){
+        print(result[i].name);
+        print(result[i].link);
+      }
     }
   }
 }

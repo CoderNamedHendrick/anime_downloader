@@ -7,10 +7,8 @@ class DownloadLink {
     this._link = link;
   }
 
-  String get name => _name;
-  set name(String name) => _name = name;
+  String get name => _name.replaceAll("\n", "").trim();
   String get link => _link;
-  set link(String link) => _link = link;
 
   DownloadLink.fromJson(Map<String, dynamic> json) {
     _name = json['name'];

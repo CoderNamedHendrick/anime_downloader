@@ -6,7 +6,8 @@ void main(){
   API_Service service = API_Service();
   // service.search(name: 'world trigger');
   // service.desc(link: '/category/world-trigger-2nd-season');
-  service.episodes(start: '1', end: '12', id: '10016');
+  // service.episodes(start: '1', end: '12', id: '10016');
+  service.downloadLink(link: '/world-trigger-2nd-season-episode-2');
   runApp(Home());
 }
 
