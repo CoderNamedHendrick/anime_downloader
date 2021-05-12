@@ -1,4 +1,5 @@
 import 'package:anime_downloader/screens/desc_screen.dart';
+import 'package:anime_downloader/screens/download_screen.dart';
 import 'package:anime_downloader/screens/episodes_screen.dart';
 import 'package:anime_downloader/screens/search_page.dart';
 import 'package:anime_downloader/services/api_service.dart';
@@ -49,7 +50,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: EpisodesScreen(),
+      home: DownloadScreen(),
     );
   }
 }
