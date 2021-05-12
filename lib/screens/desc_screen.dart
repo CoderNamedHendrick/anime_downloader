@@ -20,6 +20,9 @@ class DescriptionScreen extends StatelessWidget {
                 StretchMode.fadeTitle,
               ],
             ),
+            actions: [
+              IconButton(iconSize: 42, icon: Icon(Icons.arrow_circle_down_sharp), onPressed: null),
+            ],
           ),
           SliverFillRemaining(
             child: Container(
@@ -45,47 +48,36 @@ class DescriptionScreen extends StatelessWidget {
                     ),
                     _textWidget(
                       title: 'Summary',
-                      input: "When a gate to another world suddenly opens on Earth, Mikado City is invaded by strange creatures known as \"Neighbors,\" malicious beings impervious to traditional weaponry. In response to their arrival, an organization called the Border Defense Agency has been established to combat the Neighbor menace through special weapons called \"Triggers.\" Even though several years have passed after the gate first opened, Neighbors are still a threat and members of Border remain on guard to ensure the safety of the planet.\n\nDespite this delicate situation, members-in-training, such as Osamu Mikumo, are not permitted to use their Triggers outside of headquarters. But when the mysterious new student in his class is dragged into a forbidden area by bullies, they are attacked by Neighbors, and Osamu has no choice but to do what he believes is right. Much to his surprise, however, the transfer student Yuuma Kuga makes short work of the aliens, revealing that he is a humanoid Neighbor in disguise.\nNoted",
+                      input:
+                          "When a gate to another world suddenly opens on Earth, Mikado City is invaded by strange creatures known as \"Neighbors,\" malicious beings impervious to traditional weaponry. In response to their arrival, an organization called the Border Defense Agency has been established to combat the Neighbor menace through special weapons called \"Triggers.\" Even though several years have passed after the gate first opened, Neighbors are still a threat and members of Border remain on guard to ensure the safety of the planet.\n\nDespite this delicate situation, members-in-training, such as Osamu Mikumo, are not permitted to use their Triggers outside of headquarters. But when the mysterious new student in his class is dragged into a forbidden area by bullies, they are attacked by Neighbors, and Osamu has no choice but to do what he believes is right. Much to his surprise, however, the transfer student Yuuma Kuga makes short work of the aliens, revealing that he is a humanoid Neighbor in disguise.\nNoted",
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Text(
-                      "Genre: Action, School, Sci-Fi, Shounen, Supernatural",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    _textWidget(
+                      title: 'Genre',
+                      input: "Action, School, Sci-Fi, Shounen, Supernatural",
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Text(
-                      "release: 2014",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    _textWidget(
+                      title: 'Release',
+                      input: "2014",
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Text(
-                      "status: Completed",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    _textWidget(
+                      title: 'Status',
+                      input: "Completed",
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    Text(
-                      "otherNames: ワールドトリガー",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    _textWidget(
+                      title: 'OtherNames',
+                      input: "ワールドトリガー",
                     ),
                     SizedBox(
                       height: 8,
@@ -96,7 +88,7 @@ class DescriptionScreen extends StatelessWidget {
                         Text(
                           "Episodes:",
                           style: TextStyle(
-                            fontSize: 22,
+                            fontSize: 26,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -105,14 +97,14 @@ class DescriptionScreen extends StatelessWidget {
                             Text(
                               "start: 0",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               "end: 73",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -131,11 +123,19 @@ class DescriptionScreen extends StatelessWidget {
   }
 }
 
-Widget _textWidget({String title, String input, double fontSize:20}){
+Widget _textWidget({String title, String input, double fontSize: 20}) {
   return Row(
     children: [
-      Text("$title: ", style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),),
-      Text("$input", style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.w500),),
+      Text(
+        "$title: ",
+        style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+      ),
+      Expanded(
+        child: Text(
+          "$input",
+          style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.w500),
+        ),
+      ),
     ],
   );
 }
