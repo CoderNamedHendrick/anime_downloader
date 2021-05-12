@@ -5,7 +5,10 @@ import 'package:anime_downloader/services/episodes_json_to_dart.dart';
 import 'package:anime_downloader/services/search_json_to_dart.dart';
 import 'package:http/http.dart' as http;
 
-class API_Service {
+class ApiService{
+  ApiService._();
+  static final instance = ApiService._();
+
   Future<void> search({String name}) async {
     http.Response response = await http
         .get('https://anime-web-scraper.herokuapp.com/search?name=$name');

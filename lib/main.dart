@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 
 void main(){
-  API_Service service = API_Service();
-  // service.search(name: 'world trigger');
-  // service.desc(link: '/category/world-trigger-dub');
-  // service.episodes(start: '1', end: '12', id: '8933');
-  service.downloadLink(link: '/world-trigger-dub-episode-2');
+
+  // ApiService.instance.search(name: 'world trigger');
+  // ApiService.instance.desc(link: '/category/world-trigger-dub');
+  // ApiService.instance.episodes(start: '1', end: '12', id: '8933');
+  ApiService.instance.downloadLink(link: '/world-trigger-dub-episode-2');
   runApp(Home());
 }
 
