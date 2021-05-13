@@ -1,4 +1,4 @@
-class ApiResponse<T>{
+class ApiResponse<T> {
   Status status;
   T data;
   String message;
@@ -11,4 +11,5 @@ class ApiResponse<T>{
     return "Status : $status \n Message : $message \n Data : $data";
   }
 }
+
 enum Status { LOADING, COMPLETED, ERROR }
