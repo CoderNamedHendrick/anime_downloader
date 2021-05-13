@@ -21,7 +21,11 @@ class DescriptionScreen extends StatelessWidget {
               ],
             ),
             actions: [
-              IconButton(iconSize: 42, icon: Icon(Icons.arrow_circle_down_sharp), onPressed: null),
+              IconButton(
+                iconSize: 42,
+                icon: Icon(Icons.arrow_circle_down_sharp),
+                onPressed: () => Navigator.of(context).pushNamed('/episodes'),
+              ),
             ],
           ),
           SliverFillRemaining(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +83,7 @@ class SearchPage extends StatelessWidget {
             ),
           ),
         ),
+        onTap: () => Navigator.pushNamed(context, '/description'),
       ),
     );
   }
