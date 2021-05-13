@@ -1,4 +1,4 @@
-class Desc {
+class DescriptionModel {
   String _id;
   String _name;
   String _type;
@@ -9,7 +9,7 @@ class Desc {
   String _otherNames;
   List<EpisodesDesc> _episodes;
 
-  Desc(
+  DescriptionModel(
       {String id,
       String name,
       String type,
@@ -43,7 +43,7 @@ class Desc {
   String get episodeStart => _episodes[0].start;
   String get episodeEnd => _episodes[0].end;
 
-  Desc.fromJson(Map<String, dynamic> json) {
+  DescriptionModel.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
     _name = json['name'];
     _type = json['type'];

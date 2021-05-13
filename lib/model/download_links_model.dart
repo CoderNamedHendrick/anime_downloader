@@ -1,8 +1,8 @@
-class DownloadLink {
+class DownloadLinkModel {
   String _name;
   String _link;
 
-  DownloadLink({String name, String link}) {
+  DownloadLinkModel({String name, String link}) {
     this._name = name;
     this._link = link;
   }
@@ -10,7 +10,7 @@ class DownloadLink {
   String get name => _name.replaceAll(RegExp('\\s+'), " ").trim();
   String get link => _link;
 
-  DownloadLink.fromJson(Map<String, dynamic> json) {
+  DownloadLinkModel.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
     _link = json['link'];
   }

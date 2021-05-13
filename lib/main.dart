@@ -2,11 +2,6 @@ import 'package:anime_downloader/screens/desc_screen.dart';
 import 'package:anime_downloader/screens/download_screen.dart';
 import 'package:anime_downloader/screens/episodes_screen.dart';
 import 'package:anime_downloader/screens/search_screen.dart';
-import 'package:anime_downloader/services/api_service.dart';
-import 'package:anime_downloader/services/desc_json_to_dart.dart';
-import 'package:anime_downloader/services/download_links_json_to_dart.dart';
-import 'package:anime_downloader/services/episodes_json_to_dart.dart';
-import 'package:anime_downloader/services/search_json_to_dart.dart';
 import 'package:flutter/material.dart';
 
 
