@@ -17,7 +17,7 @@ class DownloadLinkBloc{
   }
 
   fetchDownloadLinks(String link) async{
-    downloadLinkSink.add(ApiResponse.loading('Fetchink download links'));
+    downloadLinkSink.add(ApiResponse.loading('Fetching download links'));
     try{
       List<DownloadLinkModel> links = await _downloadLinkRepository.fetchDownloadLink(link: link);
       downloadLinkSink.add(ApiResponse.completed(links));
