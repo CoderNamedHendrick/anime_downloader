@@ -4,7 +4,7 @@ import 'package:anime_downloader/services/api_service.dart';
 class EpisodeRepository {
   ApiService _service = ApiService();
 
-  Future<List<EpisodeModel>> episodes(
+  Future<List<EpisodeModel>> fetchEpisodes(
       {String start, String end, String id}) async {
     final Iterable response =
         await _service.get('/episodes?start=$start&end=$end&id=$id');
