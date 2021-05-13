@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'package:anime_downloader/model/download_links_model.dart';
+import 'package:anime_downloader/repository/downloads_repository.dart';
+import 'package:anime_downloader/services/api_response.dart';
 
 class DownloadLinkBloc{
   DownloadLinkRepository _downloadLinkRepository;
@@ -12,7 +16,7 @@ class DownloadLinkBloc{
     fetchDownloadLinks(link);
   }
 
-  fetchDownloadLinks(String link){
+  fetchDownloadLinks(String link) async{
     downloadLinkSink.add(ApiResponse.loading('Fetchink download links'));
     try{
       List<DownloadLinkModel> links = await _downloadLinkRepository.fetchDownloadLink(link: link);

@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'package:anime_downloader/model/episodes_model.dart';
+import 'package:anime_downloader/repository/episode_repository.dart';
+import 'package:anime_downloader/services/api_response.dart';
 
 class EpisodeBloc{
   EpisodeRepository _episodeRepository;
@@ -13,7 +17,7 @@ class EpisodeBloc{
     fetchEpisodes(start, end, id);
   }
 
-  fetchEpisodes(String start, String end, String id){
+  fetchEpisodes(String start, String end, String id) async{
     episodeSink.add(ApiResponse.loading('Fetching Episodes'));
     try{
       List<EpisodeModel> episodes = await _episodeRepository.fetchEpisodes(start: start, end: end, id: id);

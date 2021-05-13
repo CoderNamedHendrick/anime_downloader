@@ -1,6 +1,5 @@
-
 import 'dart:async';
-
+import 'package:anime_downloader/model/description_model.dart';
 import 'package:anime_downloader/repository/description_repository.dart';
 import 'package:anime_downloader/services/api_response.dart';
 
