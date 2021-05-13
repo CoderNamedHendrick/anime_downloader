@@ -8,6 +8,6 @@ class EpisodeRepository {
       {String start, String end, String id}) async {
     final Iterable response =
         await _service.get('/episodes?start=$start&end=$end&id=$id');
-    return List<EpisodeModel>.from(r.map((e) => EpisodeModel.fromJson(e)));
+    return List<EpisodeModel>.from(response.map((e) => EpisodeModel.fromJson(e)));
   }
 }
