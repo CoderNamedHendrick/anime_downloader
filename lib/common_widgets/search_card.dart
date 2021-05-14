@@ -1,4 +1,5 @@
 import 'package:anime_downloader/common_widgets/text_widget.dart';
+import 'package:anime_downloader/screens/desc_screen.dart';
 import 'package:flutter/material.dart';
 
 Widget SearchCard(BuildContext context,
@@ -47,7 +48,14 @@ Widget SearchCard(BuildContext context,
           ),
         ),
       ),
-      onTap: () => Navigator.pushNamed(context, '/description'),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DescriptionScreen(
+            link: link,
+          ),
+        ),
+      ),
     ),
   );
 }

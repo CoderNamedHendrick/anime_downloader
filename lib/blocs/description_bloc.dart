@@ -15,10 +15,10 @@ class DescriptionBloc{
   DescriptionBloc({String link}){
     _descriptionController = StreamController<ApiResponse<DescriptionModel>>();
     _descriptionRepository = DescriptionRepository();
-    fetchDescription(link);
+    fetchDescription(link: link);
   }
 
-  fetchDescription(String link) async{
+  fetchDescription({String link}) async{
     descriptionSink.add(ApiResponse.loading('Fetching Description'));
     try{
       DescriptionModel desc = await _descriptionRepository.fetchDesc(link: link);
