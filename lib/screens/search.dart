@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Search extends StatelessWidget {
+  TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +25,7 @@ class Search extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _controller,
                   decoration: InputDecoration(
                     fillColor: Colors.orangeAccent,
                     hintText: 'Enter Anime',
@@ -37,7 +40,7 @@ class Search extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.search_rounded),
-              onPressed: () => Navigator.pushNamed(context, '/search'),
+              onPressed: () => Navigator.pushNamed(context, '/search', arguments: _controller.value.text),
               iconSize: 32,
             ),
           ],
