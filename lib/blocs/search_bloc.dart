@@ -14,13 +14,13 @@ class SearchBloc{
 
   Stream<ApiResponse<List<SearchModel>>> get searchListStream => _searchListController.stream;
 
-  SearchBloc(String name) {
+  SearchBloc({String name}) {
     _searchListController = StreamController<ApiResponse<List<SearchModel>>>();
     _searchRepository = SearchRepository();
-    fetchSearchList(name);
+    fetchSearchList(name: name);
   }
 
-  fetchSearchList(String name) async{
+  fetchSearchList({String name}) async{
     searchListSink.add(ApiResponse.loading('Fetching Anime'));
     try{
       List<SearchModel> searches = await _searchRepository.search(name: name);

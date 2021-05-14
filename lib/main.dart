@@ -1,6 +1,7 @@
 import 'package:anime_downloader/screens/desc_screen.dart';
 import 'package:anime_downloader/screens/download_screen.dart';
 import 'package:anime_downloader/screens/episodes_screen.dart';
+import 'package:anime_downloader/screens/search.dart';
 import 'package:anime_downloader/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +49,8 @@ class Home extends StatelessWidget {
       title: 'Pōtaru',
       initialRoute: '/',
       routes: {
-        '/': (context) => SearchScreen(),
+        '/': (context) => Search(),
+        '/search': (context) => SearchScreen(),
         '/description': (context) => DescriptionScreen(),
         '/episodes': (context) => EpisodesScreen(),
         '/download_links': (context) => DownloadScreen(),
