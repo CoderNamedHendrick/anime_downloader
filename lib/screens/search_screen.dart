@@ -1,7 +1,7 @@
 import 'package:anime_downloader/blocs/search_bloc.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
-import 'package:anime_downloader/common_widgets/text_widget.dart';
+import 'package:anime_downloader/common_widgets/search_card.dart';
 import 'package:anime_downloader/model/search_model.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +82,7 @@ class SearchList extends StatelessWidget {
         crossAxisCount: 1,
       ),
       itemBuilder: (context, index) {
-        return searchCard(
+        return SearchCard(
           context,
           title: searchList[index].name,
           releaseDate: searchList[index].release,
@@ -94,53 +94,4 @@ class SearchList extends StatelessWidget {
   }
 }
 
-Widget searchCard(BuildContext context,
-    {String title, String releaseDate, String imgUrl, String link}) {
-  return Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: GestureDetector(
-      child: Card(
-        shadowColor: Colors.grey,
-        elevation: 8,
-        child: Container(
-          child: Column(
-            children: [
-              Flexible(
-                flex: 7,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(imgUrl),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              Flexible(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      TextWidget(
-                        title: 'Name',
-                        input: title,
-                        type: 'searchScreen',
-                      ),
-                      TextWidget(
-                        title: 'Release',
-                        input: releaseDate,
-                        type: 'searchScreen',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      onTap: () => Navigator.pushNamed(context, '/description'),
-    ),
-  );
-}
+
