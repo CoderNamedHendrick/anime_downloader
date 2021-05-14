@@ -52,7 +52,7 @@ Widget SearchCard(BuildContext context,
         context,
         MaterialPageRoute(
           builder: (context) => DescriptionScreen(
-            link: link,
+            link: link, imageUrl: imgUrl,
           ),
         ),
       ),

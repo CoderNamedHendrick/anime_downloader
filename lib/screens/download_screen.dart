@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class DownloadScreen extends StatelessWidget {
-  const DownloadScreen({Key key}) : super(key: key);
+class DownloadScreen extends StatefulWidget {
+  const DownloadScreen({Key key, this.link}) : super(key: key);
+  final String link;
 
+  @override
+  _DownloadScreenState createState() => _DownloadScreenState();
+}
+
+class _DownloadScreenState extends State<DownloadScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

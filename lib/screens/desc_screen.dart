@@ -2,13 +2,16 @@ import 'package:anime_downloader/blocs/description_bloc.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/common_widgets/text_widget.dart';
 import 'package:anime_downloader/model/description_model.dart';
+import 'package:anime_downloader/screens/episodes_screen.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionScreen extends StatefulWidget {
-  const DescriptionScreen({Key key, this.link}) : super(key: key);
+  const DescriptionScreen({Key key, this.link, this.imageUrl})
+      : super(key: key);
   final String link;
+  final String imageUrl;
 
   @override
   _DescriptionScreenState createState() => _DescriptionScreenState();
@@ -42,6 +45,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                 case Status.COMPLETED:
                   return Description(
                     desc: snapshot.data.data,
+                    imageUrl: widget.imageUrl,
                   );
                   break;
                 case Status.ERROR:
@@ -62,8 +66,9 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 }
 
 class Description extends StatelessWidget {
-  const Description({Key key, this.desc}) : super(key: key);
+  const Description({Key key, this.desc, this.imageUrl}) : super(key: key);
   final DescriptionModel desc;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +80,8 @@ class Description extends StatelessWidget {
           expandedHeight: MediaQuery.of(context).size.height / 2.5,
           flexibleSpace: FlexibleSpaceBar(
             background: Image(
-              image: AssetImage('images/rectangle.png'),
+              image: NetworkImage(imageUrl),
+              fit: BoxFit.cover,
             ),
             stretchModes: [
               // StretchMode.zoomBackground,
@@ -87,7 +93,16 @@ class Description extends StatelessWidget {
             IconButton(
               iconSize: 42,
               icon: Icon(Icons.arrow_circle_down_sharp),
-              onPressed: () => Navigator.of(context).pushNamed('/episodes'),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => EpisodesScreen(
+                    start: desc.episodeStart,
+                    end: desc.episodeEnd,
+                    id: desc.id,
+                    name: desc.name,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
