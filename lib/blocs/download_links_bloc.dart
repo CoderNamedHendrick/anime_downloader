@@ -13,10 +13,10 @@ class DownloadLinkBloc{
   DownloadLinkBloc({String link}){
     _downloadLinkController = StreamController<ApiResponse<List<DownloadLinkModel>>>();
     _downloadLinkRepository = DownloadLinkRepository();
-    fetchDownloadLinks(link);
+    fetchDownloadLinks(link: link);
   }
 
-  fetchDownloadLinks(String link) async{
+  fetchDownloadLinks({String link}) async{
     downloadLinkSink.add(ApiResponse.loading('Fetching download links'));
     try{
       List<DownloadLinkModel> links = await _downloadLinkRepository.fetchDownloadLink(link: link);

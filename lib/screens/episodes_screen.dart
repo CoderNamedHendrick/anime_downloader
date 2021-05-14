@@ -80,6 +80,12 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
       ),
     );
   }
+
+  @override
+  void dispose(){
+    _bloc.dispose();
+    super.dispose();
+  }
 }
 
 class Episodes extends StatelessWidget {

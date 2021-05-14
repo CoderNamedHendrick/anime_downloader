@@ -63,6 +63,12 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
       ),
     );
   }
+
+  @override
+  void dispose(){
+    _bloc.dispose();
+    super.dispose();
+  }
 }
 
 class Description extends StatelessWidget {
