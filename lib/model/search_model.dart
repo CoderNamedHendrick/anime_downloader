@@ -14,7 +14,7 @@ class SearchModel {
   String get name => _name;
   String get link => _link;
   String get image => _image;
-  String get release => _release.replaceAll("\n", "").trim();
+  String get release => _release.replaceAll(RegExp('[^0-9]'), "").trim();
 
   SearchModel.fromJson(Map<String, dynamic> json) {
     _name = json['name'];

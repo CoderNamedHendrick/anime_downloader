@@ -79,7 +79,7 @@ class SearchList extends StatelessWidget {
     return GridView.builder(
       itemCount: searchList.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
       ),
       itemBuilder: (context, index) {
         return searchCard(
@@ -103,12 +103,10 @@ Widget searchCard(BuildContext context,
         shadowColor: Colors.grey,
         elevation: 8,
         child: Container(
-          height: MediaQuery.of(context).size.height / 4,
-          width: MediaQuery.of(context).size.width / 2.3,
           child: Column(
             children: [
               Flexible(
-                flex: 6,
+                flex: 7,
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -119,19 +117,23 @@ Widget searchCard(BuildContext context,
                 ),
               ),
               Flexible(
-                flex: 1,
-                child: TextWidget(
-                  title: 'Name',
-                  input: title,
-                  type: 'searchScreen',
-                ),
-              ),
-              Flexible(
-                flex: 1,
-                child: TextWidget(
-                  title: 'Release',
-                  input: releaseDate,
-                  type: 'searchScreen',
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      TextWidget(
+                        title: 'Name',
+                        input: title,
+                        type: 'searchScreen',
+                      ),
+                      TextWidget(
+                        title: 'Release',
+                        input: releaseDate,
+                        type: 'searchScreen',
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
