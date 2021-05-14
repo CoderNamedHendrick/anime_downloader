@@ -7,7 +7,7 @@ import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key key, this.search}) : super(key: key);
+  const SearchScreen({Key key, @required this.search}) : super(key: key);
   final String search;
 
   @override
@@ -50,7 +50,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 case Status.ERROR:
                   return Error(
                     errorMessage: snapshot.data.message,
-                    onRetryPressed: () => _bloc.fetchSearchList(name: widget.search),
+                    onRetryPressed: () =>
+                        _bloc.fetchSearchList(name: widget.search),
                   );
                   break;
               }
@@ -76,6 +77,7 @@ class SearchList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      itemCount: searchList.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
       ),
@@ -108,7 +110,12 @@ Widget searchCard(BuildContext context,
               Flexible(
                 flex: 6,
                 child: Container(
-                  color: Colors.red,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(imgUrl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
               Flexible(

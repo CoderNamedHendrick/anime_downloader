@@ -1,3 +1,4 @@
+import 'package:anime_downloader/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class Search extends StatelessWidget {
@@ -40,7 +41,14 @@ class Search extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.search_rounded),
-              onPressed: () => Navigator.pushNamed(context, '/search', arguments: _controller.value.text),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchScreen(
+                    search: _controller.value.text,
+                  ),
+                ),
+              ),
               iconSize: 32,
             ),
           ],
