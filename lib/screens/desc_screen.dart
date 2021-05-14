@@ -1,3 +1,4 @@
+import 'package:anime_downloader/common_widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionScreen extends StatelessWidget {
@@ -36,52 +37,59 @@ class DescriptionScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _textWidget(
+                    TextWidget(
                       title: 'Name',
                       input: 'World-trigger-dub',
+                      type: 'descriptionScreen',
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    _textWidget(
+                    TextWidget(
                       title: 'Type',
                       input: 'Fall 2014 Anime',
+                      type: 'descriptionScreen',
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    _textWidget(
+                    TextWidget(
                       title: 'Summary',
                       input:
                           "When a gate to another world suddenly opens on Earth, Mikado City is invaded by strange creatures known as \"Neighbors,\" malicious beings impervious to traditional weaponry. In response to their arrival, an organization called the Border Defense Agency has been established to combat the Neighbor menace through special weapons called \"Triggers.\" Even though several years have passed after the gate first opened, Neighbors are still a threat and members of Border remain on guard to ensure the safety of the planet.\n\nDespite this delicate situation, members-in-training, such as Osamu Mikumo, are not permitted to use their Triggers outside of headquarters. But when the mysterious new student in his class is dragged into a forbidden area by bullies, they are attacked by Neighbors, and Osamu has no choice but to do what he believes is right. Much to his surprise, however, the transfer student Yuuma Kuga makes short work of the aliens, revealing that he is a humanoid Neighbor in disguise.\nNoted",
+                      type: 'descriptionScreen',
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    _textWidget(
+                    TextWidget(
                       title: 'Genre',
                       input: "Action, School, Sci-Fi, Shounen, Supernatural",
+                      type: 'descriptionScreen',
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    _textWidget(
+                    TextWidget(
                       title: 'Release',
                       input: "2014",
+                      type: 'descriptionScreen',
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    _textWidget(
+                    TextWidget(
                       title: 'Status',
                       input: "Completed",
+                      type: 'descriptionScreen',
                     ),
                     SizedBox(
                       height: 8,
                     ),
-                    _textWidget(
+                    TextWidget(
                       title: 'OtherNames',
                       input: "ワールドトリガー",
+                      type: 'descriptionScreen',
                     ),
                     SizedBox(
                       height: 8,
@@ -125,21 +133,4 @@ class DescriptionScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _textWidget({String title, String input, double fontSize: 20}) {
-  return Row(
-    children: [
-      Text(
-        "$title: ",
-        style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
-      ),
-      Expanded(
-        child: Text(
-          "$input",
-          style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.w500),
-        ),
-      ),
-    ],
-  );
 }

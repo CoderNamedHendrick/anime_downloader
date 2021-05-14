@@ -1,3 +1,4 @@
+import 'package:anime_downloader/common_widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -54,31 +55,27 @@ class SearchScreen extends StatelessWidget {
             child: Column(
               children: [
                 Flexible(
-                  flex: 7,
+                  flex: 6,
                   child: Container(
                     color: Colors.red,
                   ),
                 ),
                 Flexible(
                   flex: 1,
-                  child: Text(
-                    "Name : World Trigger",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
+                  child: TextWidget(
+                    title: 'Name',
+                    input: 'World Trigger',
+                    type: 'searchScreen',
                   ),
                 ),
                 Flexible(
                   flex: 1,
-                  child: Text(
-                    "Release: 2019",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
+                  child: TextWidget(
+                    title: 'Release',
+                    input: '2019',
+                    type: 'searchScreen',
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -88,3 +85,5 @@ class SearchScreen extends StatelessWidget {
     );
   }
 }
+
+
