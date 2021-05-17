@@ -2,6 +2,7 @@ import 'package:anime_downloader/blocs/download_links_bloc.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/model/download_links_model.dart';
+import 'package:anime_downloader/screens/download_webview.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
 
@@ -71,6 +72,7 @@ class Downloads extends StatelessWidget {
     return ListView.separated(
       itemCount: downloads.length,
       itemBuilder: (context, index) => _episodes(
+        context,
         name: downloads[index].name,
         link: downloads[index].link,
       ),
@@ -79,10 +81,14 @@ class Downloads extends StatelessWidget {
   }
 }
 
-Widget _episodes({String name, String link}) {
+Widget _episodes(BuildContext context, {String name, String link}) {
   return ListTile(
     title: Text('$name'),
     trailing: Icon(Icons.download_outlined),
-    onTap: () => null,
+    onTap: () => Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DownloaderWebview(link: link,),
+      ),
+    ),
   );
 }
