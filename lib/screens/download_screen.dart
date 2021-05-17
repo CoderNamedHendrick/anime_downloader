@@ -87,7 +87,7 @@ Widget _episodes(BuildContext context, {String name, String link}) {
     trailing: Icon(Icons.download_outlined),
     onTap: () => Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DownloaderWebview(link: link,),
+        builder: (context) => DownloaderWebView(link: link,),
       ),
     ),
   );
