@@ -36,21 +36,21 @@ class _DownloaderWebViewState extends State<DownloaderWebView> {
         initialOptions: InAppWebViewGroupOptions(
           crossPlatform: InAppWebViewOptions(
             useOnDownloadStart: true,
+
           ),
         ),
-        onWebViewCreated: (InAppWebViewController controller){
+        onWebViewCreated: (InAppWebViewController controller) {
           webViewController = controller;
         },
-        onLoadStart: (InAppWebViewController controller, Uri url){
-        },
-        onLoadStop: (InAppWebViewController controller, Uri url){
-
-        },
-        onDownloadStart: (controller, url) async{
+        onLoadStart: (InAppWebViewController controller, Uri url) {},
+        onLoadStop: (InAppWebViewController controller, Uri url) {},
+        onDownloadStart: (controller, url) async {
           print("OnDownloadStart $url");
-          final taskId = await FlutterDownloader.enqueue(savedDir: (await getExternalStorageDirectory()).path,
-          showNotification: true,
-          openFileFromNotification: true,);
+          final taskId = await FlutterDownloader.enqueue(
+            savedDir: (await getExternalStorageDirectory()).path,
+            showNotification: true,
+            openFileFromNotification: true,
+          );
         },
       ),
     );
