@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
 class DownloaderWebView extends StatefulWidget {
@@ -47,6 +46,7 @@ class _DownloaderWebViewState extends State<DownloaderWebView> {
         onDownloadStart: (controller, url) async {
           print("OnDownloadStart $url");
           final taskId = await FlutterDownloader.enqueue(
+            url: url.toString(),
             savedDir: (await getExternalStorageDirectory()).path,
             showNotification: true,
             openFileFromNotification: true,
