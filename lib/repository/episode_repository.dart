@@ -16,7 +16,7 @@ class NameLinkRepository {
     return List<NameLinkModel>.from(response.map((e) => NameLinkModel.fromJson(e)));
   }
 
-  Future<List<NameLinkMode>> fetchGenres() async{
+  Future<List<NameLinkModel>> fetchGenres() async{
     final Iterable response = await _service.get('/genres');
     return List<NameLinkModel>.from(response.map((e) => NameLinkModel.fromJson(e)));
   }

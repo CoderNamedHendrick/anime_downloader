@@ -1,7 +1,7 @@
 import 'package:anime_downloader/blocs/download_links_bloc.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
-import 'package:anime_downloader/model/download_links_model.dart';
+import 'package:anime_downloader/model/name_link_model.dart';
 import 'package:anime_downloader/screens/download_webview.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () => _bloc.fetchDownloadLinks(link: widget.link),
-        child: StreamBuilder<ApiResponse<List<DownloadLinkModel>>>(
+        child: StreamBuilder<ApiResponse<List<NameLinkModel>>>(
           stream: _bloc.downloadLinkStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -65,7 +65,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
 
 class Downloads extends StatelessWidget {
   const Downloads({Key key, this.downloads}) : super(key: key);
-  final List<DownloadLinkModel> downloads;
+  final List<NameLinkModel> downloads;
 
   @override
   Widget build(BuildContext context) {
