@@ -1,7 +1,7 @@
 import 'package:anime_downloader/blocs/episode_bloc.dart';
 import 'package:anime_downloader/common_widgets/episodes.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
-import 'package:anime_downloader/model/episodes_model.dart';
+import 'package:anime_downloader/model/name_link_model.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
           id: widget.id,
           name: widget.name,
         ),
-        child: StreamBuilder<ApiResponse<List<EpisodeModel>>>(
+        child: StreamBuilder<ApiResponse<List<NameLinkModel>>>(
           stream: _bloc.episodeStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -90,7 +90,7 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
 
 class Episodes extends StatelessWidget {
   const Episodes({Key key, this.episodeList}) : super(key: key);
-  final List<EpisodeModel> episodeList;
+  final List<NameLinkModel> episodeList;
 
   @override
   Widget build(BuildContext context) {
