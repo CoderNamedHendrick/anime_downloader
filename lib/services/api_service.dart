@@ -1,9 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:anime_downloader/model/description_model.dart';
-import 'package:anime_downloader/model/download_links_model.dart';
-import 'package:anime_downloader/model/name_link_model.dart';
-import 'package:anime_downloader/model/search_model.dart';
 import 'package:anime_downloader/services/api_exceptions.dart';
 import 'package:http/http.dart' as http;
 

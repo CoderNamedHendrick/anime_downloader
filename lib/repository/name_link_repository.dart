@@ -11,6 +11,12 @@ class NameLinkRepository {
     return List<NameLinkModel>.from(response.map((e) => NameLinkModel.fromJson(e)));
   }
 
+  Future<List<NameLinkModel>> fetchDownloadLink({String link}) async {
+    final Iterable response = await _service.get('/downloadLink?link=$link');
+    return List<NameLinkModel>.from(
+        response.map((e) => NameLinkModel.fromJson(e)));
+  }
+
   Future<List<NameLinkModel>> fetchAnimeByLetter({String name}) async{
     final Iterable response = await _service.get('/letters?name=$name');
     return List<NameLinkModel>.from(response.map((e) => NameLinkModel.fromJson(e)));

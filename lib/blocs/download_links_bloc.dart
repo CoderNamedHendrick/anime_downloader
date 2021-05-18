@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:anime_downloader/model/name_link_model.dart';
-import 'package:anime_downloader/repository/downloads_repository.dart';
+import 'package:anime_downloader/repository/name_link_repository.dart';
 import 'package:anime_downloader/services/api_response.dart';
 
 class DownloadLinkBloc{
-  DownloadLinkRepository _downloadLinkRepository;
+  NameLinkRepository _downloadLinkRepository;
   StreamController _downloadLinkController;
 
   StreamSink<ApiResponse<List<NameLinkModel>>> get downloadLinkSink => _downloadLinkController.sink;
@@ -12,7 +12,7 @@ class DownloadLinkBloc{
 
   DownloadLinkBloc({String link}){
     _downloadLinkController = StreamController<ApiResponse<List<NameLinkModel>>>();
-    _downloadLinkRepository = DownloadLinkRepository();
+    _downloadLinkRepository = NameLinkRepository();
     fetchDownloadLinks(link: link);
   }
 
