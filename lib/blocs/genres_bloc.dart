@@ -10,16 +10,16 @@ class GenresBloc{
   StreamSink<ApiResponse<List<NameLinkModel>>> get genresSink => _genresController.sink;
   Stream<ApiResponse<List<NameLinkModel>>> get genresStream => _genresController.stream;
 
-  GenresBloc({String link}){
+  GenresBloc(){
     _genresController = StreamController<ApiResponse<List<NameLinkModel>>>();
     _genresRepository = NameLinkRepository();
-    fetchDownloadLinks(link: link);
+    fetchDownloadLinks();
   }
 
-  fetchDownloadLinks({String link}) async{
+  fetchDownloadLinks() async{
     genresSink.add(ApiResponse.loading('Fetching download links'));
     try{
-      List<NameLinkModel> links = await _genresRepository.fetchDownloadLink(link: link);
+      List<NameLinkModel> links = await _genresRepository.fetchGenres();
       genresSink.add(ApiResponse.completed(links));
     } catch (e){
       genresSink.add(ApiResponse.error(e.toString()));
