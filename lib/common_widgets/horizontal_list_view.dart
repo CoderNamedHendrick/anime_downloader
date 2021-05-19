@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget horizontalListView(List list) {
+Widget HorizontalListView(List list) {
   return Expanded(
     child: Container(
       padding: EdgeInsets.zero,

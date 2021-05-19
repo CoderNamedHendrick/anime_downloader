@@ -1,4 +1,5 @@
 import 'package:anime_downloader/common_widgets/horizontal_list_view.dart';
+import 'package:anime_downloader/common_widgets/page_one_horizontal_list.dart';
 import 'package:flutter/material.dart';
 
 class PageOne extends StatelessWidget {
@@ -123,17 +124,9 @@ class PageOne extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 4),
-              Text('Latest Releases'),
-              SizedBox(
-                height: 12,
-              ),
-              horizontalListView(_demoItems),
-              Text('Trending'),
-              SizedBox(height: 12),
-              horizontalListView(_demoItems),
-              Text('Genres'),
-              SizedBox(height: 12),
-              horizontalListView(_demoItems),
+              PageOneHorizontalList(title: 'Latest Releases', list: _demoItems,),
+              PageOneHorizontalList(title: 'Trending', list: _demoItems,),
+              PageOneHorizontalList(title: 'Genre', list: _demoItems,),
             ],
           ),
         ),
