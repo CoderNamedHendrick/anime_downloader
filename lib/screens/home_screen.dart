@@ -6,11 +6,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-
-        ],
-      ),
+      appBar: AppBar(),
+      body: PageOne(),
+      backgroundColor: Theme.of(context).primaryColor,
     );
   }
 }

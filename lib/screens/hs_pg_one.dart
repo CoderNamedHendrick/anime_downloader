@@ -1,47 +1,54 @@
 import 'package:anime_downloader/common_widgets/page_one_horizontal_list.dart';
 import 'package:anime_downloader/common_widgets/recent_searches_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 class PageOne extends StatelessWidget {
   List _demoItems = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-
-      ],
+    return SingleChildScrollView(
+      child: Container_dub(context, _demoItems),
     );
   }
 }
 
-Widget Container_dub(BuildContext context, List demoItems){
-  return Container(
-    color: Theme.of(context).accentColor,
-    width: MediaQuery.of(context).size.width,
-    height: MediaQuery.of(context).size.height,
-    child: Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Recent Searches'),
-          SizedBox(height: 12),
-          RecentSearchWidget(),
-          RecentSearchWidget(),
-          SizedBox(height: 4),
-          PageOneHorizontalList(
-            title: 'Latest Releases',
-            list: demoItems,
+Widget Container_dub(BuildContext context, List demoItems) {
+  List genres = ['Action', 'Drama', 'Hentai', 'Spice of life', 'Magic'];
+  return Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text('Recent Searches', style: Theme.of(context).textTheme.headline1,),
+        SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(children: [
+                RecentSearch(),
+                RecentSearch(),
+              ],),
+              Row(children: [
+                RecentSearch(),
+                RecentSearch(),
+              ],),
+            ],
           ),
-          PageOneHorizontalList(
-            title: 'Trending',
-            list: demoItems,
-          ),
-          Text('Genre'),
-          PageOneHorizontalList(title: 'Dance', list: demoItems),
-        ],
-      ),
+        ),
+        SizedBox(height: 4),
+        Container(
+          height: 270,
+          child: PageOneHorizontalList(title: 'Latest', list: demoItems),
+        ),
+        SizedBox(height: 12),
+        Text('Genre', style: Theme.of(context).textTheme.headline1,),
+        SizedBox(height: 12),
+
+      ],
     ),
   );
 }

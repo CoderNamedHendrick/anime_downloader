@@ -8,12 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterDownloader.initialize(
-    debug:true
-  );
+  await FlutterDownloader.initialize(debug: true);
   await Permission.storage.request();
   runApp(Home());
 }
@@ -24,9 +21,17 @@ class Home extends StatelessWidget {
     return MaterialApp(
       title: 'Pōtaru',
       theme: ThemeData(
-        primaryColor: Colors.grey[700],
-        accentColor: Colors.grey[800],
-      ),
+          primaryColor: const Color(0xff282828),
+          accentColor: const Color(0x00282828),
+          textTheme: TextTheme(
+              bodyText1: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+              headline1: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600))),
       // initialRoute: '/',
       // routes: {
       //   '/': (context) => Search(),
