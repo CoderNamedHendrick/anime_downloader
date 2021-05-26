@@ -27,6 +27,7 @@ class Home extends StatelessWidget {
               bodyText1: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
+                fontWeight: FontWeight.w400,
               ),
               headline1: TextStyle(
                   color: Colors.white,
@@ -40,7 +41,7 @@ class Home extends StatelessWidget {
       //   '/episodes': (context) => EpisodesScreen(),
       //   '/download_links': (context) => DownloadScreen(),
       // },
-      home: HomeScreen(),
+      home: Search(),
     );
   }
 }
