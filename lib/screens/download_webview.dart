@@ -22,8 +22,7 @@ class _DownloaderWebViewState extends State<DownloaderWebView> {
 
   createDir() async {
     final directoryName = 'Pōtaru';
-    final extDir = await getExternalStorageDirectory();
-    final myDir = Directory('${extDir.path}/$directoryName');
+    final myDir = Directory('storage/emulated/0/$directoryName');
 
     if (await myDir.exists()) {
       print(myDir.path);
