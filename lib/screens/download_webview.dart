@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 
@@ -16,13 +17,26 @@ class DownloaderWebView extends StatefulWidget {
 }
 
 class _DownloaderWebViewState extends State<DownloaderWebView> {
-
   int progress = 0;
-
   ReceivePort _receivePort = ReceivePort();
 
-  static downloadingCallback(id, status, progress){
-    final SendPort sendPort = IsolateNameServer.lookupPortByName('downloading_send_port');
+  createDir() async {
+    final directoryName = 'Pōtaru';
+    final extDir = await getExternalStorageDirectory();
+    final myDir = Directory('${extDir.path}/$directoryName');
+
+    if (await myDir.exists()) {
+      print(myDir.path);
+    }
+
+    final dir = await myDir.create(recursive: true);
+    print(dir.path);
+    return dir;
+  }
+
+  static downloadingCallback(id, status, progress) {
+    final SendPort sendPort =
+        IsolateNameServer.lookupPortByName('downloading_send_port');
     sendPort.send([id, status, progress]);
   }
 
@@ -31,12 +45,13 @@ class _DownloaderWebViewState extends State<DownloaderWebView> {
   @override
   void initState() {
     super.initState();
-    IsolateNameServer.registerPortWithName(_receivePort.sendPort, "downloading_send_port");
+    IsolateNameServer.registerPortWithName(
+        _receivePort.sendPort, "downloading_send_port");
 
     // listening for the data coming from the download isolate
     _receivePort.listen((message) {
       String id = message[0];
-      DownloadTaskStatus status =  message[1];
+      DownloadTaskStatus status = message[1];
       progress = message[2];
       setState(() {});
       print(progress);
@@ -53,44 +68,36 @@ class _DownloaderWebViewState extends State<DownloaderWebView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          LinearProgressIndicator(
-            backgroundColor: Colors.grey,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-            value: progress.toDouble(),
-            minHeight: 60,
+      appBar: AppBar(
+        title: Text("Progress: $progress"),
+      ),
+      body: InAppWebView(
+        initialUrlRequest: URLRequest(
+          url: Uri.parse(widget.link),
+        ),
+        initialOptions: InAppWebViewGroupOptions(
+          crossPlatform: InAppWebViewOptions(
+            useOnDownloadStart: true,
           ),
-          SizedBox(height: 20),
-          InAppWebView(
-            initialUrlRequest: URLRequest(
-              url: Uri.parse(widget.link),
-            ),
-            initialOptions: InAppWebViewGroupOptions(
-              crossPlatform: InAppWebViewOptions(
-                useOnDownloadStart: true,
+        ),
+        onWebViewCreated: (InAppWebViewController controller) {
+          webViewController = controller;
+        },
+        onLoadStart: (InAppWebViewController controller, Uri url) {},
+        onLoadStop: (InAppWebViewController controller, Uri url) {},
+        onDownloadStart: (controller, url) async {
+          print("OnDownloadStart $url");
+          // final externalDir = await getExternalStorageDirectory();
+          final externalDir = await createDir();
 
-              ),
-            ),
-            onWebViewCreated: (InAppWebViewController controller) {
-              webViewController = controller;
-            },
-            onLoadStart: (InAppWebViewController controller, Uri url) {},
-            onLoadStop: (InAppWebViewController controller, Uri url) {},
-            onDownloadStart: (controller, url) async {
-              print("OnDownloadStart $url");
-              final externalDir = await getExternalStorageDirectory();
-
-              final taskId = await FlutterDownloader.enqueue(
-                url: url.toString(),
-                savedDir: externalDir.path,
-                fileName: "downloaded anime",
-                showNotification: true,
-                openFileFromNotification: true,
-              );
-            },
-          ),
-        ],
+          final taskId = await FlutterDownloader.enqueue(
+            url: url.toString(),
+            savedDir: externalDir.path,
+            fileName: "downloaded anime",
+            showNotification: true,
+            openFileFromNotification: true,
+          );
+        },
       ),
     );
   }
