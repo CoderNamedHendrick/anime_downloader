@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class DownloaderWebView extends StatefulWidget {
   final String link;
@@ -23,7 +24,10 @@ class _DownloaderWebViewState extends State<DownloaderWebView> {
   createDir() async {
     final directoryName = 'Pōtaru';
     final myDir = Directory('storage/emulated/0/$directoryName');
-
+    var status = await Permission.storage.status;
+    if(!status.isGranted){
+      await Permission.storage.request();
+    }
     if (await myDir.exists()) {
       print(myDir.path);
     }
