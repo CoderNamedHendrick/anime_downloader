@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
       //   '/episodes': (context) => EpisodesScreen(),
       //   '/download_links': (context) => DownloadScreen(),
       // },
-      home: Search(),
+      home: LibraryScreen(),
     );
   }
 }
