@@ -34,7 +34,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
         onRefresh: () => _bloc.fetchDescription(link: widget.link),
         child: StreamBuilder<ApiResponse<DescriptionModel>>(
           stream: _bloc.descriptionStream,
-          builder: (conttext, snapshot) {
+          builder: (context, snapshot) {
             if (snapshot.hasData) {
               switch (snapshot.data.status) {
                 case Status.LOADING:

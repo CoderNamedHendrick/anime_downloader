@@ -59,6 +59,7 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
                 case Status.COMPLETED:
                   return Episodes(
                     episodeList: snapshot.data.data,
+                    title: widget.name,
                   );
                   break;
                 case Status.ERROR:
@@ -89,8 +90,9 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
 }
 
 class Episodes extends StatelessWidget {
-  const Episodes({Key key, this.episodeList}) : super(key: key);
+  const Episodes({Key key, this.episodeList, this.title}) : super(key: key);
   final List<NameLinkModel> episodeList;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +100,7 @@ class Episodes extends StatelessWidget {
       itemCount: episodeList.length,
       itemBuilder: (context, index) => EpisodesWidget(
         context,
+        title: title,
         name: episodeList[index].name,
         link: episodeList[index].link,
       ),

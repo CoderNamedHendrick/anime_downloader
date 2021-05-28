@@ -2,6 +2,7 @@ import 'package:anime_downloader/screens/desc_screen.dart';
 import 'package:anime_downloader/screens/download_screen.dart';
 import 'package:anime_downloader/screens/episodes_screen.dart';
 import 'package:anime_downloader/screens/home_screen.dart';
+import 'package:anime_downloader/screens/library_screen.dart';
 import 'package:anime_downloader/screens/search.dart';
 import 'package:anime_downloader/screens/search_screen.dart';
 import 'package:flutter/material.dart';

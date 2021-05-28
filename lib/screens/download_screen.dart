@@ -7,8 +7,10 @@ import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
 
 class DownloadScreen extends StatefulWidget {
-  const DownloadScreen({Key key, this.link}) : super(key: key);
+  const DownloadScreen({Key key, this.title, this.name, this.link}) : super(key: key);
   final String link;
+  final String title;
+  final String name;
 
   @override
   _DownloadScreenState createState() => _DownloadScreenState();
@@ -43,6 +45,8 @@ class _DownloadScreenState extends State<DownloadScreen> {
                   break;
                 case Status.COMPLETED:
                   return Downloads(
+                    animeTitle: widget.title,
+                    episode: widget.name,
                     downloads: snapshot.data.data,
                   );
                   break;
@@ -64,8 +68,10 @@ class _DownloadScreenState extends State<DownloadScreen> {
 }
 
 class Downloads extends StatelessWidget {
-  const Downloads({Key key, this.downloads}) : super(key: key);
+  const Downloads({Key key, this.animeTitle, this.episode, this.downloads}) : super(key: key);
   final List<NameLinkModel> downloads;
+  final String animeTitle;
+  final String episode;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +79,8 @@ class Downloads extends StatelessWidget {
       itemCount: downloads.length,
       itemBuilder: (context, index) => _episodes(
         context,
+        animeTitle: animeTitle,
+        episode: episode,
         name: downloads[index].name,
         link: downloads[index].link,
       ),
@@ -81,13 +89,16 @@ class Downloads extends StatelessWidget {
   }
 }
 
-Widget _episodes(BuildContext context, {String name, String link}) {
+Widget _episodes(BuildContext context, {String animeTitle, String episode, String name, String link}) {
   return ListTile(
     title: Text('$name'),
     trailing: Icon(Icons.download_outlined),
     onTap: () => Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => DownloaderWebView(link: link,),
+        builder: (context) => DownloaderWebView(
+          animeTitle: animeTitle,
+          episode: episode,
+          link: link,),
       ),
     ),
   );

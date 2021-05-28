@@ -10,8 +10,11 @@ import 'package:permission_handler/permission_handler.dart';
 
 class DownloaderWebView extends StatefulWidget {
   final String link;
+  final String animeTitle;
+  final String episode;
 
-  const DownloaderWebView({Key key, this.link}) : super(key: key);
+  const DownloaderWebView({Key key, this.animeTitle, this.episode, this.link})
+      : super(key: key);
 
   @override
   _DownloaderWebViewState createState() => _DownloaderWebViewState();
@@ -23,13 +26,15 @@ class _DownloaderWebViewState extends State<DownloaderWebView> {
 
   createDir() async {
     final directoryName = 'Pōtaru';
-    final myDir = Directory('storage/emulated/0/$directoryName');
+    final myDir =
+        Directory('storage/emulated/0/$directoryName/${widget.animeTitle}');
     var status = await Permission.storage.status;
-    if(!status.isGranted){
+    if (!status.isGranted) {
       await Permission.storage.request();
     }
     if (await myDir.exists()) {
       print(myDir.path);
+      return myDir;
     }
 
     final dir = await myDir.create(recursive: true);
@@ -96,7 +101,7 @@ class _DownloaderWebViewState extends State<DownloaderWebView> {
           final taskId = await FlutterDownloader.enqueue(
             url: url.toString(),
             savedDir: externalDir.path,
-            fileName: "downloaded anime",
+            fileName: "${widget.episode}",
             showNotification: true,
             openFileFromNotification: true,
           );
