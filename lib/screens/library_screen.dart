@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:anime_downloader/common_widgets/loading_widget.dart';
+import 'package:anime_downloader/screens/folder.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -16,9 +18,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
   @override
   void initState() {
     super.initState();
-    _listFiles();
+    _listFolders();
   }
-  void _listFiles() async{
+
+  void _listFolders() async {
     final directoryName = 'Pōtaru';
     final dir = await Directory('storage/emulated/0/$directoryName');
     var status = await Permission.storage.status;
@@ -38,16 +41,30 @@ class _LibraryScreenState extends State<LibraryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.builder(
-        itemCount: folders.length,
-        itemBuilder: (context, index) => Card(
-          child: ListTile(
-            title: Text('${folders[index].path}'),
-            leading: Icon(Icons.folder),
-            trailing: Icon(Icons.chevron_right_sharp),
-          ),
-        ),
-      ),
+      body: folders == null
+          ? Loading(
+              loadingMessage: 'Fetching Folders',
+            )
+          : ListView.builder(
+              itemCount: folders.length,
+              itemBuilder: (context, index) => Card(
+                child: ListTile(
+                  title: Text(
+                    '${folders[index].path}'
+                        .replaceAll("storage/emulated/0/Pōtaru/", ""),
+                  ),
+                  leading: Icon(Icons.folder),
+                  trailing: Icon(Icons.chevron_right_sharp),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => FolderContents(
+                        dir: folders[index].path,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
     );
   }
 }

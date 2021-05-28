@@ -34,15 +34,7 @@ class Home extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.w600))),
-      // initialRoute: '/',
-      // routes: {
-      //   '/': (context) => Search(),
-      //   '/search': (context) => SearchScreen(),
-      //   '/description': (context) => DescriptionScreen(),
-      //   '/episodes': (context) => EpisodesScreen(),
-      //   '/download_links': (context) => DownloadScreen(),
-      // },
-      home: LibraryScreen(),
+      home: Search(),
     );
   }
 }
