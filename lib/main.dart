@@ -1,10 +1,4 @@
-import 'package:anime_downloader/screens/desc_screen.dart';
-import 'package:anime_downloader/screens/download_screen.dart';
-import 'package:anime_downloader/screens/episodes_screen.dart';
 import 'package:anime_downloader/screens/home_screen.dart';
-import 'package:anime_downloader/screens/library_screen.dart';
-import 'package:anime_downloader/screens/search.dart';
-import 'package:anime_downloader/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -13,10 +7,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterDownloader.initialize(debug: true);
   await Permission.storage.request();
-  runApp(Home());
+  runApp(Main());
 }
 
-class Home extends StatelessWidget {
+class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,7 +28,7 @@ class Home extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.w600))),
-      home: Search(),
+      home: HomeScreen(),
     );
   }
 }

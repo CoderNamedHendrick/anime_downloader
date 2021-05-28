@@ -1,7 +1,14 @@
 import 'package:anime_downloader/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
-class Search extends StatelessWidget {
+class Search extends StatefulWidget {
+  const Search({Key key}) : super(key: key);
+
+  @override
+  _SearchState createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
   TextEditingController _controller = TextEditingController();
 
   @override

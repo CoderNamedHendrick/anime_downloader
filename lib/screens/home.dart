@@ -1,9 +1,15 @@
 import 'package:anime_downloader/common_widgets/page_one_horizontal_list.dart';
 import 'package:anime_downloader/common_widgets/recent_searches_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
-class PageOne extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   List _demoItems = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 
   @override
