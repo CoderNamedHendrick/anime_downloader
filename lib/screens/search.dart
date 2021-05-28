@@ -38,21 +38,119 @@ class _SearchState extends State<Search> {
       backgroundColor: Theme.of(context).primaryColor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 60,
-          decoration: BoxDecoration(
-              color: Color(0xff282828).withOpacity(0.01),
-              borderRadius: BorderRadius.all(Radius.circular(4))),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: _controller,
-              decoration: InputDecoration(
-                  fillColor: Colors.orangeAccent,
-                  hintText: 'Movies, Series or Genre',
-                  hintStyle: Theme.of(context).textTheme.bodyText1),
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 60,
+                decoration: BoxDecoration(
+                    color: Color(0xff282828).withOpacity(0.01),
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _controller,
+                    decoration: InputDecoration(
+                        fillColor: Colors.orangeAccent,
+                        hintText: 'Movies, Series or Genre',
+                        hintStyle: Theme.of(context).textTheme.bodyText1),
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              Text(
+                'By Genre',
+                style: Theme.of(context).textTheme.headline1,
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height / 3.2,
+                  child: GridView.builder(
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 0.6,
+                        crossAxisCount: 2),
+                    itemBuilder: (context, index) => Card(
+                      color: Colors.grey,
+                      child: Container(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: Container(
+                                color: Colors.red,
+                              ),
+                            ),
+                            Flexible(
+                              flex: 2,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('Dummy Text'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              Text(
+                'By Release Year',
+                style: Theme.of(context).textTheme.headline1,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                child: Container(
+                  height: MediaQuery.of(context).size.height / 3.2,
+                  child: GridView.builder(
+                    itemCount: 10,
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 0.6,
+                        crossAxisCount: 2),
+                    itemBuilder: (context, index) => Card(
+                      color: Colors.grey,
+                      child: Container(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: Container(
+                                color: Colors.red,
+                              ),
+                            ),
+                            Flexible(
+                              flex: 2,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('Dummy Text'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

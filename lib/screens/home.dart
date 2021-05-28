@@ -14,8 +14,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container_dub(context, _demoItems),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Recent Searches',
+          style: Theme.of(context).textTheme.headline1,
+        ),
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Container_dub(context, _demoItems),
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
     );
   }
 }
@@ -28,22 +38,21 @@ Widget Container_dub(BuildContext context, List demoItems) {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Recent Searches', style: Theme.of(context).textTheme.headline1,),
-        SizedBox(height: 12),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(children: [
+        Column(
+          children: [
+            Row(
+              children: [
                 RecentSearch(),
                 RecentSearch(),
-              ],),
-              Row(children: [
+              ],
+            ),
+            Row(
+              children: [
                 RecentSearch(),
                 RecentSearch(),
-              ],),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
         SizedBox(height: 4),
         Container(
@@ -51,9 +60,11 @@ Widget Container_dub(BuildContext context, List demoItems) {
           child: PageOneHorizontalList(title: 'Latest', list: demoItems),
         ),
         SizedBox(height: 12),
-        Text('Genre', style: Theme.of(context).textTheme.headline1,),
+        Text(
+          'Genre',
+          style: Theme.of(context).textTheme.headline1,
+        ),
         SizedBox(height: 12),
-
       ],
     ),
   );
