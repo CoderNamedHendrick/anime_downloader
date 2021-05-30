@@ -40,7 +40,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Library', style: Theme.of(context).textTheme.headline1,),
+      ),
       body: folders == null
           ? Loading(
               loadingMessage: 'Fetching Folders',

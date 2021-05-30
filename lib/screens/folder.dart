@@ -31,7 +31,9 @@ class _FolderContentsState extends State<FolderContents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Episodes', style: Theme.of(context).textTheme.headline1,),
+      ),
       body: files == null
           ? Loading(
               loadingMessage: 'Fetching Episodes',
