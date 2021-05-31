@@ -42,12 +42,6 @@ class _VideoViewState extends State<VideoView> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    _chewieController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -55,5 +49,12 @@ class _VideoViewState extends State<VideoView> {
         controller: _chewieController,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.videoPlayerController.dispose();
+    _chewieController.dispose();
   }
 }

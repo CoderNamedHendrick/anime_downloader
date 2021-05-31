@@ -31,6 +31,8 @@ dependencies:
   path_provider: ^2.0.1
   video_player: ^2.1.4
   chewie: 1.0.0
+  file_picker: ^3.0.2+2
+  open_file: ^3.2.1
 
 
   # The following adds the Cupertino Icons font to your application.

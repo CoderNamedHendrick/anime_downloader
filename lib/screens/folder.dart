@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/screens/video_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
 
 class FolderContents extends StatefulWidget {
   final String dir;
@@ -51,16 +52,18 @@ class _FolderContentsState extends State<FolderContents> {
                   ),
                   leading: Icon(Icons.play_circle_outline_sharp),
                   trailing: Icon(Icons.chevron_right_sharp),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => VideoScreen(
-                        file: files[index].path,
-                      ),
-                    ),
-                  ),
+                  onTap: () =>
+                      OpenFile.open(files[index].path, type: "video/mp4"),
                 ),
               ),
             ),
     );
+
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) =>
+    //         VideoScreen(file: files[index].path),
+    //   ),
+    // ),
   }
 }

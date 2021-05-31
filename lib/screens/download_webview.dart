@@ -94,14 +94,14 @@ class _DownloaderWebViewState extends State<DownloaderWebView> {
         onLoadStart: (InAppWebViewController controller, Uri url) {},
         onLoadStop: (InAppWebViewController controller, Uri url) {},
         onDownloadStart: (controller, url) async {
-          print("OnDownloadStart $url");
+          print("OnDownloadStart: $url");
           // final externalDir = await getExternalStorageDirectory();
           final externalDir = await createDir();
 
           final taskId = await FlutterDownloader.enqueue(
             url: url.toString(),
             savedDir: externalDir.path,
-            fileName: "${widget.episode}",
+            fileName: "${widget.episode}.mp4".replaceAll(" ", "-"),
             showNotification: true,
             openFileFromNotification: true,
           );
