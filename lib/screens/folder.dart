@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
+import 'package:anime_downloader/screens/video_screen.dart';
 import 'package:flutter/material.dart';
 
 class FolderContents extends StatefulWidget {
@@ -32,7 +33,10 @@ class _FolderContentsState extends State<FolderContents> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Episodes', style: Theme.of(context).textTheme.headline1,),
+        title: Text(
+          'Episodes',
+          style: Theme.of(context).textTheme.headline1,
+        ),
       ),
       body: files == null
           ? Loading(
@@ -43,11 +47,17 @@ class _FolderContentsState extends State<FolderContents> {
               itemBuilder: (context, index) => Card(
                 child: ListTile(
                   title: Text(
-                    '${files[index].path}'
-                        .replaceAll("${widget.dir}/", ""),
+                    '${files[index].path}'.replaceAll("${widget.dir}/", ""),
                   ),
                   leading: Icon(Icons.play_circle_outline_sharp),
                   trailing: Icon(Icons.chevron_right_sharp),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => VideoScreen(
+                        file: files[index].path,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
