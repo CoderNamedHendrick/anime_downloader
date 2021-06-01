@@ -1,4 +1,5 @@
 import 'package:anime_downloader/blocs/search_bloc.dart';
+import 'package:anime_downloader/blocs/search_by_genre_bloc.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/common_widgets/search_card.dart';
@@ -15,12 +16,16 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  SearchBloc _bloc;
+  var _bloc;
 
   @override
   void initState() {
     super.initState();
-    _bloc = SearchBloc(name: widget.search);
+    if (widget.search.contains("/")) {
+      _bloc = SearchByGenreBloc(name: widget.search);
+    } else {
+      _bloc = SearchBloc(name: widget.search);
+    }
   }
 
   @override

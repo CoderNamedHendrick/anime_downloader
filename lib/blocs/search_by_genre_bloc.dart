@@ -14,16 +14,16 @@ class SearchByGenreBloc{
 
   Stream<ApiResponse<List<SearchModel>>> get searchListStream => _searchByGenreListController.stream;
 
-  SearchByGenreBloc({String link}) {
+  SearchByGenreBloc({String name}) {
     _searchByGenreListController = StreamController<ApiResponse<List<SearchModel>>>();
     _searchByGenreRepository = SearchRepository();
-    fetchSearchList(link: link);
+    fetchSearchList(name: name);
   }
 
-  fetchSearchList({String link}) async{
+  fetchSearchList({String name}) async{
     searchListSink.add(ApiResponse.loading('Fetching Anime'));
     try{
-      List<SearchModel> searches = await _searchByGenreRepository.searchByGenre(link: link);
+      List<SearchModel> searches = await _searchByGenreRepository.searchByGenre(link: name);
       searchListSink.add(ApiResponse.completed(searches));
     } catch(e){
       searchListSink.add(ApiResponse.error(e.toString()));

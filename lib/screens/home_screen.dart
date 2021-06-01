@@ -1,4 +1,4 @@
-import 'package:anime_downloader/screens/home.dart';
+import 'package:anime_downloader/screens/home_page.dart';
 import 'package:anime_downloader/screens/library_screen.dart';
 import 'package:anime_downloader/screens/search.dart';
 import 'package:flutter/cupertino.dart';

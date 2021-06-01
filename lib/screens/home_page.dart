@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:anime_downloader/common_widgets/page_one_horizontal_list.dart';
 import 'package:anime_downloader/common_widgets/recent_searches_widget.dart';
 import 'package:flutter/material.dart';
@@ -60,11 +62,17 @@ Widget Container_dub(BuildContext context, List demoItems) {
           child: PageOneHorizontalList(title: 'Latest', list: demoItems),
         ),
         SizedBox(height: 12),
+        Container(
+          height: 270,
+          child: PageOneHorizontalList(title: 'Trending', list: demoItems,),
+        ),
+        SizedBox(height: 12),
         Text(
           'Genre',
           style: Theme.of(context).textTheme.headline1,
         ),
         SizedBox(height: 12),
+
       ],
     ),
   );

@@ -13,11 +13,11 @@ class GenresBloc{
   GenresBloc(){
     _genresController = StreamController<ApiResponse<List<NameLinkModel>>>();
     _genresRepository = NameLinkRepository();
-    fetchDownloadLinks();
+    fetchGenres();
   }
 
-  fetchDownloadLinks() async{
-    genresSink.add(ApiResponse.loading('Fetching download links'));
+  fetchGenres() async{
+    genresSink.add(ApiResponse.loading('Fetching Genres'));
     try{
       List<NameLinkModel> links = await _genresRepository.fetchGenres();
       genresSink.add(ApiResponse.completed(links));
