@@ -1,10 +1,12 @@
 import 'dart:ffi';
 
+import 'package:anime_downloader/blocs/latest_bloc.dart';
 import 'package:anime_downloader/blocs/popular_bloc.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/common_widgets/page_one_horizontal_list.dart';
 import 'package:anime_downloader/common_widgets/recent_searches_widget.dart';
+import 'package:anime_downloader/model/latest_model.dart';
 import 'package:anime_downloader/model/popular_model.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +20,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PopularBloc _bloc;
+  LatestAnimeBloc _latestAnimeBloc;
   List _demoItems = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _bloc = PopularBloc();
+    _latestAnimeBloc = LatestAnimeBloc();
   }
 
   @override
@@ -61,9 +64,37 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               SizedBox(height: 4),
-              Container(
-                height: 270,
-                child: PageOneHorizontalList(title: 'Latest', list: _demoItems),
+              RefreshIndicator(
+                onRefresh: () => _latestAnimeBloc.fetchLatest(),
+                child: StreamBuilder<ApiResponse<List<LatestAnimeModel>>>(
+                  stream: _latestAnimeBloc.latestStream,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      switch (snapshot.data.status) {
+                        case Status.LOADING:
+                          return Loading(loadingMessage: snapshot.data.message);
+                          break;
+                        case Status.COMPLETED:
+                          return Container(
+                            height: 330,
+                            child: LatestHorizontalList(
+                              title: 'Latest',
+                              list: snapshot.data.data,
+                            ),
+                          );
+                          break;
+                        case Status.ERROR:
+                          return Error(
+                            errorMessage: snapshot.data.message,
+                            onRetryPressed: () =>
+                                _latestAnimeBloc.fetchLatest(),
+                          );
+                          break;
+                      }
+                    }
+                    return Container();
+                  },
+                ),
               ),
               SizedBox(height: 12),
               RefreshIndicator(
@@ -71,15 +102,15 @@ class _HomePageState extends State<HomePage> {
                 child: StreamBuilder<ApiResponse<List<PopularModel>>>(
                   stream: _bloc.popularStream,
                   builder: (context, snapshot) {
-                    if(snapshot.hasData){
-                      switch(snapshot.data.status){
+                    if (snapshot.hasData) {
+                      switch (snapshot.data.status) {
                         case Status.LOADING:
                           return Loading(loadingMessage: snapshot.data.message);
                           break;
                         case Status.COMPLETED:
                           return Container(
-                            height: 300,
-                            child: PageOneHorizontalList(
+                            height: 330,
+                            child: PopularHorizontalList(
                               title: 'Trending',
                               list: snapshot.data.data,
                             ),
@@ -94,15 +125,9 @@ class _HomePageState extends State<HomePage> {
                       }
                     }
                     return Container();
-                  }
+                  },
                 ),
               ),
-              SizedBox(height: 12),
-              Text(
-                'Genre',
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              SizedBox(height: 12),
             ],
           ),
         ),
