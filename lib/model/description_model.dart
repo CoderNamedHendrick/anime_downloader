@@ -9,27 +9,6 @@ class DescriptionModel {
   String _otherNames;
   List<EpisodesDesc> _episodes;
 
-  DescriptionModel(
-      {String id,
-      String name,
-      String type,
-      String summary,
-      String genre,
-      String release,
-      String status,
-      String otherNames,
-      List<EpisodesDesc> episodes}) {
-    this._id = id;
-    this._name = name;
-    this._type = type;
-    this._summary = summary;
-    this._genre = genre;
-    this._release = release;
-    this._status = status;
-    this._otherNames = otherNames;
-    this._episodes = episodes;
-  }
-
   String get id => _id;
   String get name => _name.trim();
   String get type =>

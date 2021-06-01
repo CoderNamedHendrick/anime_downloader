@@ -1,4 +1,5 @@
 import 'package:anime_downloader/common_widgets/horizontal_list_view.dart';
+import 'package:anime_downloader/screens/desc_screen.dart';
 import 'package:flutter/material.dart';
 
 class PageOneHorizontalList extends StatelessWidget {
@@ -22,28 +23,46 @@ class PageOneHorizontalList extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.zero,
               child: ListView.separated(
-                  itemCount: list.length,
-                  scrollDirection: Axis.horizontal,
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: 8.0,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Container(
+                itemCount: list.length,
+                scrollDirection: Axis.horizontal,
+                separatorBuilder: (context, index) => SizedBox(
+                  width: 8.0,
+                ),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    child: Container(
                       width: 140,
                       child: Column(
                         children: [
                           Container(
                             height: 180,
-                            color: Colors.green,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(list[index].image),
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: 4,
                           ),
-                          Text('Demon Slayer Mugen Train', style: Theme.of(context).textTheme.bodyText1,),
+                          Text(
+                            '${list[index].name}',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
                         ],
                       ),
-                    );
-                  }),
+                    ),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => DescriptionScreen(
+                          link: list[index].link,
+                          imageUrl: list[index].image,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],
