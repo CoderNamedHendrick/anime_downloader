@@ -56,12 +56,5 @@ class _FolderContentsState extends State<FolderContents> {
               ),
             ),
     );
-
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //     builder: (context) =>
-    //         VideoScreen(file: files[index].path),
-    //   ),
-    // ),
   }
 }
