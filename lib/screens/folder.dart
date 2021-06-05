@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
-import 'package:anime_downloader/screens/video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 
