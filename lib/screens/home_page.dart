@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:anime_downloader/blocs/latest_bloc.dart';
 import 'package:anime_downloader/blocs/popular_bloc.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
@@ -21,7 +19,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   PopularBloc _bloc;
   LatestAnimeBloc _latestAnimeBloc;
-  List _demoItems = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 
   @override
   void initState() {
@@ -41,94 +38,96 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      RecentSearch(),
-                      RecentSearch(),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      RecentSearch(),
-                      RecentSearch(),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(height: 4),
-              RefreshIndicator(
-                onRefresh: () => _latestAnimeBloc.fetchLatest(),
-                child: StreamBuilder<ApiResponse<List<LatestAnimeModel>>>(
-                  stream: _latestAnimeBloc.latestStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      switch (snapshot.data.status) {
-                        case Status.LOADING:
-                          return Loading(loadingMessage: snapshot.data.message);
-                          break;
-                        case Status.COMPLETED:
-                          return Container(
-                            height: 330,
-                            child: LatestHorizontalList(
-                              title: 'Latest',
-                              list: snapshot.data.data,
-                            ),
-                          );
-                          break;
-                        case Status.ERROR:
-                          return Error(
-                            errorMessage: snapshot.data.message,
-                            onRetryPressed: () =>
-                                _latestAnimeBloc.fetchLatest(),
-                          );
-                          break;
-                      }
-                    }
-                    return Container();
-                  },
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        RecentSearch(),
+                        RecentSearch(),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        RecentSearch(),
+                        RecentSearch(),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(height: 12),
-              RefreshIndicator(
-                onRefresh: () => _bloc.fetchPopular(),
-                child: StreamBuilder<ApiResponse<List<PopularModel>>>(
-                  stream: _bloc.popularStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      switch (snapshot.data.status) {
-                        case Status.LOADING:
-                          return Loading(loadingMessage: snapshot.data.message);
-                          break;
-                        case Status.COMPLETED:
-                          return Container(
-                            height: 330,
-                            child: PopularHorizontalList(
-                              title: 'Trending',
-                              list: snapshot.data.data,
-                            ),
-                          );
-                          break;
-                        case Status.ERROR:
-                          return Error(
-                            errorMessage: snapshot.data.message,
-                            onRetryPressed: () => _bloc.fetchPopular(),
-                          );
-                          break;
+                SizedBox(height: 4),
+                RefreshIndicator(
+                  onRefresh: () => _latestAnimeBloc.fetchLatest(),
+                  child: StreamBuilder<ApiResponse<List<LatestAnimeModel>>>(
+                    stream: _latestAnimeBloc.latestStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        switch (snapshot.data.status) {
+                          case Status.LOADING:
+                            return Loading(loadingMessage: snapshot.data.message);
+                            break;
+                          case Status.COMPLETED:
+                            return Container(
+                              height: 330,
+                              child: LatestHorizontalList(
+                                title: 'Latest',
+                                list: snapshot.data.data,
+                              ),
+                            );
+                            break;
+                          case Status.ERROR:
+                            return Error(
+                              errorMessage: snapshot.data.message,
+                              onRetryPressed: () =>
+                                  _latestAnimeBloc.fetchLatest(),
+                            );
+                            break;
+                        }
                       }
-                    }
-                    return Container();
-                  },
+                      return Container();
+                    },
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(height: 12),
+                RefreshIndicator(
+                  onRefresh: () => _bloc.fetchPopular(),
+                  child: StreamBuilder<ApiResponse<List<PopularModel>>>(
+                    stream: _bloc.popularStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        switch (snapshot.data.status) {
+                          case Status.LOADING:
+                            return Loading(loadingMessage: snapshot.data.message);
+                            break;
+                          case Status.COMPLETED:
+                            return Container(
+                              height: 330,
+                              child: PopularHorizontalList(
+                                title: 'Trending',
+                                list: snapshot.data.data,
+                              ),
+                            );
+                            break;
+                          case Status.ERROR:
+                            return Error(
+                              errorMessage: snapshot.data.message,
+                              onRetryPressed: () => _bloc.fetchPopular(),
+                            );
+                            break;
+                        }
+                      }
+                      return Container();
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
