@@ -10,8 +10,9 @@ class RecentSearch extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8.0, right: 12.0),
           child: Container(
             color: Theme.of(context).accentColor,
-            width: MediaQuery.of(context).size.width/2.3,
-            child: Row(
+            width: MediaQuery.of(context).size.width / 2.3,
+            child: Wrap(
+              direction: Axis.vertical,
               children: [
                 Container(
                   height: 50,

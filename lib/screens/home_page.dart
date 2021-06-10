@@ -37,8 +37,8 @@ class _HomePageState extends State<HomePage> {
         ),
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Container(
+      body: Container(
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -70,7 +70,8 @@ class _HomePageState extends State<HomePage> {
                       if (snapshot.hasData) {
                         switch (snapshot.data.status) {
                           case Status.LOADING:
-                            return Loading(loadingMessage: snapshot.data.message);
+                            return Loading(
+                                loadingMessage: snapshot.data.message);
                             break;
                           case Status.COMPLETED:
                             return Container(
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 6),
                 RefreshIndicator(
                   onRefresh: () => _bloc.fetchPopular(),
                   child: StreamBuilder<ApiResponse<List<PopularModel>>>(
@@ -103,7 +104,8 @@ class _HomePageState extends State<HomePage> {
                       if (snapshot.hasData) {
                         switch (snapshot.data.status) {
                           case Status.LOADING:
-                            return Loading(loadingMessage: snapshot.data.message);
+                            return Loading(
+                                loadingMessage: snapshot.data.message);
                             break;
                           case Status.COMPLETED:
                             return Container(

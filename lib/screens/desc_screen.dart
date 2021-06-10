@@ -65,7 +65,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _bloc.dispose();
     super.dispose();
   }
@@ -83,34 +83,22 @@ class Description extends StatelessWidget {
         SliverAppBar(
           floating: false,
           pinned: true,
+          automaticallyImplyLeading: false,
           expandedHeight: MediaQuery.of(context).size.height / 2.5,
           flexibleSpace: FlexibleSpaceBar(
             background: Image(
               image: NetworkImage(imageUrl),
               fit: BoxFit.cover,
             ),
-            stretchModes: [
-              // StretchMode.zoomBackground,
-              // StretchMode.blurBackground,
-              StretchMode.fadeTitle,
-            ],
+            // stretchModes: [
+            //   StretchMode.zoomBackground,
+            //   // StretchMode.blurBackground,
+            // ],
           ),
-          actions: [
-            IconButton(
-              iconSize: 42,
-              icon: Icon(Icons.arrow_circle_down_sharp),
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => EpisodesScreen(
-                    start: desc.episodeStart,
-                    end: desc.episodeEnd,
-                    id: desc.id,
-                    name: desc.name,
-                  ),
-                ),
-              ),
-            ),
-          ],
+          title: Text(
+            'Preview',
+            style: Theme.of(context).textTheme.headline1,
+          ),
         ),
         SliverFillRemaining(
           child: Container(
@@ -120,62 +108,129 @@ class Description extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextWidget(
-                    title: 'Name',
-                    input: desc.name,
-                    type: 'descriptionScreen',
+                  Text(
+                    firstCharacterUpper(desc.name),
+                    style: Theme.of(context).textTheme.headline1,
                   ),
+                  SizedBox(height: 6),
+                  Container(
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 25,
+                          height: 22,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4))),
+                          child: Center(
+                              child: Text(
+                            'R',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          )),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 8),
+                          child: Text(
+                            desc.release,
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 6),
+                  Text(
+                    desc.genre,
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  SizedBox(height: 6),
                   SizedBox(
-                    height: 8,
+                    height: MediaQuery.of(context).size.height / 14.7,
+                    width: MediaQuery.of(context).size.width,
+                    child: TextButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.arrow_downward_rounded),
+                          Text('Download')
+                        ],
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.grey),
+                      ),
+                      onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => EpisodesScreen(
+                            start: desc.episodeStart,
+                            end: desc.episodeEnd,
+                            id: desc.id,
+                            name: desc.name,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  TextWidget(
-                    title: 'Type',
-                    input: desc.type,
-                    type: 'descriptionScreen',
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  TextWidget(
-                    title: 'Summary',
-                    input: desc.summary,
-                    type: 'descriptionScreen',
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  TextWidget(
-                    title: 'Genre',
-                    input: desc.genre,
-                    type: 'descriptionScreen',
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  TextWidget(
-                    title: 'Release',
-                    input: desc.release,
-                    type: 'descriptionScreen',
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  TextWidget(
-                    title: 'Status',
-                    input: desc.status,
-                    type: 'descriptionScreen',
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  TextWidget(
-                    title: 'OtherNames',
-                    input: desc.otherNames,
-                    type: 'descriptionScreen',
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  SizedBox(height: 6),
+                  // TextWidget(
+                  //   title: 'Name',
+                  //   input: desc.name,
+                  //   type: 'descriptionScreen',
+                  // ),
+                  // SizedBox(
+                  //   height: 8,
+                  // ),
+                  // TextWidget(
+                  //   title: 'Type',
+                  //   input: desc.type,
+                  //   type: 'descriptionScreen',
+                  // ),
+                  // SizedBox(
+                  //   height: 8,
+                  // ),
+                  // TextWidget(
+                  //   title: 'Summary',
+                  //   input: desc.summary,
+                  //   type: 'descriptionScreen',
+                  // ),
+                  // SizedBox(
+                  //   height: 8,
+                  // ),
+                  // TextWidget(
+                  //   title: 'Genre',
+                  //   input: desc.genre,
+                  //   type: 'descriptionScreen',
+                  // ),
+                  // SizedBox(
+                  //   height: 8,
+                  // ),
+                  // TextWidget(
+                  //   title: 'Release',
+                  //   input: desc.release,
+                  //   type: 'descriptionScreen',
+                  // ),
+                  // SizedBox(
+                  //   height: 8,
+                  // ),
+                  // TextWidget(
+                  //   title: 'Status',
+                  //   input: desc.status,
+                  //   type: 'descriptionScreen',
+                  // ),
+                  // SizedBox(
+                  //   height: 8,
+                  // ),
+                  // TextWidget(
+                  //   title: 'OtherNames',
+                  //   input: desc.otherNames,
+                  //   type: 'descriptionScreen',
+                  // ),
+                  // SizedBox(
+                  //   height: 8,
+                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -214,4 +269,21 @@ class Description extends StatelessWidget {
       ],
     );
   }
+}
+
+String firstCharacterUpper(String text) {
+  List arrayPieces = List();
+
+  String outPut = '';
+  text.split(' ').forEach((separatedWord) {
+    arrayPieces.add(separatedWord);
+  });
+
+  arrayPieces.forEach((word) {
+    word =
+        "${word[0].toString().toUpperCase()}${word.toString().substring(1)} ";
+    outPut += word;
+  });
+
+  return outPut;
 }
