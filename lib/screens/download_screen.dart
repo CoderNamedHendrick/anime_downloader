@@ -29,8 +29,9 @@ class _DownloadScreenState extends State<DownloadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Download links'),
+        title: Text('${widget.title}'),
       ),
+      backgroundColor: Theme.of(context).primaryColor,
       body: RefreshIndicator(
         onRefresh: () => _bloc.fetchDownloadLinks(link: widget.link),
         child: StreamBuilder<ApiResponse<List<NameLinkModel>>>(
@@ -91,8 +92,8 @@ class Downloads extends StatelessWidget {
 
 Widget _episodes(BuildContext context, {String animeTitle, String episode, String name, String link}) {
   return ListTile(
-    title: Text('$name'),
-    trailing: Icon(Icons.download_outlined),
+    title: Text('$name', style: TextStyle(color: Colors.white)),
+    trailing: Icon(Icons.arrow_downward_sharp, color: Colors.white),
     onTap: () => Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => DownloaderWebView(

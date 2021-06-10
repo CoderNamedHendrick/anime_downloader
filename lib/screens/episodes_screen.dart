@@ -39,6 +39,7 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
       appBar: AppBar(
         title: Text('Episodes'),
       ),
+      backgroundColor: Theme.of(context).primaryColor,
       body: RefreshIndicator(
         onRefresh: () => _bloc.fetchEpisodes(
           start: widget.start,
@@ -96,7 +97,7 @@ class Episodes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ListView.builder(
       itemCount: episodeList.length,
       itemBuilder: (context, index) => EpisodesWidget(
         context,
@@ -104,7 +105,6 @@ class Episodes extends StatelessWidget {
         name: episodeList[index].name,
         link: episodeList[index].link,
       ),
-      separatorBuilder: (context, index) => Divider(),
     );
   }
 }
