@@ -102,7 +102,7 @@ class Description extends StatelessWidget {
         ),
         SliverFillRemaining(
           child: Container(
-            color: Colors.red,
+            color: Theme.of(context).primaryColor,
             padding: EdgeInsets.all(12),
             child: SingleChildScrollView(
               child: Column(
@@ -154,8 +154,12 @@ class Description extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.arrow_downward_rounded),
-                          Text('Download')
+                          Icon(Icons.arrow_downward_rounded,
+                              color: Colors.white),
+                          Text(
+                            'Download',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          )
                         ],
                       ),
                       style: ButtonStyle(
@@ -175,69 +179,18 @@ class Description extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 6),
-                  // TextWidget(
-                  //   title: 'Name',
-                  //   input: desc.name,
-                  //   type: 'descriptionScreen',
-                  // ),
-                  // SizedBox(
-                  //   height: 8,
-                  // ),
-                  // TextWidget(
-                  //   title: 'Type',
-                  //   input: desc.type,
-                  //   type: 'descriptionScreen',
-                  // ),
-                  // SizedBox(
-                  //   height: 8,
-                  // ),
-                  // TextWidget(
-                  //   title: 'Summary',
-                  //   input: desc.summary,
-                  //   type: 'descriptionScreen',
-                  // ),
-                  // SizedBox(
-                  //   height: 8,
-                  // ),
-                  // TextWidget(
-                  //   title: 'Genre',
-                  //   input: desc.genre,
-                  //   type: 'descriptionScreen',
-                  // ),
-                  // SizedBox(
-                  //   height: 8,
-                  // ),
-                  // TextWidget(
-                  //   title: 'Release',
-                  //   input: desc.release,
-                  //   type: 'descriptionScreen',
-                  // ),
-                  // SizedBox(
-                  //   height: 8,
-                  // ),
-                  // TextWidget(
-                  //   title: 'Status',
-                  //   input: desc.status,
-                  //   type: 'descriptionScreen',
-                  // ),
-                  // SizedBox(
-                  //   height: 8,
-                  // ),
-                  // TextWidget(
-                  //   title: 'OtherNames',
-                  //   input: desc.otherNames,
-                  //   type: 'descriptionScreen',
-                  // ),
-                  // SizedBox(
-                  //   height: 8,
-                  // ),
+                  Text(
+                    desc.summary,
+                    style: TextStyle(color: Colors.grey),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "Episodes:",
                         style: TextStyle(
-                          fontSize: 26,
+                          color: Colors.white,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -246,15 +199,15 @@ class Description extends StatelessWidget {
                           Text(
                             "start: " + desc.episodeStart,
                             style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.white
                             ),
                           ),
                           Text(
                             "end: " + desc.episodeEnd,
                             style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.white
                             ),
                           ),
                         ],
