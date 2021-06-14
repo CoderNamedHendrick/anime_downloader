@@ -1,12 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:anime_downloader/common_widgets/show_exception_alert_dialog.dart';
+import 'package:anime_downloader/common_widgets/sign_in_button.dart';
+import 'package:anime_downloader/common_widgets/social_signin_button.dart';
+import 'package:anime_downloader/screens/signin/email_signin_page.dart';
+import 'package:anime_downloader/screens/signin/sign_in_manager.dart';
+import 'package:anime_downloader/services/auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_flutter/app/signin/email_signin_page.dart';
-import 'package:time_tracker_flutter/app/signin/sign_in_manager.dart';
-import 'package:time_tracker_flutter/common_widgets/show_exception_alert_dialog.dart';
-import 'package:time_tracker_flutter/common_widgets/sign_in_button.dart';
-import 'package:time_tracker_flutter/common_widgets/social_signin_button.dart';
-import 'package:time_tracker_flutter/services/auth.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key key, @required this.manager, @required this.isLoading}) : super(key: key);
@@ -40,13 +41,6 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-  Future<void> _signInAnonymously(BuildContext context) async {
-    try {
-      await manager.signInAnonymously();
-    } on Exception catch (e) {
-      _showSignInError(context, e);
-    }
-  }
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {
@@ -56,9 +50,9 @@ class SignInPage extends StatelessWidget {
     }
   }
 
-  Future<void> _signInWithFacebook(BuildContext context) async {
+  Future<void> _signInWithTwitter(BuildContext context) async {
     try {
-      await manager.signInWithFacebook();
+      await manager.signInWithTwitter();
     } on Exception catch (e) {
       _showSignInError(context, e);
     }
@@ -107,11 +101,11 @@ class SignInPage extends StatelessWidget {
             height: 8.0,
           ),
           SocialSignInButton(
-            assetName: 'images/facebook-logo.png',
-            text: 'Sign in with Facebook',
+            assetName: 'images/twitter-logo.png',
+            text: 'Sign in with Twitter',
             textColor: Colors.white,
             color: Color(0xFF334D92),
-            onPressed: isLoading ? null : () => _signInWithFacebook(context),
+            onPressed: isLoading ? null : () => _signInWithTwitter(context),
           ),
           SizedBox(
             height: 8.0,
@@ -121,23 +115,6 @@ class SignInPage extends StatelessWidget {
             textColor: Colors.white,
             color: Colors.teal[700],
             onPressed: isLoading ? null : () => _signInWithEmail(context),
-          ),
-          SizedBox(
-            height: 8.0,
-          ),
-          Text(
-            "or",
-            style: TextStyle(fontSize: 14.0, color: Colors.black87),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 8.0,
-          ),
-          SignInButton(
-            text: 'Go anonymous',
-            textColor: Colors.black,
-            color: Colors.lime[300],
-            onPressed: isLoading ? null : () => _signInAnonymously(context),
           ),
         ],
       ),

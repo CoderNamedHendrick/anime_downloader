@@ -1,4 +1,5 @@
-import 'package:time_tracker_flutter/app/signin/validators.dart';
+
+import 'package:anime_downloader/screens/signin/validators.dart';
 
 enum EmailSignInFormType { signIn, register }
 

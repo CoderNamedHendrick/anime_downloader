@@ -1,10 +1,13 @@
-import 'dart:io';
+
+
+import 'package:anime_downloader/common_widgets/form_submit_button.dart';
+import 'package:anime_downloader/common_widgets/show_exception_alert_dialog.dart';
 import 'package:anime_downloader/screens/signin/email_sign_in_bloc.dart';
+import 'package:anime_downloader/screens/signin/email_sign_in_model.dart';
 import 'package:anime_downloader/services/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'email_sign_in_model.dart';
 
 class EmailSignInFormBlocBased extends StatefulWidget {
   EmailSignInFormBlocBased({@required this.bloc});
@@ -45,7 +48,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
     try {
       await widget.bloc.submit();
       Navigator.of(context).pop();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseException catch (e) {
       showExceptionAlertDialog(
         context,
         title: 'Sign in failed',

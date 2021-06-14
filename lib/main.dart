@@ -1,4 +1,4 @@
-import 'package:anime_downloader/screens/home_screen.dart';
+import 'package:anime_downloader/screens/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -28,7 +28,7 @@ class Main extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.w600))),
-      home: HomeScreen(),
+      home: LandingPage(),
     );
   }
 }

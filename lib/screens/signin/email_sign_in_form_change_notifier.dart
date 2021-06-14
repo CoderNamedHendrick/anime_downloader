@@ -1,16 +1,10 @@
-import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:anime_downloader/common_widgets/form_submit_button.dart';
+import 'package:anime_downloader/common_widgets/show_exception_alert_dialog.dart';
+import 'package:anime_downloader/screens/signin/email_sign_in_change_model.dart';
+import 'package:anime_downloader/services/auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_flutter/app/signin/email_sign_in_bloc.dart';
-import 'package:time_tracker_flutter/app/signin/email_sign_in_change_model.dart';
-import 'package:time_tracker_flutter/app/signin/validators.dart';
-import 'package:time_tracker_flutter/common_widgets/form_submit_button.dart';
-import 'package:time_tracker_flutter/common_widgets/show_exception_alert_dialog.dart';
-import 'package:time_tracker_flutter/services/auth.dart';
-
-import 'email_sign_in_model.dart';
 
 class EmailSignInFormChangeNotifier extends StatefulWidget {
   EmailSignInFormChangeNotifier({@required this.model});
@@ -55,7 +49,7 @@ class _EmailSignInFormChangeNotifierState
     try {
       await model.submit();
       Navigator.of(context).pop();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseException catch (e) {
       showExceptionAlertDialog(
         context,
         title: 'Sign in failed',
