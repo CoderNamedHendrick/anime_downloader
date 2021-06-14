@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:time_tracker_flutter/services/auth.dart';
+import 'package:anime_downloader/services/auth.dart';
 
 
 class AuthProvider extends InheritedWidget{

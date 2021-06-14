@@ -1,8 +1,9 @@
 
+
+import 'package:anime_downloader/screens/signin/email_sign_in_model.dart';
+import 'package:anime_downloader/screens/signin/validators.dart';
+import 'package:anime_downloader/services/auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:time_tracker_flutter/app/signin/email_sign_in_model.dart';
-import 'package:time_tracker_flutter/app/signin/validators.dart';
-import 'package:time_tracker_flutter/services/auth.dart';
 
 class EmailSignInChangeModel with EmailAndPasswordValidators, ChangeNotifier{
   EmailSignInChangeModel({
