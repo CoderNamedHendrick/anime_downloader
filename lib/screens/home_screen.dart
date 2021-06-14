@@ -35,20 +35,23 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             label: 'Home',
+            tooltip: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Search',
+            tooltip: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.folder_outlined),
             label: 'Library',
+            tooltip: 'Library',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.red,
+        selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).accentColor,
         onTap: _onItemTapped,
       ),
     );

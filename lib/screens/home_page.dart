@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-                SizedBox(height: 6),
+                SizedBox(height: 4),
                 RefreshIndicator(
                   onRefresh: () => _bloc.fetchPopular(),
                   child: StreamBuilder<ApiResponse<List<PopularModel>>>(

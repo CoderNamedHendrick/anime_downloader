@@ -95,6 +95,14 @@ class Description extends StatelessWidget {
             //   // StretchMode.blurBackground,
             // ],
           ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.favorite_border_outlined,
+                color: Colors.white,
+              ),
+            )
+          ],
           title: Text(
             'Preview',
             style: Theme.of(context).textTheme.headline1,
@@ -198,17 +206,11 @@ class Description extends StatelessWidget {
                         children: [
                           Text(
                             "start: " + desc.episodeStart,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white
-                            ),
+                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           Text(
                             "end: " + desc.episodeEnd,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white
-                            ),
+                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ],
                       )

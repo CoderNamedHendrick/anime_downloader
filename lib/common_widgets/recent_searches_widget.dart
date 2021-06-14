@@ -12,7 +12,7 @@ class RecentSearch extends StatelessWidget {
             color: Theme.of(context).accentColor,
             width: MediaQuery.of(context).size.width / 2.3,
             child: Wrap(
-              direction: Axis.vertical,
+              direction: Axis.horizontal,
               children: [
                 Container(
                   height: 50,
@@ -22,7 +22,7 @@ class RecentSearch extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Enn Enn no Shobuboi',
+                    'Enn Enn no Sh',
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),

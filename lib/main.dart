@@ -17,7 +17,7 @@ class Main extends StatelessWidget {
       title: 'Pōtaru',
       theme: ThemeData(
           primaryColor: const Color(0xff282828),
-          accentColor: const Color(0x00282828),
+          accentColor: Colors.grey[700],
           textTheme: TextTheme(
               bodyText1: TextStyle(
                 color: Colors.white,

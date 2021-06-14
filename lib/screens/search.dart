@@ -26,6 +26,14 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
+    _search() => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SearchScreen(
+          search: _controller.value.text,
+        ),
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -35,15 +43,8 @@ class _SearchState extends State<Search> {
         elevation: 0.0,
         actions: [
           IconButton(
-            icon: Icon(Icons.search_rounded),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SearchScreen(
-                  search: _controller.value.text,
-                ),
-              ),
-            ),
+            icon: Icon(Icons.saved_search),
+            onPressed: () => null,
             iconSize: 32,
           ),
         ],
@@ -58,7 +59,7 @@ class _SearchState extends State<Search> {
               Container(
                 height: 60,
                 decoration: BoxDecoration(
-                    color: Color(0xff282828).withOpacity(0.01),
+                    color: Colors.grey[700],
                     borderRadius: BorderRadius.all(Radius.circular(4))),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -69,6 +70,7 @@ class _SearchState extends State<Search> {
                         hintText: 'Movies, Series or Genre',
                         hintStyle: Theme.of(context).textTheme.bodyText1),
                     style: Theme.of(context).textTheme.bodyText1,
+                    onEditingComplete: _search,
                   ),
                 ),
               ),
@@ -112,46 +114,46 @@ class _SearchState extends State<Search> {
               SizedBox(
                 height: 6,
               ),
-              Text(
-                'By Release Year',
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.height / 3.2,
-                  child: GridView.builder(
-                    itemCount: 10,
-                    scrollDirection: Axis.horizontal,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: 0.6, crossAxisCount: 2),
-                    itemBuilder: (context, index) => Card(
-                      color: Colors.grey,
-                      child: Container(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              flex: 1,
-                              child: Container(
-                                color: Colors.red,
-                              ),
-                            ),
-                            Flexible(
-                              flex: 2,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('Dummy Text'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // Text(
+              //   'By Release Year',
+              //   style: Theme.of(context).textTheme.headline1,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+              //   child: Container(
+              //     height: MediaQuery.of(context).size.height / 3.2,
+              //     child: GridView.builder(
+              //       itemCount: 10,
+              //       scrollDirection: Axis.vertical,
+              //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //           childAspectRatio: 0.6, crossAxisCount: 2),
+              //       itemBuilder: (context, index) => Card(
+              //         color: Colors.grey,
+              //         child: Container(
+              //           child: Row(
+              //             crossAxisAlignment: CrossAxisAlignment.start,
+              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //             children: [
+              //               Flexible(
+              //                 flex: 1,
+              //                 child: Container(
+              //                   color: Colors.red,
+              //                 ),
+              //               ),
+              //               Flexible(
+              //                 flex: 2,
+              //                 child: Padding(
+              //                   padding: const EdgeInsets.all(8.0),
+              //                   child: Text('Dummy Text'),
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -169,15 +171,15 @@ class Genres extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Container(
-        height: MediaQuery.of(context).size.height / 3.2,
+        height: MediaQuery.of(context).size.height - 40,
         child: GridView.builder(
           itemCount: list.length,
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 0.6, crossAxisCount: 2),
           itemBuilder: (context, index) => GestureDetector(
             child: Card(
-              color: Colors.grey,
+              color: Theme.of(context).accentColor,
               child: Container(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
