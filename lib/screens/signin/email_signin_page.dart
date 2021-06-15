@@ -9,7 +9,7 @@ class EmailSignInPage extends StatelessWidget {
     final auth = Provider.of<AuthBase>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Time Tracker"),
+        title: Text("Potaru"),
         elevation: 2.0,
       ),
       body: SingleChildScrollView(

@@ -1,4 +1,3 @@
-
 import 'package:anime_downloader/common_widgets/show_exception_alert_dialog.dart';
 import 'package:anime_downloader/common_widgets/sign_in_button.dart';
 import 'package:anime_downloader/common_widgets/social_signin_button.dart';
@@ -71,7 +70,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Time Tracker"),
+        title: Text("Potaru"),
         elevation: 2.0,
       ),
       body: _buildContent(context),

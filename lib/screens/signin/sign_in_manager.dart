@@ -7,7 +7,7 @@ class SignInManager {
   final AuthBase auth;
   final ValueNotifier<bool> isLoading;
 
-  Future<FirebaseUser> _signIn(Future<FirebaseUser> Function() signInMethod) async{
+  Future<User> _signIn(Future<User> Function() signInMethod) async{
     try{
       isLoading.value = true;
       return await signInMethod();
@@ -16,7 +16,6 @@ class SignInManager {
       rethrow;
     }
   }
-  Future<FirebaseUser> signInWithGoogle() async => await _signIn(auth.signInWithGoogle);
-  Future<FirebaseUser> signInWithTwitter() async => await _signIn(auth.signInWithTwitter);
-
+  Future<User> signInWithGoogle() async => await _signIn(auth.signInWithGoogle);
+  Future<User> signInWithTwitter() async => await _signIn(auth.signInWithTwitter);
 }

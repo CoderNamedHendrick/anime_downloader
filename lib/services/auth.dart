@@ -1,17 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:anime_downloader/keys.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_twitter_login/flutter_twitter_login.dart';
+import 'package:twitter_login/twitter_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class AuthBase {
-  Future<FirebaseUser> get currentUser;
-  Stream<FirebaseUser> authStateChanges();
-  Future<FirebaseUser> signInWithEmailAndPassword(
-      String email, String password);
-  Future<FirebaseUser> createUserWithEmailAndPassword(
-      String email, String password);
-  Future<FirebaseUser> signInWithGoogle();
-  Future<FirebaseUser> signInWithTwitter();
+  User get currentUser;
+  Stream<User> authStateChanges();
+  Future<User> signInWithEmailAndPassword(String email, String password);
+  Future<User> createUserWithEmailAndPassword(String email, String password);
+  Future<User> signInWithGoogle();
+  Future<User> signInWithTwitter();
   Future<void> signOut();
 }
 
@@ -19,49 +17,50 @@ class Auth implements AuthBase {
   final _firebaseAuth = FirebaseAuth.instance;
 
   @override
-  Stream<FirebaseUser> authStateChanges() => _firebaseAuth.onAuthStateChanged;
+  Stream<User> authStateChanges() => _firebaseAuth.authStateChanges();
 
   @override
-  Future<FirebaseUser> get currentUser => _firebaseAuth.currentUser();
+  User get currentUser => _firebaseAuth.currentUser;
 
   @override
-  Future<FirebaseUser> signInWithEmailAndPassword(
-      String email, String password) async {
-    final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
-    return userCredential;
+  Future<User> signInWithEmailAndPassword(String email, String password) async {
+    final userCredential = await _firebaseAuth.signInWithCredential(
+      EmailAuthProvider.credential(email: email, password: password),
+    );
+    return userCredential.user;
   }
 
   @override
-  Future<FirebaseUser> createUserWithEmailAndPassword(
+  Future<User> createUserWithEmailAndPassword(
       String email, String password) async {
     final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
-    return userCredential;
+    return userCredential.user;
   }
 
   @override
-  Future<FirebaseUser> signInWithGoogle() async {
+  Future<User> signInWithGoogle() async {
     final googleSignIn = GoogleSignIn();
     final googleUser = await googleSignIn.signIn();
     if (googleUser != null) {
       final googleAuth = await googleUser.authentication;
       if (googleAuth.idToken != null) {
-        final userCredential = await _firebaseAuth.signInWithGoogle(
-            idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
-        return userCredential;
+        final userCredential = await _firebaseAuth
+            .signInWithCredential(GoogleAuthProvider.credential(
+          idToken: googleAuth.idToken,
+          accessToken: googleAuth.accessToken,
+        ));
+        return userCredential.user;
       } else {
-        throw FirebaseException(
-          plugin: 'Missing Id token',
+        throw FirebaseAuthException(
           code: 'ERROR_MISSING_GOOGLE_ID_TOKEN',
           message: 'Missing Google ID Token',
         );
       }
     } else {
-      throw FirebaseException(
-        plugin: 'Operation aborted by user',
+      throw FirebaseAuthException(
         code: 'ERROR_ABORTED_BY_USER',
         message: 'Sign in aborted by user',
       );
@@ -69,32 +68,26 @@ class Auth implements AuthBase {
   }
 
   @override
-  Future<FirebaseUser> signInWithTwitter() async {
-    final tw = TwitterLogin(
-        consumerKey: 'imJr3lVDEHUatITQkLwBoPwZs',
-        consumerSecret: 'Q90mEFWSoTlJVAEfk6JVqIs9E4xcHxqCqTOj3lGuBBfiDQKqjc');
-    final response = await tw.authorize();
-    switch (response.status) {
+  Future<User> signInWithTwitter() async {
+    final twitterLogin = TwitterLogin(apiKey: CONSUMER_KEY, apiSecretKey: CONSUMER_KEY_SECRET, redirectURI: 'example://',);
+    final authResult = await twitterLogin.login();
+    switch (authResult.status) {
       case TwitterLoginStatus.loggedIn:
-        final session = response.session;
-        final userCredential = await _firebaseAuth.signInWithTwitter(
-          authToken: session.token,
-          authTokenSecret: session.secret,
+        print('We got here');
+        final userCredential = await _firebaseAuth.signInWithCredential(
+          TwitterAuthProvider.credential(
+              accessToken: authResult.authToken, secret: authResult.authTokenSecret),
         );
-        return userCredential;
-        break;
+        return userCredential.user;
       case TwitterLoginStatus.cancelledByUser:
-        throw FirebaseException(
-          plugin: 'Login cancelled by user',
+        throw FirebaseAuthException(
           code: 'ERROR_ABORTED_BY_USER',
           message: 'Sign in aborted by user',
         );
-        break;
       case TwitterLoginStatus.error:
-        throw FirebaseException(
-          plugin: 'Error with login',
+        throw FirebaseAuthException(
           code: 'ERROR_TWITTER_LOGIN_FAILED',
-          message: response.errorMessage,
+          message: authResult.errorMessage,
         );
         break;
       default:
@@ -106,10 +99,12 @@ class Auth implements AuthBase {
   Future<void> signOut() async {
     final googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
-    final twitterLogin = TwitterLogin(
-        consumerKey: 'imJr3lVDEHUatITQkLwBoPwZs',
-        consumerSecret: 'Q90mEFWSoTlJVAEfk6JVqIs9E4xcHxqCqTOj3lGuBBfiDQKqjc');
-    await twitterLogin.logOut();
+    // final twitterLogin = TwitterLogin(
+    //   apiKey: CONSUMER_KEY,
+    //   apiSecretKey: CONSUMER_KEY_SECRET,
+    //   redirectURI: 'example://',
+    // );
+
     await _firebaseAuth.signOut();
   }
 }

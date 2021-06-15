@@ -1,4 +1,4 @@
-import 'package:anime_downloader/screens/download_screen.dart';
+import 'package:anime_downloader/screens/home/download_screen.dart';
 import 'package:flutter/material.dart';
 
 Widget EpisodesWidget(BuildContext context,

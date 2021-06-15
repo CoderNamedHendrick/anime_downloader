@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
-import 'package:anime_downloader/screens/folder.dart';
+import 'package:anime_downloader/screens/home/folder.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 

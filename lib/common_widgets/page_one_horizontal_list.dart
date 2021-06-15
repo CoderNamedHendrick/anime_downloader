@@ -1,6 +1,6 @@
 import 'package:anime_downloader/common_widgets/horizontal_list_view.dart';
-import 'package:anime_downloader/screens/desc_screen.dart';
-import 'package:anime_downloader/screens/download_screen.dart';
+import 'package:anime_downloader/screens/home/desc_screen.dart';
+import 'package:anime_downloader/screens/home/download_screen.dart';
 import 'package:flutter/material.dart';
 
 class PopularHorizontalList extends StatelessWidget {

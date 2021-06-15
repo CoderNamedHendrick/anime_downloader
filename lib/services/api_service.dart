@@ -9,7 +9,7 @@ class ApiService {
   Future<dynamic> get (String url) async{
     var responseJson;
     try {
-      final response = await http.get(_baseUrl + url);
+      final response = await http.get(Uri.parse(_baseUrl + url));
       responseJson = _returnResponse(response);
     } on SocketException{
       print('No net');

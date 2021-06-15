@@ -1,6 +1,6 @@
-import 'package:anime_downloader/screens/home_page.dart';
-import 'package:anime_downloader/screens/library_screen.dart';
-import 'package:anime_downloader/screens/search.dart';
+import 'package:anime_downloader/screens/home/home_page.dart';
+import 'package:anime_downloader/screens/home/library_screen.dart';
+import 'package:anime_downloader/screens/home/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

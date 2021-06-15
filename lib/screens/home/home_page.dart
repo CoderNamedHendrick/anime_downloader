@@ -4,10 +4,13 @@ import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/common_widgets/page_one_horizontal_list.dart';
 import 'package:anime_downloader/common_widgets/recent_searches_widget.dart';
+import 'package:anime_downloader/common_widgets/show_alert_dialog.dart';
 import 'package:anime_downloader/model/latest_model.dart';
 import 'package:anime_downloader/model/popular_model.dart';
 import 'package:anime_downloader/services/api_response.dart';
+import 'package:anime_downloader/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -17,6 +20,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> _confirmSignOut(BuildContext context) async {
+    final didRequestSignOut = await showAlertDialog(context,
+        title: 'Logout',
+        content: 'Are you sure you want to logout?',
+        defaultActionText: 'Logout',
+        cancelActionText: 'Cancel');
+    if (didRequestSignOut == true) {
+      _signOut(context);
+    }
+  }
+
   PopularBloc _bloc;
   LatestAnimeBloc _latestAnimeBloc;
 
@@ -36,6 +59,15 @@ class _HomePageState extends State<HomePage> {
           style: Theme.of(context).textTheme.headline1,
         ),
         elevation: 0,
+        actions: [
+          TextButton(
+            child: Text(
+              'Logout',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            onPressed: () => _confirmSignOut(context),
+          ),
+        ],
       ),
       body: Container(
         child: SingleChildScrollView(

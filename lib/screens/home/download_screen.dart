@@ -2,7 +2,7 @@ import 'package:anime_downloader/blocs/download_links_bloc.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/model/name_link_model.dart';
-import 'package:anime_downloader/screens/download_webview.dart';
+import 'package:anime_downloader/screens/home/download_webview.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
 
