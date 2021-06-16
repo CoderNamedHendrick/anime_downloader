@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key key, @required this.manager, @required this.isLoading}) : super(key: key);
+  const SignInPage({Key key, @required this.manager, @required this.isLoading})
+      : super(key: key);
   final SignInManager manager;
   final bool isLoading;
 
@@ -21,7 +22,10 @@ class SignInPage extends StatelessWidget {
         builder: (_, isLoading, __) => Provider<SignInManager>(
           create: (_) => SignInManager(auth: auth, isLoading: isLoading),
           child: Consumer<SignInManager>(
-            builder: (_, manager, __) => SignInPage(manager: manager, isLoading: isLoading.value,),
+            builder: (_, manager, __) => SignInPage(
+              manager: manager,
+              isLoading: isLoading.value,
+            ),
           ),
         ),
       ),
@@ -39,7 +43,6 @@ class SignInPage extends StatelessWidget {
       exception: exception,
     );
   }
-
 
   Future<void> _signInWithGoogle(BuildContext context) async {
     try {

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LandingPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
@@ -15,7 +16,9 @@ class LandingPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           final User user = snapshot.data;
           print('Something happened here');
-          if (user == null) return SignInPage.create(context);
+          if (user == null) {
+           return SignInPage.create(context);
+          }
           return HomeScreen();
         }
         return Scaffold(
@@ -24,6 +27,24 @@ class LandingPage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class DemoScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final auth = Provider.of<AuthBase>(context, listen: false);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Demo Screen'),
+        actions: [
+          TextButton(
+            child: Text('Logout'),
+            onPressed: () => auth.signOut(),
+          )
+        ],
+      ),
     );
   }
 }
