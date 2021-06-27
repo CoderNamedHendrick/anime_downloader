@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/screens/home/folder.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class LibraryScreen extends StatefulWidget {
@@ -14,6 +14,7 @@ class LibraryScreen extends StatefulWidget {
 
 class _LibraryScreenState extends State<LibraryScreen> {
   List folders;
+  var dir;
 
   @override
   void initState() {
@@ -22,15 +23,31 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }
 
   void _listFolders() async {
-    final directoryName = 'Pōtaru';
-    final dir = await Directory('storage/emulated/0/$directoryName');
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
+    final directoryName = 'pōtaru';
+    try {
+      print('Testing directories: ${await getExternalStorageDirectories()}');
+      dir = await Directory('/storage/emulated/0/Download/' + directoryName);
+      var status = await Permission.storage.status;
+      print('Permission status: $status');
+      if (!status.isGranted) {
+        await Permission.storage.request();
+      }
+      if (await dir.exists() == false) {
+        await dir.createSync(recursive: true);
+      }
+    } catch (e) {
+      print(e.message);
     }
-    if (await dir.exists() == false) {
-      await dir.create(recursive: true);
-    }
+    // } on FileSystemException{
+    //   final storagedir = await getExternalStorageDirectories(type: StorageDirectory.movies);
+    //   dir = await Directory(storagedir.single.path);
+    //   var status = await Permission.storage.status;
+    //   if (!status.isGranted) {
+    //     await Permission.storage.request();
+    //   }
+    //   if (await dir.exists() == false) {
+    //     await dir.create(recursive: true);
+    //   }
 
     setState(() {
       folders = dir.listSync();
@@ -41,11 +58,16 @@ class _LibraryScreenState extends State<LibraryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Library', style: Theme.of(context).textTheme.headline1,),
+        title: Text(
+          'Library',
+          style: Theme.of(context).textTheme.headline1,
+        ),
       ),
       body: folders == null
-          ? Loading(
-              loadingMessage: 'Fetching Folders',
+          ? Center(
+              child: Container(
+                child: Text('test'),
+              ),
             )
           : ListView.builder(
               itemCount: folders.length,
@@ -53,7 +75,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 child: ListTile(
                   title: Text(
                     '${folders[index].path}'
-                        .replaceAll("storage/emulated/0/Pōtaru/", ""),
+                        .replaceAll("${dir.path.toString()}", ""),
                   ),
                   leading: Icon(Icons.folder),
                   trailing: Icon(Icons.chevron_right_sharp),

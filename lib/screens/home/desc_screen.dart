@@ -71,10 +71,21 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   }
 }
 
-class Description extends StatelessWidget {
+class Description extends StatefulWidget {
   const Description({Key key, this.desc, this.imageUrl}) : super(key: key);
   final DescriptionModel desc;
   final String imageUrl;
+
+  @override
+  _DescriptionState createState() => _DescriptionState();
+}
+
+class _DescriptionState extends State<Description> {
+  bool isFavourite = false;
+
+  bool _favourite(bool favourite) {
+    return isFavourite = !favourite;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +98,7 @@ class Description extends StatelessWidget {
           expandedHeight: MediaQuery.of(context).size.height / 2.5,
           flexibleSpace: FlexibleSpaceBar(
             background: Image(
-              image: NetworkImage(imageUrl),
+              image: NetworkImage(widget.imageUrl),
               fit: BoxFit.cover,
             ),
             // stretchModes: [
@@ -97,11 +108,29 @@ class Description extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              icon: Icon(
-                Icons.favorite_border_outlined,
-                color: Colors.white,
-              ),
-            )
+                icon: isFavourite
+                    ? Icon(
+                        Icons.favorite_outlined,
+                        color: Colors.red,
+                      )
+                    : Icon(
+                        Icons.favorite_border_outlined,
+                        color: Colors.white,
+                      ),
+                onPressed: () {
+                  _favourite(isFavourite);
+                  final snackBar = isFavourite
+                      ? SnackBar(
+                          content: Text('favorite'),
+                          duration: Duration(seconds: 3),
+                        )
+                      : SnackBar(
+                          content: Text('unfavourite'),
+                          duration: Duration(seconds: 3),
+                        );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  setState(() {});
+                })
           ],
           title: Text(
             'Preview',
@@ -117,7 +146,7 @@ class Description extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    firstCharacterUpper(desc.name),
+                    firstCharacterUpper(widget.desc.name),
                     style: Theme.of(context).textTheme.headline1,
                   ),
                   SizedBox(height: 6),
@@ -142,7 +171,7 @@ class Description extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 8),
                           child: Text(
-                            desc.release,
+                            widget.desc.release,
                             style: TextStyle(color: Colors.grey),
                           ),
                         ),
@@ -151,7 +180,7 @@ class Description extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    desc.genre,
+                    widget.desc.genre,
                     style: TextStyle(color: Colors.grey),
                   ),
                   SizedBox(height: 6),
@@ -177,10 +206,10 @@ class Description extends StatelessWidget {
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => EpisodesScreen(
-                            start: desc.episodeStart,
-                            end: desc.episodeEnd,
-                            id: desc.id,
-                            name: desc.name,
+                            start: widget.desc.episodeStart,
+                            end: widget.desc.episodeEnd,
+                            id: widget.desc.id,
+                            name: widget.desc.name,
                           ),
                         ),
                       ),
@@ -188,7 +217,7 @@ class Description extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    desc.summary,
+                    widget.desc.summary,
                     style: TextStyle(color: Colors.grey),
                   ),
                   Row(
@@ -205,11 +234,11 @@ class Description extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            "start: " + desc.episodeStart,
+                            "start: " + widget.desc.episodeStart,
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           Text(
-                            "end: " + desc.episodeEnd,
+                            "end: " + widget.desc.episodeEnd,
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                         ],

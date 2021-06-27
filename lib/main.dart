@@ -22,18 +22,18 @@ class Main extends StatelessWidget {
       child: MaterialApp(
         title: 'Pōtaru',
         theme: ThemeData(
-            primaryColor: const Color(0xff282828),
-            accentColor: Colors.grey[700],
-            textTheme: TextTheme(
-                bodyText1: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-                headline1: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600))),
+          primaryColor: const Color(0xff282828),
+          accentColor: Colors.grey[700],
+          textTheme: TextTheme(
+            bodyText1: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+            headline1: TextStyle(
+                color: Colors.white, fontSize: 24, fontWeight: FontWeight.w600),
+          ),
+        ),
         home: LandingPage(),
       ),
     );

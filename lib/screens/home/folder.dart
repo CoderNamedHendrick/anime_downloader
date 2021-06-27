@@ -45,14 +45,19 @@ class _FolderContentsState extends State<FolderContents> {
               itemCount: files.length,
               itemBuilder: (context, index) => Card(
                 child: ListTile(
-                  title: Text(
-                    '${files[index].path}'.replaceAll("${widget.dir}/", ""),
-                  ),
-                  leading: Icon(Icons.play_circle_outline_sharp),
-                  trailing: Icon(Icons.chevron_right_sharp),
-                  onTap: () =>
-                      OpenFile.open(files[index].path, type: "video/mp4"),
-                ),
+                    title: Text(
+                      '${files[index].path}'.replaceAll("${widget.dir}/", ""),
+                    ),
+                    leading: Icon(Icons.play_circle_outline_sharp),
+                    trailing: Icon(Icons.chevron_right_sharp),
+                    onTap: () {
+                      print(files[index].path);
+                      try {
+                        OpenFile.open(files[index].path, type: "video/mp4");
+                      } catch (e){
+                        print(e);
+                      }
+                    }),
               ),
             ),
     );

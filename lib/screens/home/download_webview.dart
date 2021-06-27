@@ -3,9 +3,8 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class DownloaderWebView extends StatefulWidget {
@@ -23,23 +22,25 @@ class DownloaderWebView extends StatefulWidget {
 class _DownloaderWebViewState extends State<DownloaderWebView> {
   int progress = 0;
   ReceivePort _receivePort = ReceivePort();
- 
-  createDir() async {
-    final directoryName = 'Pōtaru';
-    final myDir =
-        Directory('storage/emulated/0/$directoryName/${widget.animeTitle.replaceAll(" ", "-")}');
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
-    }
-    if (await myDir.exists()) {
-      print(myDir.path);
-      return myDir;
-    }
 
-    final dir = await myDir.create(recursive: true);
-    print(dir.path);
-    return dir;
+  createDir() async {
+    print(await Permission.storage.status.isGranted);
+    final directoryName = 'pōtaru';
+    try {
+      final myDir = Directory(
+          '/storage/emulated/0/Download/$directoryName/${widget.animeTitle.replaceAll(" ", "-")}');
+      var status = await Permission.storage.status;
+      if (!status.isGranted) {
+        await Permission.storage.request();
+      }
+      if (await myDir.exists()) {
+        return myDir;
+      }
+      final dir = await myDir.create(recursive: true);
+      return dir;
+    } catch (e) {
+      print(e.message);
+    }
   }
 
   static downloadingCallback(id, status, progress) {
