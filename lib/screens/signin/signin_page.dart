@@ -1,6 +1,7 @@
 import 'package:anime_downloader/common_widgets/show_exception_alert_dialog.dart';
 import 'package:anime_downloader/common_widgets/sign_in_button.dart';
 import 'package:anime_downloader/common_widgets/social_signin_button.dart';
+import 'package:anime_downloader/screens/home/home_screen.dart';
 import 'package:anime_downloader/screens/signin/email_signin_page.dart';
 import 'package:anime_downloader/screens/signin/sign_in_manager.dart';
 import 'package:anime_downloader/services/auth.dart';
@@ -97,7 +98,11 @@ class SignInPage extends StatelessWidget {
             assetName: 'images/google-logo.png',
             text: 'Sign in with Google',
             textColor: Colors.black87,
-            onPressed: isLoading ? null : () => _signInWithGoogle(context),
+            onPressed: isLoading
+                ? null
+                : () async {
+                    await _signInWithGoogle(context);
+                  },
           ),
           SizedBox(
             height: 8.0,
@@ -107,7 +112,16 @@ class SignInPage extends StatelessWidget {
             text: 'Sign in with Twitter',
             textColor: Colors.white,
             color: Color(0xFF334D92),
-            onPressed: isLoading ? null : () => _signInWithTwitter(context),
+            onPressed: isLoading
+                ? null
+                : () async {
+                    await _signInWithTwitter(context);
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(),
+                      ),
+                    );
+                  },
           ),
           SizedBox(
             height: 8.0,

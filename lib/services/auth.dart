@@ -1,11 +1,11 @@
 import 'package:anime_downloader/keys.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:twitter_login/twitter_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 abstract class AuthBase {
   User get currentUser;
-  Stream<User> authStateChanges();
+  Stream<User> get authStateChanges;
   Future<User> signInWithEmailAndPassword(String email, String password);
   Future<User> createUserWithEmailAndPassword(String email, String password);
   Future<User> signInWithGoogle();
@@ -17,7 +17,7 @@ class Auth implements AuthBase {
   final _firebaseAuth = FirebaseAuth.instance;
 
   @override
-  Stream<User> authStateChanges() => _firebaseAuth.authStateChanges();
+  Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
   @override
   User get currentUser => _firebaseAuth.currentUser;
@@ -69,14 +69,19 @@ class Auth implements AuthBase {
 
   @override
   Future<User> signInWithTwitter() async {
-    final twitterLogin = TwitterLogin(apiKey: CONSUMER_KEY, apiSecretKey: CONSUMER_KEY_SECRET, redirectURI: 'example://',);
+    final twitterLogin = TwitterLogin(
+      apiKey: CONSUMER_KEY,
+      apiSecretKey: CONSUMER_KEY_SECRET,
+      redirectURI: 'example://',
+    );
     final authResult = await twitterLogin.login();
     switch (authResult.status) {
       case TwitterLoginStatus.loggedIn:
         print('We got here');
         final userCredential = await _firebaseAuth.signInWithCredential(
           TwitterAuthProvider.credential(
-              accessToken: authResult.authToken, secret: authResult.authTokenSecret),
+              accessToken: authResult.authToken,
+              secret: authResult.authTokenSecret),
         );
         return userCredential.user;
       case TwitterLoginStatus.cancelledByUser:
