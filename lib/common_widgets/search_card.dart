@@ -25,7 +25,7 @@ Widget SearchCard(BuildContext context,
                 ),
               ),
               Flexible(
-                flex: 2,
+                flex: 4,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

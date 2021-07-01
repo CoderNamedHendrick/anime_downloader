@@ -21,6 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
+    print(widget.search);
     if (widget.search.contains("/")) {
       _bloc = SearchByGenreBloc(name: widget.search);
     } else {
@@ -98,5 +99,3 @@ class SearchList extends StatelessWidget {
     );
   }
 }
-
-

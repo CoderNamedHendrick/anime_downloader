@@ -28,7 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _navBarWidgets.elementAt(_selectedIndex),
+      body: IndexedStack(
+        children: _navBarWidgets,
+        index: _selectedIndex,
+      ),
       backgroundColor: Theme.of(context).primaryColor,
       bottomNavigationBar: BottomNavigationBar(
         items: [

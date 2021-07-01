@@ -16,15 +16,6 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   GenresBloc _bloc;
   TextEditingController _controller = TextEditingController();
-  List<String> _genres = [
-    'Action',
-    'Game',
-    'Adventure',
-    'Sex',
-    'Illusion',
-    'Crime',
-    'Cars'
-  ];
 
   @override
   void initState() {
