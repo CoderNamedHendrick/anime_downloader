@@ -31,7 +31,10 @@ class Main extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
             headline1: TextStyle(
-                color: Colors.white, fontSize: 24, fontWeight: FontWeight.w600),
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         home: LandingPage(),
