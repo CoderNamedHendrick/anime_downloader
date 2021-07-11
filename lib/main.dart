@@ -1,4 +1,4 @@
-import 'package:anime_downloader/screens/landing_page.dart';
+import 'package:anime_downloader/screens/home/home_screen.dart';
 import 'package:anime_downloader/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class Main extends StatelessWidget {
             ),
           ),
         ),
-        home: LandingPage(),
+        home: HomeScreen(),
       ),
     );
   }

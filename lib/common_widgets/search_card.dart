@@ -2,7 +2,7 @@ import 'package:anime_downloader/common_widgets/text_widget.dart';
 import 'package:anime_downloader/screens/home/desc_screen.dart';
 import 'package:flutter/material.dart';
 
-Widget SearchCard(BuildContext context,
+Widget searchCard(BuildContext context,
     {String title, String releaseDate, String imgUrl, String link}) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
@@ -25,7 +25,7 @@ Widget SearchCard(BuildContext context,
                 ),
               ),
               Flexible(
-                flex: 4,
+                flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

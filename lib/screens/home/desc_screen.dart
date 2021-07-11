@@ -1,10 +1,9 @@
 import 'package:anime_downloader/blocs/description_bloc.dart';
+import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
-import 'package:anime_downloader/common_widgets/text_widget.dart';
 import 'package:anime_downloader/model/description_model.dart';
 import 'package:anime_downloader/screens/home/episodes_screen.dart';
 import 'package:anime_downloader/services/api_response.dart';
-import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionScreen extends StatefulWidget {
@@ -108,29 +107,32 @@ class _DescriptionState extends State<Description> {
           ),
           actions: [
             IconButton(
-                icon: isFavourite
-                    ? Icon(
-                        Icons.favorite_outlined,
-                        color: Colors.red,
+              splashColor: Colors.pinkAccent.withOpacity(0.8),
+              splashRadius: 20,
+              icon: isFavourite
+                  ? Icon(
+                      Icons.favorite_outlined,
+                      color: Colors.red,
+                    )
+                  : Icon(
+                      Icons.favorite_border_outlined,
+                      color: Colors.white,
+                    ),
+              onPressed: () {
+                _favourite(isFavourite);
+                final snackBar = isFavourite
+                    ? SnackBar(
+                        content: Text('favorite'),
+                        duration: Duration(seconds: 3),
                       )
-                    : Icon(
-                        Icons.favorite_border_outlined,
-                        color: Colors.white,
-                      ),
-                onPressed: () {
-                  _favourite(isFavourite);
-                  final snackBar = isFavourite
-                      ? SnackBar(
-                          content: Text('favorite'),
-                          duration: Duration(seconds: 3),
-                        )
-                      : SnackBar(
-                          content: Text('unfavourite'),
-                          duration: Duration(seconds: 3),
-                        );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  setState(() {});
-                })
+                    : SnackBar(
+                        content: Text('un-favorite'),
+                        duration: Duration(seconds: 3),
+                      );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                setState(() {});
+              },
+            )
           ],
           title: Text(
             'Preview',

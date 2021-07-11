@@ -88,7 +88,7 @@ class SearchList extends StatelessWidget {
         crossAxisCount: 1,
       ),
       itemBuilder: (context, index) {
-        return SearchCard(
+        return searchCard(
           context,
           title: searchList[index].name,
           releaseDate: searchList[index].release,

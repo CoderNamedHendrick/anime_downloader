@@ -19,7 +19,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  AnimationController _bottomModalAnimController;
   Future<void> _signOut(BuildContext context) async {
     try {
       final auth = Provider.of<AuthBase>(context, listen: false);
@@ -48,6 +49,11 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _bloc = PopularBloc();
     _latestAnimeBloc = LatestAnimeBloc();
+    _bottomModalAnimController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 900),
+      reverseDuration: Duration(milliseconds: 520),
+    );
   }
 
   @override
@@ -62,11 +68,20 @@ class _HomePageState extends State<HomePage> {
         actions: [
           TextButton(
             child: Text(
-              'Logout',
+              "Sign-in",
               style: Theme.of(context).textTheme.bodyText1,
             ),
-            onPressed: () => _confirmSignOut(context),
+            onPressed: () {
+              _showBottomModal(context);
+            },
           ),
+          // TextButton(
+          //   child: Text(
+          //     'Logout',
+          //     style: Theme.of(context).textTheme.bodyText1,
+          //   ),
+          //   onPressed: () => _confirmSignOut(context),
+          // ),
         ],
       ),
       body: Container(
@@ -166,6 +181,67 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       backgroundColor: Theme.of(context).primaryColor,
+    );
+  }
+
+  _showBottomModal(context) {
+    return showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      transitionAnimationController: _bottomModalAnimController,
+      builder: (context) {
+        return Container(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height / 3,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10.0,
+                ),
+              ],
+            ),
+            padding: EdgeInsets.all(14.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Sign In options",
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                ),
+                SizedBox(
+                  height: 14,
+                ),
+                Align(
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "images/google-logo.png",
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

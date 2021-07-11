@@ -64,6 +64,7 @@ class _SearchState extends State<Search> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     controller: _controller,
+                    cursorHeight: 20,
                     decoration: InputDecoration(
                         fillColor: Colors.orangeAccent,
                         hintText: 'Movies, Series or Genre',
