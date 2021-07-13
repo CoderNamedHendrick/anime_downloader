@@ -174,19 +174,20 @@ class Genres extends StatelessWidget {
       for (int index = 0; index < list.length; index++) {
         print(list[index]);
         _chips[index] = Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-            child: ActionChip(
-              label: Text(list[index].name),
-              labelStyle: TextStyle(fontSize: 20),
-              elevation: 4,
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => SearchScreen(
-                    search: list[index].link,
-                  ),
+          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+          child: ActionChip(
+            label: Text(list[index].name),
+            labelStyle: TextStyle(fontSize: 20),
+            elevation: 4,
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => SearchScreen(
+                  search: list[index].link,
                 ),
               ),
-            ));
+            ),
+          ),
+        );
       }
       return _chips;
     }

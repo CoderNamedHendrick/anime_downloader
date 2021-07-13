@@ -14,6 +14,7 @@ class Loading extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 24,
+              color: Colors.white,
             ),
           ),
           SizedBox(height: 24),

@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static const List<Widget> _navBarWidgets = [
     HomePage(),
     Search(),
@@ -53,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,
+        selectedIconTheme: IconThemeData(size: 32),
         unselectedItemColor: Colors.white,
         backgroundColor: Theme.of(context).accentColor,
         onTap: _onItemTapped,

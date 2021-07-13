@@ -36,6 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
         title: Text('Search Result'),
         centerTitle: true,
       ),
+      backgroundColor: Theme.of(context).primaryColor,
       body: RefreshIndicator(
         onRefresh: () => _bloc.fetchSearchList(name: widget.search),
         child: StreamBuilder<ApiResponse<List<SearchModel>>>(

@@ -29,6 +29,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   Widget build(BuildContext context) {
     print(widget.link);
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: RefreshIndicator(
         onRefresh: () => _bloc.fetchDescription(link: widget.link),
         child: StreamBuilder<ApiResponse<DescriptionModel>>(
@@ -88,13 +89,15 @@ class _DescriptionState extends State<Description> {
 
   @override
   Widget build(BuildContext context) {
+    var size2 = MediaQuery.of(context).size;
+    var textTheme2 = Theme.of(context).textTheme;
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
           floating: false,
           pinned: true,
           automaticallyImplyLeading: false,
-          expandedHeight: MediaQuery.of(context).size.height / 2.5,
+          expandedHeight: size2.height / 2.5,
           flexibleSpace: FlexibleSpaceBar(
             background: Image(
               image: NetworkImage(widget.imageUrl),
@@ -136,7 +139,7 @@ class _DescriptionState extends State<Description> {
           ],
           title: Text(
             'Preview',
-            style: Theme.of(context).textTheme.headline1,
+            style: textTheme2.headline1,
           ),
         ),
         SliverFillRemaining(
@@ -149,7 +152,7 @@ class _DescriptionState extends State<Description> {
                 children: [
                   Text(
                     firstCharacterUpper(widget.desc.name),
-                    style: Theme.of(context).textTheme.headline1,
+                    style: textTheme2.headline1,
                   ),
                   SizedBox(height: 6),
                   Container(
@@ -159,16 +162,17 @@ class _DescriptionState extends State<Description> {
                           width: 25,
                           height: 22,
                           decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4))),
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                          ),
                           child: Center(
-                              child: Text(
-                            'R',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
-                          )),
+                            child: Text(
+                              'R',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 8),
@@ -187,18 +191,20 @@ class _DescriptionState extends State<Description> {
                   ),
                   SizedBox(height: 6),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 14.7,
-                    width: MediaQuery.of(context).size.width,
+                    height: size2.height / 14.7,
+                    width: size2.width,
                     child: TextButton(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.arrow_downward_rounded,
-                              color: Colors.white),
+                          Icon(
+                            Icons.arrow_downward_rounded,
+                            color: Colors.white,
+                          ),
                           Text(
                             'Download',
-                            style: Theme.of(context).textTheme.bodyText1,
-                          )
+                            style: textTheme2.bodyText1,
+                          ),
                         ],
                       ),
                       style: ButtonStyle(
@@ -237,11 +243,17 @@ class _DescriptionState extends State<Description> {
                         children: [
                           Text(
                             "start: " + widget.desc.episodeStart,
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
                           ),
                           Text(
                             "end: " + widget.desc.episodeEnd,
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
                           ),
                         ],
                       )
