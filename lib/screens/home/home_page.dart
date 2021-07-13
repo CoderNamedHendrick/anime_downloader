@@ -21,6 +21,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   AnimationController _bottomModalAnimController;
+  var _height;
+  bool isLoading = false;
   Future<void> _signOut(BuildContext context) async {
     try {
       final auth = Provider.of<AuthBase>(context, listen: false);
@@ -49,15 +51,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.initState();
     _bloc = PopularBloc();
     _latestAnimeBloc = LatestAnimeBloc();
-    _bottomModalAnimController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 900),
-      reverseDuration: Duration(milliseconds: 520),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
+    _height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -122,7 +120,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             break;
                           case Status.COMPLETED:
                             return Container(
-                              height: 330,
+                              height: _height / 3,
                               child: LatestHorizontalList(
                                 title: 'Latest',
                                 list: snapshot.data.data,
@@ -156,7 +154,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             break;
                           case Status.COMPLETED:
                             return Container(
-                              height: 330,
+                              height: _height / 3,
                               child: PopularHorizontalList(
                                 title: 'Trending',
                                 list: snapshot.data.data,
@@ -188,60 +186,137 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      transitionAnimationController: _bottomModalAnimController,
       builder: (context) {
-        return Container(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height / 3,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.0),
-                topRight: Radius.circular(20.0),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 10.0,
-                ),
-              ],
-            ),
-            padding: EdgeInsets.all(14.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Sign In options",
-                  style: TextStyle(fontSize: 18, color: Colors.black),
-                ),
-                SizedBox(
-                  height: 14,
-                ),
-                Align(
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              "images/google-logo.png",
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
+        return BottomModal();
       },
     );
   }
+}
+
+class BottomModal extends StatefulWidget {
+  @override
+  _BottomModalState createState() => _BottomModalState();
+}
+
+class _BottomModalState extends State<BottomModal> {
+  bool isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    return Container(
+      constraints: BoxConstraints(
+        maxHeight: height / 3,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10.0,
+            ),
+          ],
+        ),
+        padding: EdgeInsets.all(14.0),
+        child: Column(
+          children: [
+            Text(
+              "Sign In options",
+              style: TextStyle(fontSize: 18, color: Colors.black),
+            ),
+            SizedBox(
+              height: height / 10,
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isLoading = !isLoading;
+                });
+              },
+              child: AnimatedCrossFade(
+                duration: const Duration(seconds: 2),
+                alignment: Alignment.center,
+                firstChild: _signInOptions(),
+                firstCurve: Curves.elasticIn,
+                secondChild: Container(
+                  height: 100,
+                  width: 200,
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                layoutBuilder: (Widget topChild, Key topChildKey,
+                    Widget bottomChild, Key bottomChildKey) {
+                  return Stack(
+                    clipBehavior: Clip.hardEdge,
+                    children: [
+                      Positioned(key: topChildKey, child: topChild),
+                      Positioned(
+                        key: bottomChildKey,
+                        child: bottomChild,
+                        left: 0,
+                        right: 0,
+                      ),
+                    ],
+                  );
+                },
+                crossFadeState: isLoading
+                    ? CrossFadeState.showFirst
+                    : CrossFadeState.showSecond,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _signInOptions() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/twitter-logo.png'),
+                  ),
+                ),
+              ),
+              Text("Sign In with Twitter"),
+            ],
+          ),
+          SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/google-logo.png'),
+                  ),
+                ),
+              ),
+              Text("Sign In with Google"),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+_method() {
+  var height;
 }

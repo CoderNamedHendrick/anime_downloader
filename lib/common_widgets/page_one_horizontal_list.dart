@@ -1,4 +1,3 @@
-import 'package:anime_downloader/common_widgets/horizontal_list_view.dart';
 import 'package:anime_downloader/screens/home/desc_screen.dart';
 import 'package:anime_downloader/screens/home/download_screen.dart';
 import 'package:flutter/material.dart';
@@ -127,12 +126,11 @@ class LatestHorizontalList extends StatelessWidget {
                     ),
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => DownloadScreen(
-                          title: list[index].name,
-                          name: list[index].episode,
-                          link: list[index].link,
-                        )
-                      ),
+                          builder: (context) => DownloadScreen(
+                                title: list[index].name,
+                                name: list[index].episode,
+                                link: list[index].link,
+                              )),
                     ),
                   );
                 },
