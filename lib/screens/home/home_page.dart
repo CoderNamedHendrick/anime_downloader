@@ -1,5 +1,6 @@
 import 'package:anime_downloader/blocs/latest_bloc.dart';
 import 'package:anime_downloader/blocs/popular_bloc.dart';
+import 'package:anime_downloader/common_widgets/bottom_modal.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/common_widgets/page_one_horizontal_list.dart';
@@ -187,136 +188,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        return BottomModal();
+        return AppBottomModal.create(context);
       },
     );
   }
-}
-
-class BottomModal extends StatefulWidget {
-  @override
-  _BottomModalState createState() => _BottomModalState();
-}
-
-class _BottomModalState extends State<BottomModal> {
-  bool isLoading = false;
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: height / 3,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 10.0,
-            ),
-          ],
-        ),
-        padding: EdgeInsets.all(14.0),
-        child: Column(
-          children: [
-            Text(
-              "Sign In options",
-              style: TextStyle(fontSize: 18, color: Colors.black),
-            ),
-            SizedBox(
-              height: height / 10,
-            ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  isLoading = !isLoading;
-                });
-              },
-              child: AnimatedCrossFade(
-                duration: const Duration(seconds: 2),
-                alignment: Alignment.center,
-                firstChild: _signInOptions(),
-                firstCurve: Curves.elasticIn,
-                secondChild: Container(
-                  height: 100,
-                  width: 200,
-                  child: Center(child: CircularProgressIndicator()),
-                ),
-                layoutBuilder: (Widget topChild, Key topChildKey,
-                    Widget bottomChild, Key bottomChildKey) {
-                  return Stack(
-                    clipBehavior: Clip.hardEdge,
-                    children: [
-                      Positioned(key: topChildKey, child: topChild),
-                      Positioned(
-                        key: bottomChildKey,
-                        child: bottomChild,
-                        left: 0,
-                        right: 0,
-                      ),
-                    ],
-                  );
-                },
-                crossFadeState: isLoading
-                    ? CrossFadeState.showFirst
-                    : CrossFadeState.showSecond,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _signInOptions() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('images/twitter-logo.png'),
-                  ),
-                ),
-              ),
-              Text("Sign In with Twitter"),
-            ],
-          ),
-          SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('images/google-logo.png'),
-                  ),
-                ),
-              ),
-              Text("Sign In with Google"),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-_method() {
-  var height;
 }
