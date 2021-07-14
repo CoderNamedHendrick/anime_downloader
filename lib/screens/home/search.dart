@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {
   const Search({Key key}) : super(key: key);
-
   @override
   _SearchState createState() => _SearchState();
 }
@@ -33,11 +32,12 @@ class _SearchState extends State<Search> {
             ),
           ),
         );
+    var textTheme2 = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Search',
-          style: Theme.of(context).textTheme.headline1,
+          style: textTheme2.headline1,
         ),
         elevation: 0.0,
         actions: [
@@ -58,8 +58,11 @@ class _SearchState extends State<Search> {
               Container(
                 height: 60,
                 decoration: BoxDecoration(
-                    color: Colors.grey[700],
-                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                  color: Colors.grey[700],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(4),
+                  ),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
@@ -68,8 +71,8 @@ class _SearchState extends State<Search> {
                     decoration: InputDecoration(
                         fillColor: Colors.orangeAccent,
                         hintText: 'Movies, Series or Genre',
-                        hintStyle: Theme.of(context).textTheme.bodyText1),
-                    style: Theme.of(context).textTheme.bodyText1,
+                        hintStyle: textTheme2.bodyText1),
+                    style: textTheme2.bodyText1,
                     onEditingComplete: _search,
                   ),
                 ),
@@ -79,7 +82,7 @@ class _SearchState extends State<Search> {
               ),
               Text(
                 'By Genre',
-                style: Theme.of(context).textTheme.headline1,
+                style: textTheme2.headline1,
               ),
               SizedBox(height: 6),
               RefreshIndicator(
@@ -114,46 +117,6 @@ class _SearchState extends State<Search> {
               SizedBox(
                 height: 6,
               ),
-              // Text(
-              //   'By Release Year',
-              //   style: Theme.of(context).textTheme.headline1,
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-              //   child: Container(
-              //     height: MediaQuery.of(context).size.height / 3.2,
-              //     child: GridView.builder(
-              //       itemCount: 10,
-              //       scrollDirection: Axis.vertical,
-              //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //           childAspectRatio: 0.6, crossAxisCount: 2),
-              //       itemBuilder: (context, index) => Card(
-              //         color: Colors.grey,
-              //         child: Container(
-              //           child: Row(
-              //             crossAxisAlignment: CrossAxisAlignment.start,
-              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //             children: [
-              //               Flexible(
-              //                 flex: 1,
-              //                 child: Container(
-              //                   color: Colors.red,
-              //                 ),
-              //               ),
-              //               Flexible(
-              //                 flex: 2,
-              //                 child: Padding(
-              //                   padding: const EdgeInsets.all(8.0),
-              //                   child: Text('Dummy Text'),
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),
@@ -164,7 +127,6 @@ class _SearchState extends State<Search> {
 
 class Genres extends StatelessWidget {
   final List list;
-
   const Genres({Key key, this.list}) : super(key: key);
 
   @override
@@ -177,7 +139,7 @@ class Genres extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
           child: ActionChip(
             label: Text(list[index].name),
-            labelStyle: TextStyle(fontSize: 20),
+            labelStyle: TextStyle(fontSize: 18),
             elevation: 4,
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(

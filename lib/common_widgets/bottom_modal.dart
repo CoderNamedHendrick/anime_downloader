@@ -34,20 +34,24 @@ class AppBottomModal extends StatefulWidget {
 }
 
 class _AppBottomModalState extends State<AppBottomModal> {
-  Future<void> _signInWithGoogle(BuildContext context) async {
+  Future<bool> _signInWithGoogle(BuildContext context) async {
     try {
       await widget.manager.signInWithGoogle();
+      return true;
     } on Exception catch (e) {
       _showSignInError(context, e);
     }
+    return false;
   }
 
-  Future<void> _signInWithTwitter(BuildContext context) async {
+  Future<bool> _signInWithTwitter(BuildContext context) async {
     try {
       await widget.manager.signInWithTwitter();
+      return true;
     } on Exception catch (e) {
       _showSignInError(context, e);
     }
+    return false;
   }
 
   void _showSignInError(BuildContext context, Exception exception) {
@@ -65,6 +69,7 @@ class _AppBottomModalState extends State<AppBottomModal> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+
     return Container(
       constraints: BoxConstraints(
         maxHeight: height / 3,
@@ -139,7 +144,10 @@ class _AppBottomModalState extends State<AppBottomModal> {
             onTap: widget.isLoading
                 ? null
                 : () async {
-                    await _signInWithTwitter(context);
+                    bool result = await _signInWithTwitter(context);
+                    if (result) {
+                      Navigator.of(context).pop();
+                    }
                   },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -162,7 +170,10 @@ class _AppBottomModalState extends State<AppBottomModal> {
             onTap: widget.isLoading
                 ? null
                 : () async {
-                    await _signInWithGoogle(context);
+                    bool result = await _signInWithGoogle(context);
+                    if (result) {
+                      Navigator.of(context).pop();
+                    }
                   },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
