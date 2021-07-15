@@ -1,5 +1,6 @@
 import 'package:anime_downloader/screens/home/desc_screen.dart';
 import 'package:anime_downloader/screens/home/download_screen.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class PopularHorizontalList extends StatelessWidget {
@@ -45,8 +46,9 @@ class PopularHorizontalList extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
-                          Text(
+                          AutoSizeText(
                             '${list[index].name}',
+                            minFontSize: 10,
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ],
@@ -98,6 +100,7 @@ class LatestHorizontalList extends StatelessWidget {
                   width: 8.0,
                 ),
                 itemBuilder: (context, index) {
+                  var textTheme2 = Theme.of(context).textTheme;
                   return GestureDetector(
                     child: Container(
                       width: 140,
@@ -112,25 +115,26 @@ class LatestHorizontalList extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 4),
-                          Text(
+                          AutoSizeText(
                             '${list[index].name}',
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: textTheme2.bodyText1,
                           ),
                           SizedBox(height: 6),
                           Text(
                             '${list[index].episode}',
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: textTheme2.bodyText1,
                           )
                         ],
                       ),
                     ),
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => DownloadScreen(
-                                title: list[index].name,
-                                name: list[index].episode,
-                                link: list[index].link,
-                              )),
+                        builder: (context) => DownloadScreen(
+                          title: list[index].name,
+                          name: list[index].episode,
+                          link: list[index].link,
+                        ),
+                      ),
                     ),
                   );
                 },

@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         defaultActionText: 'Logout',
         cancelActionText: 'Cancel');
     if (didRequestSignOut == true) {
-      _signOut(context);
+      await _signOut(context);
     }
   }
 
@@ -76,8 +76,9 @@ class _HomePageState extends State<HomePage> {
                           "Sign-in",
                           style: textTheme2.bodyText1,
                         ),
-                        onPressed: () {
-                          _showBottomModal(context);
+                        onPressed: () async {
+                          await _showBottomModal(context);
+                          setState(() {});
                         },
                       )
                     : TextButton(
@@ -85,8 +86,9 @@ class _HomePageState extends State<HomePage> {
                           'Log Out',
                           style: textTheme2.bodyText1,
                         ),
-                        onPressed: () {
-                          _confirmSignOut(context);
+                        onPressed: () async {
+                          await _confirmSignOut(context);
+                          setState(() {});
                         },
                       ),
               ],
