@@ -2,7 +2,6 @@ import 'package:anime_downloader/blocs/latest_bloc.dart';
 import 'package:anime_downloader/blocs/popular_bloc.dart';
 import 'package:anime_downloader/common_widgets/bottom_modal.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
-import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/common_widgets/page_one_horizontal_list.dart';
 import 'package:anime_downloader/common_widgets/recent_searches_widget.dart';
 import 'package:anime_downloader/common_widgets/show_alert_dialog.dart';
@@ -127,8 +126,13 @@ class _HomePageState extends State<HomePage> {
                             if (snapshot.hasData) {
                               switch (snapshot.data.status) {
                                 case Status.LOADING:
-                                  return Loading(
-                                      loadingMessage: snapshot.data.message);
+                                  // return Loading(
+                                  //   loadingMessage: snapshot.data.message,
+                                  // );
+                                  return Container(
+                                    height: _height / 3,
+                                    child: LatestHorizontalListSkeleton(),
+                                  );
                                   break;
                                 case Status.COMPLETED:
                                   return Container(
@@ -161,17 +165,18 @@ class _HomePageState extends State<HomePage> {
                             if (snapshot.hasData) {
                               switch (snapshot.data.status) {
                                 case Status.LOADING:
-                                  return Loading(
-                                      loadingMessage: snapshot.data.message);
+                                  return Container(
+                                    height: _height / 3,
+                                    child: PopularHorizontalListSkeleton(),
+                                  );
                                   break;
                                 case Status.COMPLETED:
                                   return Container(
                                     height: _height / 3,
-                                    child: PopularHorizontalListSkeleton(),
-                                    // child: PopularHorizontalList(
-                                    //   title: 'Trending',
-                                    //   list: snapshot.data.data,
-                                    // ),
+                                    child: PopularHorizontalList(
+                                      title: 'Trending',
+                                      list: snapshot.data.data,
+                                    ),
                                   );
                                   break;
                                 case Status.ERROR:

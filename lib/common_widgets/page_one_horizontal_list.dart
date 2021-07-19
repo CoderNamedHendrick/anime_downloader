@@ -77,56 +77,56 @@ class PopularHorizontalList extends StatelessWidget {
 class PopularHorizontalListSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 16,
-            width: 140,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SkeletonAnimation(
+          child: Container(
+            height: 26,
+            width: MediaQuery.of(context).size.width / 2.3,
             color: Colors.grey[500],
           ),
-          SizedBox(height: 12),
-          Flexible(
-            fit: FlexFit.loose,
-            child: Container(
-              padding: EdgeInsets.zero,
-              child: ListView.separated(
-                itemCount: 10,
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: (context, index) => SizedBox(
-                  width: 8.0,
-                ),
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 140,
-                    child: Column(
-                      children: [
-                        SkeletonAnimation(
-                          child: Container(
-                            height: 180,
-                            color: Colors.grey[500],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        SkeletonAnimation(
-                          child: Container(
-                            height: 16,
-                            width: 120,
-                            color: Colors.grey[500],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+        ),
+        SizedBox(height: 12),
+        Flexible(
+          fit: FlexFit.loose,
+          child: Container(
+            padding: EdgeInsets.zero,
+            child: ListView.separated(
+              itemCount: 10,
+              scrollDirection: Axis.horizontal,
+              separatorBuilder: (context, index) => SizedBox(
+                width: 8.0,
               ),
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 140,
+                  child: Column(
+                    children: [
+                      SkeletonAnimation(
+                        child: Container(
+                          height: 180,
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      SkeletonAnimation(
+                        child: Container(
+                          height: 16,
+                          width: 120,
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -210,6 +210,65 @@ class LatestHorizontalListSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SkeletonAnimation(
+            child: Container(
+              height: 26,
+              width: MediaQuery.of(context).size.width / 2.3,
+              color: Colors.grey[500],
+            ),
+          ),
+          SizedBox(height: 12),
+          Flexible(
+            fit: FlexFit.loose,
+            child: Container(
+              padding: EdgeInsets.zero,
+              child: ListView.separated(
+                itemCount: 10,
+                scrollDirection: Axis.horizontal,
+                separatorBuilder: (context, index) => SizedBox(
+                  width: 8.0,
+                ),
+                itemBuilder: (context, index) {
+                  var textTheme2 = Theme.of(context).textTheme;
+                  return Container(
+                    width: 140,
+                    child: Column(
+                      children: [
+                        SkeletonAnimation(
+                          child: Container(
+                            height: 180,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        SkeletonAnimation(
+                          child: Container(
+                            height: 16,
+                            width: 120,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                        SizedBox(height: 6),
+                        SkeletonAnimation(
+                          child: Container(
+                            height: 16,
+                            width: 120,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
