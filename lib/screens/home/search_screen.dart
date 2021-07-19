@@ -1,7 +1,6 @@
 import 'package:anime_downloader/blocs/search_bloc.dart';
 import 'package:anime_downloader/blocs/search_by_genre_bloc.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
-import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/common_widgets/search_card.dart';
 import 'package:anime_downloader/model/search_model.dart';
 import 'package:anime_downloader/services/api_response.dart';
@@ -45,9 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
             if (snapshot.hasData) {
               switch (snapshot.data.status) {
                 case Status.LOADING:
-                  return Loading(
-                    loadingMessage: snapshot.data.message,
-                  );
+                  return SearchListSkeleton();
                   break;
                 case Status.COMPLETED:
                   return SearchList(
@@ -89,13 +86,27 @@ class SearchList extends StatelessWidget {
         crossAxisCount: 1,
       ),
       itemBuilder: (context, index) {
-        return searchCard(
-          context,
+        return SearchCard(
           title: searchList[index].name,
           releaseDate: searchList[index].release,
           imgUrl: searchList[index].image,
           link: searchList[index].link,
         );
+      },
+    );
+  }
+}
+
+class SearchListSkeleton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      itemCount: 10,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 1,
+      ),
+      itemBuilder: (context, index) {
+        return SearchCardSkeleton();
       },
     );
   }
