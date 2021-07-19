@@ -16,7 +16,7 @@ Future<void> main() async {
 
 class Main extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext conhotext) {
     return Provider<AuthBase>(
       create: (context) => Auth(),
       child: MaterialApp(

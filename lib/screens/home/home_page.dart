@@ -130,17 +130,14 @@ class _HomePageState extends State<HomePage> {
                                   //   loadingMessage: snapshot.data.message,
                                   // );
                                   return Container(
-                                    height: _height / 3,
+                                    height: _height / 2.7,
                                     child: LatestHorizontalListSkeleton(),
                                   );
                                   break;
                                 case Status.COMPLETED:
-                                  return Container(
-                                    height: _height / 3,
-                                    child: LatestHorizontalList(
-                                      title: 'Latest',
-                                      list: snapshot.data.data,
-                                    ),
+                                  return LatestHorizontalList(
+                                    title: 'Latest',
+                                    list: snapshot.data.data,
                                   );
                                   break;
                                 case Status.ERROR:

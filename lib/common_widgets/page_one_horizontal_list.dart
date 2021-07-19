@@ -138,68 +138,71 @@ class LatestHorizontalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.headline1,
-          ),
-          SizedBox(height: 12),
-          Flexible(
-            fit: FlexFit.loose,
-            child: Container(
-              padding: EdgeInsets.zero,
-              child: ListView.separated(
-                itemCount: list.length,
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: (context, index) => SizedBox(
-                  width: 8.0,
-                ),
-                itemBuilder: (context, index) {
-                  var textTheme2 = Theme.of(context).textTheme;
-                  return GestureDetector(
-                    child: Container(
-                      width: 140,
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 180,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(list[index].image),
+    return Container(
+      height: MediaQuery.of(context).size.height / 2.7,
+      child: Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            SizedBox(height: 12),
+            Flexible(
+              fit: FlexFit.loose,
+              child: Container(
+                padding: EdgeInsets.zero,
+                child: ListView.separated(
+                  itemCount: list.length,
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (context, index) => SizedBox(
+                    width: 8.0,
+                  ),
+                  itemBuilder: (context, index) {
+                    var textTheme2 = Theme.of(context).textTheme;
+                    return GestureDetector(
+                      child: Container(
+                        width: 140,
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 180,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(list[index].image),
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 4),
-                          AutoSizeText(
-                            '${list[index].name}',
-                            style: textTheme2.bodyText1,
-                          ),
-                          SizedBox(height: 6),
-                          Text(
-                            '${list[index].episode}',
-                            style: textTheme2.bodyText1,
-                          )
-                        ],
-                      ),
-                    ),
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => DownloadScreen(
-                          title: list[index].name,
-                          name: list[index].episode,
-                          link: list[index].link,
+                            SizedBox(height: 4),
+                            AutoSizeText(
+                              '${list[index].name}',
+                              style: textTheme2.bodyText1,
+                            ),
+                            SizedBox(height: 6),
+                            Text(
+                              '${list[index].episode}',
+                              style: textTheme2.bodyText1,
+                            )
+                          ],
                         ),
                       ),
-                    ),
-                  );
-                },
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => DownloadScreen(
+                            title: list[index].name,
+                            name: list[index].episode,
+                            link: list[index].link,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
