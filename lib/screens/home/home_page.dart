@@ -167,10 +167,11 @@ class _HomePageState extends State<HomePage> {
                                 case Status.COMPLETED:
                                   return Container(
                                     height: _height / 3,
-                                    child: PopularHorizontalList(
-                                      title: 'Trending',
-                                      list: snapshot.data.data,
-                                    ),
+                                    child: PopularHorizontalListSkeleton(),
+                                    // child: PopularHorizontalList(
+                                    //   title: 'Trending',
+                                    //   list: snapshot.data.data,
+                                    // ),
                                   );
                                   break;
                                 case Status.ERROR:

@@ -41,6 +41,7 @@ dependencies:
   intl: ^0.17.0
   flutter_cache_manager: 3.1.2
   auto_size_text: 2.1.0
+  skeleton_text: 3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
