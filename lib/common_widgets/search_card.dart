@@ -49,7 +49,6 @@ class SearchCard extends StatelessWidget {
                           input: title,
                           type: 'searchScreen',
                         ),
-                        SizedBox(height: 12),
                         TextWidget(
                           title: 'Release',
                           input: releaseDate,
