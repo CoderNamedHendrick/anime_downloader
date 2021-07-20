@@ -1,8 +1,8 @@
-import 'package:anime_downloader/material_home_scaffold.dart';
 import 'package:anime_downloader/screens/home/home.dart';
 import 'package:anime_downloader/screens/home/library_screen.dart';
 import 'package:anime_downloader/screens/home/search.dart';
-import 'package:anime_downloader/tab_items.dart';
+import 'package:anime_downloader/screens/material_home_scaffold.dart';
+import 'package:anime_downloader/screens/tab_items.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

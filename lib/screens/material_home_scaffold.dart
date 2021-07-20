@@ -1,4 +1,4 @@
-import 'package:anime_downloader/tab_items.dart';
+import 'package:anime_downloader/screens/tab_items.dart';
 import 'package:flutter/material.dart';
 
 class MaterialHomeScaffold extends StatelessWidget {

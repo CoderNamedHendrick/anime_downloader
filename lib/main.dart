@@ -3,6 +3,7 @@ import 'package:anime_downloader/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:hive/hive.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,7 @@ Future<void> main() async {
   await FlutterDownloader.initialize(debug: true);
   await Permission.storage.request();
   await Firebase.initializeApp();
+  await Hive.i
   runApp(Main());
 }
 
