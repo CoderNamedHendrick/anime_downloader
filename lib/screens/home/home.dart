@@ -55,8 +55,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    _height = MediaQuery.of(context).size.height;
-    var textTheme2 = Theme.of(context).textTheme;
+    final textTheme2 = Theme.of(context).textTheme;
     final auth = Provider.of<AuthBase>(context, listen: false);
     return StreamBuilder<User>(
         stream: auth.authStateChanges,
@@ -93,9 +92,9 @@ class _HomeState extends State<Home> {
               ],
             ),
             body: Container(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -103,90 +102,97 @@ class _HomeState extends State<Home> {
                       Column(
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              RecentSearch(),
-                              RecentSearch(),
+                              RecentSearch(
+                                title: "Shippuden",
+                              ),
+                              RecentSearch(
+                                title: "Overlord",
+                              ),
                             ],
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              RecentSearch(),
-                              RecentSearch(),
+                              RecentSearch(
+                                title: "Black Clover",
+                              ),
+                              RecentSearch(
+                                title: "Kimetsu no yaiba",
+                              ),
                             ],
                           ),
                         ],
                       ),
                       SizedBox(height: 4),
-                      RefreshIndicator(
-                        onRefresh: () => _latestAnimeBloc.fetchLatest(),
-                        child:
-                            StreamBuilder<ApiResponse<List<LatestAnimeModel>>>(
-                          stream: _latestAnimeBloc.latestStream,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              switch (snapshot.data.status) {
-                                case Status.LOADING:
-                                  // return Loading(
-                                  //   loadingMessage: snapshot.data.message,
-                                  // );
-                                  return Container(
-                                    height: _height / 2.7,
-                                    child: LatestHorizontalListSkeleton(),
-                                  );
-                                  break;
-                                case Status.COMPLETED:
-                                  return LatestHorizontalList(
-                                    title: 'Latest',
-                                    list: snapshot.data.data,
-                                  );
-                                  break;
-                                case Status.ERROR:
-                                  return Error(
-                                    errorMessage: snapshot.data.message,
-                                    onRetryPressed: () =>
-                                        _latestAnimeBloc.fetchLatest(),
-                                  );
-                                  break;
-                              }
-                            }
-                            return Container();
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      RefreshIndicator(
-                        onRefresh: () => _bloc.fetchPopular(),
-                        child: StreamBuilder<ApiResponse<List<PopularModel>>>(
-                          stream: _bloc.popularStream,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              switch (snapshot.data.status) {
-                                case Status.LOADING:
-                                  return Container(
-                                    height: _height / 3,
-                                    child: PopularHorizontalListSkeleton(),
-                                  );
-                                  break;
-                                case Status.COMPLETED:
-                                  return Container(
-                                    height: _height / 3,
-                                    child: PopularHorizontalList(
-                                      title: 'Trending',
-                                      list: snapshot.data.data,
-                                    ),
-                                  );
-                                  break;
-                                case Status.ERROR:
-                                  return Error(
-                                    errorMessage: snapshot.data.message,
-                                    onRetryPressed: () => _bloc.fetchPopular(),
-                                  );
-                                  break;
-                              }
-                            }
-                            return Container();
-                          },
-                        ),
+                      Column(
+                        children: [
+                          RefreshIndicator(
+                            onRefresh: () => _latestAnimeBloc.fetchLatest(),
+                            child: StreamBuilder<
+                                ApiResponse<List<LatestAnimeModel>>>(
+                              stream: _latestAnimeBloc.latestStream,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  switch (snapshot.data.status) {
+                                    case Status.LOADING:
+                                      // return Loading(
+                                      //   loadingMessage: snapshot.data.message,
+                                      // );
+                                      return LatestHorizontalListSkeleton();
+                                      break;
+                                    case Status.COMPLETED:
+                                      return LatestHorizontalList(
+                                        title: 'Latest',
+                                        list: snapshot.data.data,
+                                      );
+                                      break;
+                                    case Status.ERROR:
+                                      return Error(
+                                        errorMessage: snapshot.data.message,
+                                        onRetryPressed: () =>
+                                            _latestAnimeBloc.fetchLatest(),
+                                      );
+                                      break;
+                                  }
+                                }
+                                return Container();
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          RefreshIndicator(
+                            onRefresh: () => _bloc.fetchPopular(),
+                            child:
+                                StreamBuilder<ApiResponse<List<PopularModel>>>(
+                              stream: _bloc.popularStream,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  switch (snapshot.data.status) {
+                                    case Status.LOADING:
+                                      return PopularHorizontalListSkeleton();
+                                      break;
+                                    case Status.COMPLETED:
+                                      return PopularHorizontalList(
+                                        title: 'Trending',
+                                        list: snapshot.data.data,
+                                      );
+                                      break;
+                                    case Status.ERROR:
+                                      return Error(
+                                        errorMessage: snapshot.data.message,
+                                        onRetryPressed: () =>
+                                            _bloc.fetchPopular(),
+                                      );
+                                      break;
+                                  }
+                                }
+                                return Container();
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

@@ -18,10 +18,19 @@ class MaterialHomeScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Builder(
-        builder: (context) {
-          return widgetBuilders[TabItem.values[currentTab.index]](context);
-        },
+      body: IndexedStack(
+        index: currentTab.index,
+        children: [
+          Builder(
+            builder: (context) => widgetBuilders[TabItem.values[0]](context),
+          ),
+          Builder(
+            builder: (context) => widgetBuilders[TabItem.values[1]](context),
+          ),
+          Builder(
+            builder: (context) => widgetBuilders[TabItem.values[2]](context),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
@@ -31,6 +40,7 @@ class MaterialHomeScaffold extends StatelessWidget {
         ],
         onTap: (index) => onSelectTab(TabItem.values[index]),
         backgroundColor: Theme.of(context).primaryColor,
+        elevation: 6,
       ),
     );
   }

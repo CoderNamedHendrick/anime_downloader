@@ -1,36 +1,43 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RecentSearch extends StatelessWidget {
+  final String title;
+  final String imgUrl;
+  final String link;
+
+  const RecentSearch({this.title, this.imgUrl, this.link});
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0, right: 12.0),
-          child: Container(
+    return GestureDetector(
+      onTap: () => null,
+      child: Row(
+        children: [
+          Container(
             color: Theme.of(context).accentColor,
-            width: MediaQuery.of(context).size.width / 2.3,
+            width: MediaQuery.of(context).size.width / 2.2,
             child: Wrap(
               direction: Axis.horizontal,
               children: [
                 Container(
                   height: 50,
                   width: 40,
-                  color: Colors.red,
+                  child: Placeholder(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Enn Enn no Sh',
+                  child: AutoSizeText(
+                    this.title,
+                    maxLines: 1,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),
               ],
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
