@@ -7,10 +7,24 @@ import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
 
 class DownloadScreen extends StatefulWidget {
-  const DownloadScreen({Key key, this.title, this.name, this.link}) : super(key: key);
+  const DownloadScreen({Key key, this.title, this.name, this.link})
+      : super(key: key);
   final String link;
   final String title;
   final String name;
+
+  static Future<void> show(BuildContext context,
+      {String link, String title, String name}) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DownloadScreen(
+          link: link,
+          title: title,
+          name: name,
+        ),
+      ),
+    );
+  }
 
   @override
   _DownloadScreenState createState() => _DownloadScreenState();
@@ -69,7 +83,8 @@ class _DownloadScreenState extends State<DownloadScreen> {
 }
 
 class Downloads extends StatelessWidget {
-  const Downloads({Key key, this.animeTitle, this.episode, this.downloads}) : super(key: key);
+  const Downloads({Key key, this.animeTitle, this.episode, this.downloads})
+      : super(key: key);
   final List<NameLinkModel> downloads;
   final String animeTitle;
   final String episode;
@@ -90,7 +105,8 @@ class Downloads extends StatelessWidget {
   }
 }
 
-Widget _episodes(BuildContext context, {String animeTitle, String episode, String name, String link}) {
+Widget _episodes(BuildContext context,
+    {String animeTitle, String episode, String name, String link}) {
   return ListTile(
     title: Text('$name', style: TextStyle(color: Colors.white)),
     trailing: Icon(Icons.arrow_downward_sharp, color: Colors.white),
@@ -99,7 +115,8 @@ Widget _episodes(BuildContext context, {String animeTitle, String episode, Strin
         builder: (context) => DownloaderWebView(
           animeTitle: animeTitle,
           episode: episode,
-          link: link,),
+          link: link,
+        ),
       ),
     ),
   );

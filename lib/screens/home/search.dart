@@ -24,14 +24,14 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    _search() => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SearchScreen(
-              search: _controller.value.text,
-            ),
-          ),
-        );
+    // _search() => Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (context) => SearchScreen(
+    //           search: _controller.value.text,
+    //         ),
+    //       ),
+    //     );
     var textTheme2 = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
@@ -73,7 +73,10 @@ class _SearchState extends State<Search> {
                         hintText: 'Movies, Series or Genre',
                         hintStyle: textTheme2.bodyText1),
                     style: textTheme2.bodyText1,
-                    onEditingComplete: _search,
+                    onEditingComplete: () => SearchScreen.show(
+                      context,
+                      _controller.value.text,
+                    ),
                   ),
                 ),
               ),
@@ -141,13 +144,17 @@ class Genres extends StatelessWidget {
             label: Text(list[index].name),
             labelStyle: TextStyle(fontSize: 18),
             elevation: 4,
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => SearchScreen(
-                  search: list[index].link,
-                ),
-              ),
+            onPressed: () => SearchScreen.show(
+              context,
+              list[index].link,
             ),
+            // onPressed: () => Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => SearchScreen(
+            //       search: list[index].link,
+            //     ),
+            //   ),
+            // ),
           ),
         );
       }

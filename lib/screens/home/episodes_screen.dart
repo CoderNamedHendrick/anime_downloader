@@ -1,9 +1,9 @@
 import 'package:anime_downloader/blocs/episode_bloc.dart';
 import 'package:anime_downloader/common_widgets/episodes.dart';
+import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/model/name_link_model.dart';
 import 'package:anime_downloader/services/api_response.dart';
-import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:flutter/material.dart';
 
 class EpisodesScreen extends StatefulWidget {
@@ -14,6 +14,20 @@ class EpisodesScreen extends StatefulWidget {
   final String end;
   final String id;
   final String name;
+
+  static Future<void> show(BuildContext context,
+      {String start, String end, String id, String name}) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EpisodesScreen(
+          start: start,
+          end: end,
+          id: id,
+          name: name,
+        ),
+      ),
+    );
+  }
 
   @override
   _EpisodesScreenState createState() => _EpisodesScreenState();
@@ -84,7 +98,7 @@ class _EpisodesScreenState extends State<EpisodesScreen> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _bloc.dispose();
     super.dispose();
   }

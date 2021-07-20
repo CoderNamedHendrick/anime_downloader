@@ -62,14 +62,10 @@ class SearchCard extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () => Navigator.push(
+        onTap: () => DescriptionScreen.show(
           context,
-          MaterialPageRoute(
-            builder: (context) => DescriptionScreen(
-              link: link,
-              imageUrl: imgUrl,
-            ),
-          ),
+          link: link,
+          imageUrl: imgUrl,
         ),
       ),
     );

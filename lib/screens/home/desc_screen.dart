@@ -16,6 +16,18 @@ class DescriptionScreen extends StatefulWidget {
   final String link;
   final String imageUrl;
 
+  static Future<void> show(BuildContext context,
+      {String link, String imageUrl}) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DescriptionScreen(
+          link: link,
+          imageUrl: imageUrl,
+        ),
+      ),
+    );
+  }
+
   @override
   _DescriptionScreenState createState() => _DescriptionScreenState();
 }
@@ -220,15 +232,12 @@ class _DescriptionState extends State<Description> {
                             backgroundColor:
                                 MaterialStateProperty.all<Color>(Colors.grey),
                           ),
-                          onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => EpisodesScreen(
-                                start: widget.desc.episodeStart,
-                                end: widget.desc.episodeEnd,
-                                id: widget.desc.id,
-                                name: widget.desc.name,
-                              ),
-                            ),
+                          onPressed: () => EpisodesScreen.show(
+                            context,
+                            start: widget.desc.episodeStart,
+                            end: widget.desc.episodeEnd,
+                            id: widget.desc.id,
+                            name: widget.desc.name,
                           ),
                         ),
                       ),

@@ -10,6 +10,16 @@ class SearchScreen extends StatefulWidget {
   const SearchScreen({Key key, @required this.search}) : super(key: key);
   final String search;
 
+  static Future<void> show(BuildContext context, String link) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SearchScreen(
+          search: link,
+        ),
+      ),
+    );
+  }
+
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }

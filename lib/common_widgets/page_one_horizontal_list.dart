@@ -55,13 +55,10 @@ class PopularHorizontalList extends StatelessWidget {
                         ],
                       ),
                     ),
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => DescriptionScreen(
-                          link: list[index].link,
-                          imageUrl: list[index].image,
-                        ),
-                      ),
+                    onTap: () => DescriptionScreen.show(
+                      context,
+                      link: list[index].link,
+                      imageUrl: list[index].image,
                     ),
                   );
                 },
@@ -187,14 +184,11 @@ class LatestHorizontalList extends StatelessWidget {
                           ],
                         ),
                       ),
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => DownloadScreen(
-                            title: list[index].name,
-                            name: list[index].episode,
-                            link: list[index].link,
-                          ),
-                        ),
+                      onTap: () => DownloadScreen.show(
+                        context,
+                        title: list[index].name,
+                        name: list[index].episode,
+                        link: list[index].link,
                       ),
                     );
                   },
