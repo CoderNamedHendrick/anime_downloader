@@ -138,6 +138,7 @@ class _AppBottomModalState extends State<AppBottomModal> {
 
   _signInOptions() {
     return Material(
+      color: Colors.transparent,
       child: Column(
         children: [
           InkWell(
