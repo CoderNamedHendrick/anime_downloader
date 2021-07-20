@@ -2,7 +2,7 @@ import 'package:anime_downloader/blocs/description_bloc.dart';
 import 'package:anime_downloader/common_widgets/bottom_modal.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
-import 'package:anime_downloader/model/description_model.dart';
+import 'package:anime_downloader/model/description.dart';
 import 'package:anime_downloader/screens/home/episodes_screen.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:anime_downloader/services/auth.dart';

@@ -1,4 +1,4 @@
-import 'package:anime_downloader/model/search_model.dart';
+import 'package:anime_downloader/model/search.dart';
 import 'package:anime_downloader/services/api_service.dart';
 
 class SearchRepository {

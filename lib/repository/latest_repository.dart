@@ -1,4 +1,4 @@
-import 'package:anime_downloader/model/latest_model.dart';
+import 'package:anime_downloader/model/latest.dart';
 import 'package:anime_downloader/services/api_service.dart';
 
 class LatestAnimeRepository {

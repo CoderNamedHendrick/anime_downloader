@@ -2,7 +2,7 @@ import 'package:anime_downloader/blocs/search_bloc.dart';
 import 'package:anime_downloader/blocs/search_by_genre_bloc.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/search_card.dart';
-import 'package:anime_downloader/model/search_model.dart';
+import 'package:anime_downloader/model/search.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
 

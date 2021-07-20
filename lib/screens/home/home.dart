@@ -3,14 +3,18 @@ import 'package:anime_downloader/blocs/popular_bloc.dart';
 import 'package:anime_downloader/common_widgets/bottom_modal.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/page_one_horizontal_list.dart';
-import 'package:anime_downloader/common_widgets/recent_searches_widget.dart';
+import 'package:anime_downloader/common_widgets/recents.dart';
 import 'package:anime_downloader/common_widgets/show_alert_dialog.dart';
-import 'package:anime_downloader/model/latest_model.dart';
-import 'package:anime_downloader/model/popular_model.dart';
+import 'package:anime_downloader/model/box.dart';
+import 'package:anime_downloader/model/latest.dart';
+import 'package:anime_downloader/model/popular.dart';
+import 'package:anime_downloader/model/recent_search.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:anime_downloader/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -99,31 +103,17 @@ class _HomeState extends State<Home> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              RecentSearch(
-                                title: "Shippuden",
-                              ),
-                              RecentSearch(
-                                title: "Overlord",
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              RecentSearch(
-                                title: "Black Clover",
-                              ),
-                              RecentSearch(
-                                title: "Kimetsu no yaiba",
-                              ),
-                            ],
-                          ),
-                        ],
+                      ValueListenableBuilder<Box<RecentSearch>>(
+                        valueListenable: Boxes.getRecentSearches().listenable(),
+                        builder: (context, box, _) {
+                          final boxList =
+                              box.values.toList().cast<RecentSearch>();
+                          final recentSearch = boxList.sublist(
+                              boxList.length - 4, boxList.length).;
+                          return Container(
+                              height: MediaQuery.of(context).size.height / 7,
+                              child: Recents(recentSearch));
+                        },
                       ),
                       SizedBox(height: 4),
                       Column(
