@@ -22,8 +22,7 @@ class RecentSearchWidget extends StatelessWidget {
           Container(
             color: Theme.of(context).accentColor,
             width: MediaQuery.of(context).size.width / 2.2,
-            child: Wrap(
-              direction: Axis.horizontal,
+            child: Row(
               children: [
                 Container(
                   height: 50,
@@ -39,6 +38,8 @@ class RecentSearchWidget extends StatelessWidget {
                   child: AutoSizeText(
                     this.title,
                     maxLines: 1,
+                    textScaleFactor: 0.5,
+                    presetFontSizes: [12, 8, 4],
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),

@@ -109,13 +109,14 @@ class _HomeState extends State<Home> {
                           final boxList =
                               box.values.toList().cast<RecentSearch>();
                           final recentSearch = boxList.sublist(
-                              boxList.length - 4, boxList.length).;
+                              boxList.length > 4 ? boxList.length - 4 : 0,
+                              boxList.length);
                           return Container(
                               height: MediaQuery.of(context).size.height / 7,
                               child: Recents(recentSearch));
                         },
                       ),
-                      SizedBox(height: 4),
+                      SizedBox(height: 10),
                       Column(
                         children: [
                           RefreshIndicator(
