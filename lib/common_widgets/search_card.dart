@@ -51,7 +51,7 @@ class SearchCard extends StatelessWidget {
                     ),
                   ),
                   Flexible(
-                    flex: 2,
+                    flex: 3,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -98,6 +98,7 @@ class SearchCardSkeleton extends StatelessWidget {
         elevation: 8,
         child: Container(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
                 flex: 7,
@@ -113,6 +114,7 @@ class SearchCardSkeleton extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SkeletonAnimation(
                         child: Container(

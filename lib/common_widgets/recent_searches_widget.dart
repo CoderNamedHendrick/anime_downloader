@@ -1,6 +1,5 @@
 import 'package:anime_downloader/screens/home/desc_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RecentSearchWidget extends StatelessWidget {
@@ -40,6 +39,7 @@ class RecentSearchWidget extends StatelessWidget {
                     maxLines: 1,
                     textScaleFactor: 0.5,
                     presetFontSizes: [12, 8, 4],
+                    overflow: TextOverflow.clip,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),

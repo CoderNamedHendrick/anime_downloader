@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {
@@ -25,7 +26,7 @@ class TextWidget extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             ),
             Expanded(
-              child: Text(
+              child: AutoSizeText(
                 "$input",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
@@ -42,12 +43,15 @@ class TextWidget extends StatelessWidget {
           children: [
             Text(
               "$title: ",
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             ),
             Expanded(
-              child: Text(
+              child: AutoSizeText(
                 "$input",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ],
