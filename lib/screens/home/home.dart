@@ -112,8 +112,17 @@ class _HomeState extends State<Home> {
                               boxList.length > 4 ? boxList.length - 4 : 0,
                               boxList.length);
                           return Container(
-                              height: MediaQuery.of(context).size.height / 7,
-                              child: Recents(recentSearch));
+                            height: MediaQuery.of(context).size.height / 7,
+                            child: recentSearch.length == 0
+                                ? Center(
+                                    child: Text(
+                                      "No recent Search",
+                                      style:
+                                          Theme.of(context).textTheme.bodyText1,
+                                    ),
+                                  )
+                                : Recents(recentSearch),
+                          );
                         },
                       ),
                       SizedBox(height: 10),

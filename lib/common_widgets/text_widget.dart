@@ -45,13 +45,11 @@ class TextWidget extends StatelessWidget {
               "$title: ",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             ),
-            Expanded(
-              child: AutoSizeText(
-                "$input",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
+            AutoSizeText(
+              "$input",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],

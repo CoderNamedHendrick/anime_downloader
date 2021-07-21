@@ -27,8 +27,8 @@ class SearchHistoryTile extends StatelessWidget {
             ),
             AutoSizeText(
               title,
-              textScaleFactor: 0.5,
-              presetFontSizes: [14, 10, 6],
+              textScaleFactor: 0.8,
+              presetFontSizes: [10, 6, 4],
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ],

@@ -75,51 +75,52 @@ class _SearchState extends State<Search> {
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: StreamBuilder<bool>(
-              stream: _historyBloc.toHistroyStream,
-              builder: (context, snapshot) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[700],
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          controller: _controller,
-                          cursorHeight: 20,
-                          decoration: InputDecoration(
-                              fillColor: Colors.orangeAccent,
-                              hintText: 'Movies, Series or Genre',
-                              hintStyle: textTheme2.bodyText1),
-                          style: textTheme2.bodyText1,
-                          onEditingComplete: () => SearchScreen.show(
-                            context,
-                            _controller.value.text,
-                          ),
-                        ),
+            stream: _historyBloc.toHistroyStream,
+            builder: (context, snapshot) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[700],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
                       ),
                     ),
-                    SizedBox(
-                      height: 16,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: _controller,
+                        cursorHeight: 20,
+                        decoration: InputDecoration(
+                            fillColor: Colors.orangeAccent,
+                            hintText: 'Movies, Series or Genre',
+                            hintStyle: textTheme2.bodyText1),
+                        style: textTheme2.bodyText1,
+                        onEditingComplete: () => SearchScreen.show(
+                          context,
+                          _controller.value.text,
+                        ),
+                      ),
                     ),
-                    Text(
-                      snapshot.data == true ? 'Search History' : 'By Genre',
-                      style: textTheme2.headline1,
-                    ),
-                    SizedBox(height: 6),
-                    snapshot.data == true ? _searchHistory() : _searchGenre(),
-                    SizedBox(
-                      height: 6,
-                    ),
-                  ],
-                );
-              }),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    snapshot.data == true ? 'Search History' : 'By Genre',
+                    style: textTheme2.headline1,
+                  ),
+                  SizedBox(height: 6),
+                  snapshot.data == true ? _searchHistory() : _searchGenre(),
+                  SizedBox(
+                    height: 6,
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

@@ -34,13 +34,20 @@ class RecentSearchWidget extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: AutoSizeText(
-                    this.title,
-                    maxLines: 1,
-                    textScaleFactor: 0.5,
-                    presetFontSizes: [12, 8, 4],
-                    overflow: TextOverflow.clip,
-                    style: Theme.of(context).textTheme.bodyText1,
+                  child: Container(
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      children: [
+                        AutoSizeText(
+                          this.title,
+                          maxLines: 1,
+                          textScaleFactor: 0.5,
+                          presetFontSizes: [12, 8, 4],
+                          overflow: TextOverflow.clip,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

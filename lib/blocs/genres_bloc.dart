@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:anime_downloader/model/name_link.dart';
 import 'package:anime_downloader/repository/name_link_repository.dart';
 import 'package:anime_downloader/services/api_response.dart';
+import 'package:rxdart/rxdart.dart';
 
 class GenresBloc {
   NameLinkRepository _genresRepository;
@@ -14,7 +15,8 @@ class GenresBloc {
       _genresController.stream;
 
   GenresBloc() {
-    _genresController = StreamController<ApiResponse<List<NameLinkModel>>>();
+    //_genresController = StreamController<ApiResponse<List<NameLinkModel>>>();
+    _genresController = BehaviorSubject<ApiResponse<List<NameLinkModel>>>();
     _genresRepository = NameLinkRepository();
     fetchGenres();
   }
