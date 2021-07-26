@@ -1,5 +1,5 @@
-import 'package:anime_downloader/keys.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -50,14 +50,13 @@ class Auth implements AuthBase {
   @override
   Future<User> signInWithTwitter() async {
     final twitterLogin = TwitterLogin(
-      apiKey: TwitterKeys.CONSUMER_KEY,
-      apiSecretKey: TwitterKeys.CONSUMER_KEY_SECRET,
+      apiKey: dotenv.env['CONSUMER_KEY'],
+      apiSecretKey: dotenv.env['CONSUMER_KEY_SECRET'],
       redirectURI: 'example://',
     );
     final authResult = await twitterLogin.login();
     switch (authResult.status) {
       case TwitterLoginStatus.loggedIn:
-        print('We got here');
         final userCredential = await _firebaseAuth.signInWithCredential(
           TwitterAuthProvider.credential(
               accessToken: authResult.authToken,
