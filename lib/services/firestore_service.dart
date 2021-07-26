@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class FirestoreService {
   FirestoreService._();
@@ -8,43 +9,49 @@ class FirestoreService {
   Future<void> setData({
     @required String path,
     @required Map<String, dynamic> data,
+    @required String email,
+    @required String uid,
   }) async {
     final reference = FirebaseFirestore.instance.doc(path);
     print('$path: $data');
-    await reference.set(data);
+    await reference.set(
+      {
+        'email': email,
+        'id': uid,
+        'saved': [data],
+        'playlist': [],
+      },
+      SetOptions(
+        merge: true,
+        mergeFields: ['saved'],
+      ),
+    );
   }
 
-  Future<void> deleteData({@required String path}) async{
-    final reference = FirebaseFirestore.instance.doc(path);
-    print('delete: $path');
-    await reference.delete();
-  }
-
-  Stream<List<T>> collectionStream<T> ({
+  Future<void> addFavourite({
     @required String path,
-    @required T Function(Map<String, dynamic> data, String documentId) builder,
-    Query Function(Query query) queryBuilder,
-    int Function(T lhs, T rhs) sort,
-  }) {
-    Query query = FirebaseFirestore.instance.collection(path);
-    if(queryBuilder != null) {
-      query = queryBuilder(query);
-    }
-    final snapshots = query.snapshots();
-    return snapshots.map((snapshot) {
-      final result = snapshot.doc.map((snapshot) => builder(snapshot.data(), snapshot.id))
-          .where((value) => value != null)
-          .toList();
-      if(sort != null) {
-        result.sort(sort);
-      }
-      return result;
+    @required Map<String, dynamic> data,
+  }) async {
+    final reference = FirebaseFirestore.instance.doc(path);
+    await reference.update({
+      'saved': FieldValue.arrayUnion([data])
     });
   }
 
-  Stream<T> documentStream<T>({@required String path, @required T builder(Map<String, dynamic> data, String documentID),}){
+  Future<void> deleteFavourite(
+      {@required String path, @required Map<String, dynamic> data}) async {
+    final reference = FirebaseFirestore.instance.doc(path);
+    await reference.update({
+      'saved': FieldValue.arrayRemove([data])
+    });
+  }
+
+  Stream<T> favouriteStream<T>({
+    @required String path,
+    @required T builder(Map<String, dynamic> data),
+  }) {
     final reference = FirebaseFirestore.instance.doc(path);
     final snapshots = reference.snapshots();
-    return snapshots.map((snashot) => builder(snapshot.data(), snapshot.id));
+    return snapshots.map((snapshot) => builder(snapshot.data()));
   }
 }

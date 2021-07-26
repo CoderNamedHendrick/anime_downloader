@@ -11,7 +11,7 @@ class FavouriteModel {
     this.link = json['link'];
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         'title': this.title,
         'img': this.img,
         'link': this.link,
