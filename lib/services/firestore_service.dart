@@ -46,12 +46,16 @@ class FirestoreService {
     });
   }
 
-  Stream<T> favouriteStream<T>({
+  Stream<List<T>> favouriteStream<T>({
     @required String path,
     @required T builder(Map<String, dynamic> data),
   }) {
     final reference = FirebaseFirestore.instance.doc(path);
     final snapshots = reference.snapshots();
-    return snapshots.map((snapshot) => builder(snapshot.data()));
+    print(snapshots);
+    return snapshots.map((snapshot) {
+      final result = snapshot['saved'].map((snap) => builder(snap)).toList();
+      return result;
+    });
   }
 }

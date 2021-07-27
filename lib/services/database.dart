@@ -6,39 +6,42 @@ import 'package:meta/meta.dart';
 
 abstract class Database {
   Future<void> setFavourite(FavouriteModel favourite);
+  Future<void> addFavourite(FavouriteModel favourite);
   Future<void> deleteFavourite(FavouriteModel favourite);
-  Stream<FavouriteModel> favouriteStream({@required String favouriteId});
-  Stream<List<FavouriteModel>> favouritesStream();
+  Stream<List<FavouriteModel>> favouriteStream({@required String favouriteId});
 }
 
-String documentIdFromCurrentDate() => DateTime.now().toIso8601String();
-
 class FirestoreDatabase implements Database {
-  FirestoreDatabase({@required this.uid});
+  FirestoreDatabase({@required this.uid, @required this.email});
   final String uid;
+  final String email;
   final _service = FirestoreService.instance;
-
 
   @override
   Future<void> setFavourite(FavouriteModel favourite) {
-    _service.
+    _service.setData(
+        path: FireStorePath.favourites(uid),
+        data: favourite.toMap(),
+        email: email,
+        uid: uid);
   }
 
   @override
-  Future<void> deleteFavourite(FavouriteModel favourite) {
-    // TODO: implement deleteFavourite
-    throw UnimplementedError();
-  }
+  Future<void> addFavourite(FavouriteModel favourite) => _service.addFavourite(
+        path: FireStorePath.favourites(uid),
+        data: favourite.toMap(),
+      );
 
   @override
-  Stream<FavouriteModel> favouriteStream({String favouriteId}) {
-    // TODO: implement favouriteStream
-    throw UnimplementedError();
-  }
-
+  Future<void> deleteFavourite(FavouriteModel favourite) =>
+      _service.deleteFavourite(
+        path: FireStorePath.favourites(uid),
+        data: favourite.toMap(),
+      );
   @override
-  Stream<List<FavouriteModel>> favouritesStream() {
-    // TODO: implement favouritesStream
-    throw UnimplementedError();
+  Stream<List<FavouriteModel>> favouriteStream({String favouriteId}) {
+    return _service.favouriteStream(
+        path: FireStorePath.favourites(uid),
+        builder: (data) => FavouriteModel.fromMap(data));
   }
 }

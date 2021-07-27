@@ -5,10 +5,10 @@ class FavouriteModel {
 
   FavouriteModel({this.title, this.img, this.link});
 
-  FavouriteModel.fromJson(Map<String, dynamic> json) {
-    this.title = json['title'];
-    this.img = json['img'];
-    this.link = json['link'];
+  FavouriteModel.fromMap(Map<String, dynamic> data) {
+    this.title = data['title'];
+    this.img = data['img'];
+    this.link = data['link'];
   }
 
   Map<String, dynamic> toMap() => {
