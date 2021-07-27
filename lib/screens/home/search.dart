@@ -163,24 +163,27 @@ class _SearchState extends State<Search> {
       valueListenable: Boxes.getRecentSearches().listenable(),
       builder: (context, box, _) {
         final boxList = box.values.toList().cast<RecentSearch>();
-        return ListView.builder(
-          itemCount: boxList.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return SearchHistoryTile(
-              onTap: () => DescriptionScreen.show(context,
-                  link: boxList[index].link, imageUrl: boxList[index].imgUrl),
-              title: boxList[index].title,
-              imgUrl: boxList[index].imgUrl,
-              trailing: IconButton(
-                onPressed: () {
-                  deleteRecent(boxList[index]);
-                  setState(() {});
-                },
-                icon: FaIcon(FontAwesomeIcons.times, color: Colors.white),
-              ),
-            );
-          },
+        return Container(
+          child: ListView.builder(
+            itemCount: boxList.length,
+            shrinkWrap: true,
+            primary: false,
+            itemBuilder: (context, index) {
+              return SearchHistoryTile(
+                onTap: () => DescriptionScreen.show(context,
+                    link: boxList[index].link, imageUrl: boxList[index].imgUrl),
+                title: boxList[index].title,
+                imgUrl: boxList[index].imgUrl,
+                trailing: IconButton(
+                  onPressed: () {
+                    deleteRecent(boxList[index]);
+                    setState(() {});
+                  },
+                  icon: FaIcon(FontAwesomeIcons.times, color: Colors.white),
+                ),
+              );
+            },
+          ),
         );
       },
     );

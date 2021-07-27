@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 abstract class Database {
-  Future<void> setFavourite(FavouriteModel favourite);
+  Future<void> setFavouriteSchema();
   Future<void> addFavourite(FavouriteModel favourite);
   Future<void> deleteFavourite(FavouriteModel favourite);
   Stream<List<FavouriteModel>> favouriteStream({@required String favouriteId});
@@ -18,12 +18,9 @@ class FirestoreDatabase implements Database {
   final _service = FirestoreService.instance;
 
   @override
-  Future<void> setFavourite(FavouriteModel favourite) {
-    _service.setData(
-        path: FireStorePath.favourites(uid),
-        data: favourite.toMap(),
-        email: email,
-        uid: uid);
+  Future<void> setFavouriteSchema() async {
+    return _service.setData(
+        path: FireStorePath.favourites(uid), email: email, uid: uid);
   }
 
   @override

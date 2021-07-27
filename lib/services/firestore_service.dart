@@ -8,17 +8,15 @@ class FirestoreService {
 
   Future<void> setData({
     @required String path,
-    @required Map<String, dynamic> data,
     @required String email,
     @required String uid,
   }) async {
     final reference = FirebaseFirestore.instance.doc(path);
-    print('$path: $data');
     await reference.set(
       {
         'email': email,
         'id': uid,
-        'saved': [data],
+        'saved': [],
         'playlist': [],
       },
       SetOptions(

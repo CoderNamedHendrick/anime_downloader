@@ -19,13 +19,26 @@ class SearchCard extends StatelessWidget {
   final String imgUrl;
   final String link;
 
-  Future addRecentSearch(String title, String imgUrl, String link) {
+  Future<void> addRecentSearch(String title, String imgUrl, String link) async {
     final recentSearch = RecentSearch()
       ..title = title
       ..imgUrl = imgUrl
       ..link = link;
     final box = Boxes.getRecentSearches();
-    box.add(recentSearch);
+    print(box.values.toList().cast<RecentSearch>());
+    if (!_checkIfTitleExists(
+      box.values.toList().cast<RecentSearch>(),
+      recentSearch.title,
+    )) {
+      box.add(recentSearch);
+    }
+  }
+
+  bool _checkIfTitleExists(List<RecentSearch> box, String title) {
+    for (int i = 0; i < box.length; i++) {
+      if (box[i].title == title) return true;
+    }
+    return false;
   }
 
   @override

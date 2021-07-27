@@ -11,30 +11,34 @@ class SearchHistoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Container(
-              margin: EdgeInsets.only(right: 8),
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: NetworkImage(imgUrl),
-              )),
-            ),
-            AutoSizeText(
-              title,
-              textScaleFactor: 0.8,
-              presetFontSizes: [10, 6, 4],
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ],
-        ),
-        trailing,
-      ],
+    return Container(
+      width: double.infinity,
+      height: 60,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 8),
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: NetworkImage(imgUrl),
+                )),
+              ),
+              AutoSizeText(
+                title,
+                textScaleFactor: 0.8,
+                presetFontSizes: [10, 6, 4],
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
+          trailing,
+        ],
+      ),
     );
   }
 }

@@ -11,11 +11,9 @@ class DescriptionModel {
 
   String get id => _id;
   String get name => _name.trim();
-  String get type =>
-      _type.replaceAll(RegExp('\\s+'), ' ').trim();
+  String get type => _type.replaceAll(RegExp('\\s+'), ' ').trim();
   String get summary => _summary.trim();
-  String get genre =>
-      _genre.replaceAll(RegExp('\\s+'), ' ').trim();
+  String get genre => _genre.replaceAll(RegExp('\\s+'), ' ').trim();
   String get release => _release.replaceAll(" ", "");
   String get status => _status.replaceAll(RegExp('\\s+'), " ").trim();
   String get otherNames => _otherNames.trim();
@@ -38,6 +36,12 @@ class DescriptionModel {
       });
     }
   }
+
+  @override
+  String toString() {
+    return "name: $name, type: $type, summary: $summary, genre: $genre, release: $release, status: $status"
+        "episode start: $episodeStart, episode end: $episodeEnd";
+  }
 }
 
 class EpisodesDesc {
@@ -50,7 +54,7 @@ class EpisodesDesc {
   }
 
   String get start => _start.replaceAll("\n", "").trim();
-  String get end => _end.replaceAll("\n", "").trim();
+  String get end => _end?.replaceAll("\n", "")?.trim() ?? 'tbr';
 
   EpisodesDesc.fromJson(Map<String, dynamic> json) {
     _start = json['start'];

@@ -6,18 +6,23 @@ import 'package:anime_downloader/model/description.dart';
 import 'package:anime_downloader/screens/home/episodes_screen.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:anime_downloader/services/auth.dart';
+import 'package:anime_downloader/services/database.dart';
+import 'package:anime_downloader/services/firebase_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DescriptionScreen extends StatefulWidget {
-  const DescriptionScreen({Key key, this.link, this.imageUrl})
-      : super(key: key);
+  const DescriptionScreen({
+    Key key,
+    this.link,
+    this.imageUrl,
+  }) : super(key: key);
   final String link;
   final String imageUrl;
 
   static Future<void> show(BuildContext context,
-      {String link, String imageUrl}) async {
+      {String link, String imageUrl, Database database}) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => DescriptionScreen(
@@ -34,11 +39,14 @@ class DescriptionScreen extends StatefulWidget {
 
 class _DescriptionScreenState extends State<DescriptionScreen> {
   DescriptionBloc _bloc;
+  Database _firebase;
+  AuthBase _authBase;
 
   @override
   void initState() {
     super.initState();
     _bloc = DescriptionBloc(link: widget.link);
+    _authBase = Provider.of<AuthBase>(context, listen: false);
   }
 
   @override
@@ -62,6 +70,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
                   return Description(
                     desc: snapshot.data.data,
                     imageUrl: widget.imageUrl,
+                    link: widget.link,
                   );
                   break;
                 case Status.ERROR:
@@ -88,9 +97,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 }
 
 class Description extends StatefulWidget {
-  const Description({Key key, this.desc, this.imageUrl}) : super(key: key);
+  const Description({Key key, this.desc, this.imageUrl, this.link})
+      : super(key: key);
   final DescriptionModel desc;
   final String imageUrl;
+  final String link;
 
   @override
   _DescriptionState createState() => _DescriptionState();
@@ -99,8 +110,13 @@ class Description extends StatefulWidget {
 class _DescriptionState extends State<Description> {
   bool isFavourite = false;
 
-  bool _favourite(bool favourite) {
-    return isFavourite = !favourite;
+  _favourite(bool favourite, FavouriteModel favouriteModel) async {
+    isFavourite = !favourite;
+    // if (isFavourite == true) {
+    //   await widget.database.addFavourite(favouriteModel);
+    // } else {
+    //   await widget.database.deleteFavourite(favouriteModel);
+    // }
   }
 
   @override
@@ -142,14 +158,19 @@ class _DescriptionState extends State<Description> {
                     if (snapshot.data == null) {
                       await _showBottomModal(context);
                     }
-                    _favourite(isFavourite);
+                    _favourite(
+                        isFavourite,
+                        FavouriteModel(
+                          img: widget.imageUrl,
+                          link: widget.link,
+                        ));
                     final snackBar = isFavourite
                         ? SnackBar(
-                            content: Text('favorite'),
+                            content: Text('favourite'),
                             duration: Duration(seconds: 3),
                           )
                         : SnackBar(
-                            content: Text('un-favorite'),
+                            content: Text('un-favourite'),
                             duration: Duration(seconds: 3),
                           );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -232,13 +253,15 @@ class _DescriptionState extends State<Description> {
                             backgroundColor:
                                 MaterialStateProperty.all<Color>(Colors.grey),
                           ),
-                          onPressed: () => EpisodesScreen.show(
-                            context,
-                            start: widget.desc.episodeStart,
-                            end: widget.desc.episodeEnd,
-                            id: widget.desc.id,
-                            name: widget.desc.name,
-                          ),
+                          onPressed: () => widget.desc.status != 'Upcoming'
+                              ? EpisodesScreen.show(
+                                  context,
+                                  start: widget.desc.episodeStart,
+                                  end: widget.desc.episodeEnd,
+                                  id: widget.desc.id,
+                                  name: widget.desc.name,
+                                )
+                              : Navigator.of(context).pop(),
                         ),
                       ),
                       SizedBox(height: 6),

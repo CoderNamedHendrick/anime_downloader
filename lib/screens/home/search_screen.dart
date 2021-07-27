@@ -90,20 +90,36 @@ class SearchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: searchList.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1,
-      ),
-      itemBuilder: (context, index) {
-        return SearchCard(
-          title: searchList[index].name,
-          releaseDate: searchList[index].release,
-          imgUrl: searchList[index].image,
-          link: searchList[index].link,
-        );
-      },
-    );
+    print(searchList.length);
+    return searchList.length == 0
+        ? GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: Container(
+              color: Theme.of(context).primaryColor,
+              height: double.infinity,
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  'No results found, probably a spelling mistake?',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+            ),
+          )
+        : GridView.builder(
+            itemCount: searchList.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+            ),
+            itemBuilder: (context, index) {
+              return SearchCard(
+                title: searchList[index].name,
+                releaseDate: searchList[index].release,
+                imgUrl: searchList[index].image,
+                link: searchList[index].link,
+              );
+            },
+          );
   }
 }
 
