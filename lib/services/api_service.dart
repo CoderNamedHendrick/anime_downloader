@@ -1,23 +1,23 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:anime_downloader/services/api_exceptions.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  final String _baseUrl = 'https://anime-web-scraper.herokuapp.com';
+  final String _baseUrl = 'https://us-central1-anime-dom.cloudfunctions.net';
 
-  Future<dynamic> get (String url) async{
+  Future<dynamic> get(String url) async {
     var responseJson;
     try {
       final response = await http.get(Uri.parse(_baseUrl + url));
       responseJson = _returnResponse(response);
-    } on SocketException{
+    } on SocketException {
       print('No net');
       throw FetchDataException('No internet connection');
     }
     return responseJson;
   }
-
 }
 
 dynamic _returnResponse(http.Response response) {
