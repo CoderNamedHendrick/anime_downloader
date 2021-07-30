@@ -4,7 +4,6 @@ import 'package:anime_downloader/services/auth.dart';
 import 'package:anime_downloader/services/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -19,7 +18,6 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(RecentSearchAdapter());
   await Hive.openBox<RecentSearch>('recentSearches');
-  await dotenv.load();
   await runApp(Main());
 }
 
