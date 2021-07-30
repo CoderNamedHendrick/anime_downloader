@@ -12,7 +12,7 @@ class SearchHistoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       height: 60,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,11 +28,15 @@ class SearchHistoryTile extends StatelessWidget {
                   image: NetworkImage(imgUrl),
                 )),
               ),
-              AutoSizeText(
-                title,
-                textScaleFactor: 0.8,
-                presetFontSizes: [10, 6, 4],
-                style: Theme.of(context).textTheme.bodyText1,
+              Container(
+                width: (MediaQuery.of(context).size.width - 40 - 24) * 0.75,
+                child: AutoSizeText(
+                  title,
+                  textScaleFactor: 0.8,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
               ),
             ],
           ),
