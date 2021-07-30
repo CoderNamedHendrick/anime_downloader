@@ -60,7 +60,7 @@ class _SearchState extends State<Search> {
         elevation: 0.0,
         actions: [
           IconButton(
-            icon: Icon(Icons.youtube_searched_for_sharp),
+            icon: Icon(Icons.update),
             onPressed: () {
               searchHistory = !searchHistory;
               _historyBloc.toSearchHistory(searchHistory);

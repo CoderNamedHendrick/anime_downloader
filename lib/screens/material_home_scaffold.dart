@@ -27,16 +27,12 @@ class MaterialHomeScaffold extends StatelessWidget {
           Builder(
             builder: (context) => widgetBuilders[TabItem.values[1]](context),
           ),
-          Builder(
-            builder: (context) => widgetBuilders[TabItem.values[2]](context),
-          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           _buildItem(TabItem.HOME),
           _buildItem(TabItem.SEARCH),
-          _buildItem(TabItem.LIBRARY),
         ],
         onTap: (index) => onSelectTab(TabItem.values[index]),
         backgroundColor: Theme.of(context).primaryColor,

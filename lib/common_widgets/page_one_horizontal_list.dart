@@ -1,5 +1,5 @@
+import 'package:anime_downloader/screens/home/coming_soon.dart';
 import 'package:anime_downloader/screens/home/desc_screen.dart';
-import 'package:anime_downloader/screens/home/download_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:skeleton_text/skeleton_text.dart';
@@ -188,11 +188,10 @@ class LatestHorizontalList extends StatelessWidget {
                         ],
                       ),
                     ),
-                    onTap: () => DownloadScreen.show(
-                      context,
-                      title: list[index].name,
-                      name: list[index].episode,
-                      link: list[index].link,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ComingSoon(),
+                      ),
                     ),
                   );
                 },
