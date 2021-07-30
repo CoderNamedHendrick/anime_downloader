@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -50,8 +49,8 @@ class Auth implements AuthBase {
   @override
   Future<User> signInWithTwitter() async {
     final twitterLogin = TwitterLogin(
-      apiKey: dotenv.env['CONSUMER_KEY'],
-      apiSecretKey: dotenv.env['CONSUMER_KEY_SECRET'],
+      apiKey: 'imJr3lVDEHUatITQkLwBoPwZs',
+      apiSecretKey: 'Q90mEFWSoTlJVAEfk6JVqIs9E4xcHxqCqTOj3lGuBBfiDQKqjc',
       redirectURI: 'example://',
     );
     final authResult = await twitterLogin.login();
