@@ -1,10 +1,7 @@
 import 'package:anime_downloader/screens/home/home.dart';
-import 'package:anime_downloader/screens/home/library_screen.dart';
 import 'package:anime_downloader/screens/home/search.dart';
 import 'package:anime_downloader/screens/material_home_scaffold.dart';
 import 'package:anime_downloader/screens/tab_items.dart';
-import 'package:anime_downloader/services/auth.dart';
-import 'package:anime_downloader/services/database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +14,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TabItem _currentTab = TabItem.HOME;
-  Database _firebase;
-  AuthBase _authBase;
 
   final Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys = {
     TabItem.HOME: GlobalKey<NavigatorState>(),
@@ -30,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return {
       TabItem.HOME: (_) => Home(),
       TabItem.SEARCH: (_) => Search(),
-      TabItem.LIBRARY: (_) => LibraryScreen(),
     };
   }
 
