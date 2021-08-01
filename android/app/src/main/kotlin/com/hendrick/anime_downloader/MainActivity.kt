@@ -1,4 +1,4 @@
-package com.example.anime_downloader
+package com.hendrick.anime_downloader
 
 import io.flutter.embedding.android.FlutterActivity
 
