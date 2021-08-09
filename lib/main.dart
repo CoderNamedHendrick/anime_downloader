@@ -27,6 +27,7 @@ class Main extends StatelessWidget {
     return Provider<AuthBase>(
       create: (context) => Auth(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Pōtaru',
         theme: ThemeData(
           primaryColor: const Color(0xff282828),

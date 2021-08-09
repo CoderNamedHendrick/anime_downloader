@@ -1,6 +1,7 @@
 import 'package:anime_downloader/screens/home/coming_soon.dart';
 import 'package:anime_downloader/screens/home/desc_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
@@ -50,8 +51,9 @@ class PopularHorizontalList extends StatelessWidget {
                           ),
                           AutoSizeText(
                             '${list[index].name}',
-                            maxLines: 3,
+                            maxLines: 2,
                             style: Theme.of(context).textTheme.bodyText1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
@@ -177,13 +179,14 @@ class LatestHorizontalList extends StatelessWidget {
                           SizedBox(height: 4),
                           AutoSizeText(
                             '${list[index].name}',
-                            maxLines: 2,
+                            maxLines: 1,
                             style: textTheme2.bodyText1,
                           ),
                           SizedBox(height: 6),
                           Text(
                             '${list[index].episode}',
                             style: textTheme2.bodyText1,
+                            overflow: TextOverflow.ellipsis,
                           )
                         ],
                       ),
