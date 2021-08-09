@@ -13,7 +13,7 @@ class PopularHorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 3.1,
+      height: MediaQuery.of(context).size.height / 2.8,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -142,7 +142,7 @@ class LatestHorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 3,
+      height: MediaQuery.of(context).size.height / 2.7,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -166,30 +166,28 @@ class LatestHorizontalList extends StatelessWidget {
                   return GestureDetector(
                     child: Container(
                       width: 140,
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 180,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(list[index].image),
-                              ),
+                      child: Column(children: [
+                        Container(
+                          height: 180,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(list[index].image),
                             ),
                           ),
-                          SizedBox(height: 4),
-                          AutoSizeText(
-                            '${list[index].name}',
-                            maxLines: 1,
-                            style: textTheme2.bodyText1,
-                          ),
-                          SizedBox(height: 6),
-                          Text(
-                            '${list[index].episode}',
-                            style: textTheme2.bodyText1,
-                            overflow: TextOverflow.ellipsis,
-                          )
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 4),
+                        AutoSizeText(
+                          '${list[index].name}',
+                          maxLines: 1,
+                          style: textTheme2.bodyText1,
+                        ),
+                        SizedBox(height: 6),
+                        Text(
+                          '${list[index].episode}',
+                          style: textTheme2.bodyText1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ]),
                     ),
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
