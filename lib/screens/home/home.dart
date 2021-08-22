@@ -100,6 +100,13 @@ class _HomeState extends State<Home> {
                           setState(() {});
                         },
                       ),
+                TextButton(
+                  child: Text(
+                    'Saved',
+                    style: textTheme2.bodyText1,
+                  ),
+                  onPressed: () async {},
+                ),
               ],
             ),
             body: Container(

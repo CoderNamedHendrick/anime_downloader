@@ -19,6 +19,12 @@ class FirestoreService {
           'playlist': [],
           'saved': [],
         },
+        SetOptions(
+          mergeFields: [
+            'id',
+            'email',
+          ],
+        ),
       );
     } catch (e) {
       print(e);
@@ -26,33 +32,39 @@ class FirestoreService {
   }
 
   Future<void> addFavourite({
-    @required String path,
+    @required String uid,
     @required Map<String, dynamic> data,
   }) async {
-    final reference = FirebaseFirestore.instance.doc(path);
-    await reference.update({
-      'saved': FieldValue.arrayUnion([data])
-    });
+    try {
+      final reference = _firestore.collection('users').doc('$uid');
+      await reference.update({
+        'saved': FieldValue.arrayUnion([data])
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
-  Future<void> deleteFavourite(
-      {@required String path, @required Map<String, dynamic> data}) async {
-    final reference = FirebaseFirestore.instance.doc(path);
+  Future<void> deleteFavourite({
+    @required String uid,
+    @required Map<String, dynamic> data,
+  }) async {
+    final reference = _firestore.collection('users').doc('$uid');
     await reference.update({
       'saved': FieldValue.arrayRemove([data])
     });
   }
 
-  Stream<List<T>> favouriteStream<T>({
-    @required String path,
+  Stream<List<T>> favoriteStream<T>({
+    @required String uid,
     @required T builder(Map<String, dynamic> data),
   }) {
-    final reference = FirebaseFirestore.instance.doc(path);
+    final reference = _firestore.collection('users').doc('$uid');
     final snapshots = reference.snapshots();
-    print(snapshots);
-    return snapshots.map((snapshot) {
-      final result = snapshot['saved'].map((snap) => builder(snap)).toList();
-      return result;
-    });
+    print(snapshots.toList());
+    // return snapshots.map((snapshot) {
+    //   final result = snapshot['saved'].map((snap) => builder(snap)).toList();
+    //   return result;
+    // });
   }
 }

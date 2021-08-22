@@ -1,5 +1,4 @@
 import 'package:anime_downloader/services/firebase_model.dart';
-import 'package:anime_downloader/services/firestore_path.dart';
 import 'package:anime_downloader/services/firestore_service.dart';
 import 'package:flutter/foundation.dart';
 
@@ -17,10 +16,15 @@ class FirestoreDatabase implements Database {
   final _service = FirestoreService.instance;
 
   @override
+  Future<void> create() async {
+    _service.create(uid: uid, email: email);
+  }
+
+  @override
   Future<void> addFavourite(FavouriteModel favourite) async {
     try {
       await _service.addFavourite(
-        path: FireStorePath.favourites(uid),
+        uid: uid,
         data: favourite.toMap(),
       );
     } catch (e) {
@@ -32,7 +36,7 @@ class FirestoreDatabase implements Database {
   Future<void> deleteFavourite(FavouriteModel favourite) async {
     try {
       await _service.deleteFavourite(
-        path: FireStorePath.favourites(uid),
+        uid: uid,
         data: favourite.toMap(),
       );
     } catch (e) {
@@ -42,13 +46,9 @@ class FirestoreDatabase implements Database {
 
   @override
   Stream<List<FavouriteModel>> favouriteStream({String favouriteId}) {
-    return _service.favouriteStream(
-        path: FireStorePath.favourites(uid),
-        builder: (data) => FavouriteModel.fromMap(data));
-  }
-
-  @override
-  Future<void> create() async {
-    _service.create(uid: uid, email: email);
+    return _service.favoriteStream(
+      uid: uid,
+      builder: (data) => FavouriteModel.fromMap(data),
+    );
   }
 }

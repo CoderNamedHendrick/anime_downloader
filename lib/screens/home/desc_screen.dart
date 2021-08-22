@@ -1,5 +1,6 @@
 import 'package:anime_downloader/blocs/description_bloc.dart';
 import 'package:anime_downloader/common_widgets/bottom_modal.dart';
+import 'package:anime_downloader/common_widgets/desc_appbar.dart';
 import 'package:anime_downloader/common_widgets/error_widget.dart';
 import 'package:anime_downloader/common_widgets/loading_widget.dart';
 import 'package:anime_downloader/model/description.dart';
@@ -89,7 +90,7 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
   }
 }
 
-class Description extends StatefulWidget {
+class Description extends StatelessWidget {
   const Description({Key key, this.desc, this.imageUrl, this.link})
       : super(key: key);
   final DescriptionModel desc;
@@ -97,32 +98,13 @@ class Description extends StatefulWidget {
   final String link;
 
   @override
-  _DescriptionState createState() => _DescriptionState();
-}
-
-class _DescriptionState extends State<Description> {
-  @override
   Widget build(BuildContext context) {
     var size2 = MediaQuery.of(context).size;
     var textTheme2 = Theme.of(context).textTheme;
     return CustomScrollView(
       slivers: <Widget>[
-        SliverAppBar(
-          floating: false,
-          pinned: true,
-          automaticallyImplyLeading: false,
-          expandedHeight: size2.height / 2.5,
-          flexibleSpace: FlexibleSpaceBar(
-            background: Image(
-              image: NetworkImage(widget.imageUrl),
-              fit: BoxFit.cover,
-            ),
-          ),
-          title: Text(
-            'Preview',
-            style: textTheme2.headline1,
-          ),
-        ),
+        CustomAppBar(
+            size2: size2, imgUrl: imageUrl, link: link, textTheme2: textTheme2),
         SliverFillRemaining(
           child: Container(
             color: Theme.of(context).primaryColor,
@@ -132,7 +114,7 @@ class _DescriptionState extends State<Description> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    firstCharacterUpper(widget.desc.name),
+                    firstCharacterUpper(desc.name),
                     style: textTheme2.headline1,
                   ),
                   SizedBox(height: 6),
@@ -158,7 +140,7 @@ class _DescriptionState extends State<Description> {
                         Padding(
                           padding: EdgeInsets.only(left: 8),
                           child: Text(
-                            widget.desc.release,
+                            desc.release,
                             style: TextStyle(color: Colors.grey),
                           ),
                         ),
@@ -167,7 +149,7 @@ class _DescriptionState extends State<Description> {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    widget.desc.genre,
+                    desc.genre,
                     style: TextStyle(color: Colors.grey),
                   ),
                   SizedBox(height: 6),
@@ -192,7 +174,7 @@ class _DescriptionState extends State<Description> {
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.grey),
                       ),
-                      onPressed: () => widget.desc.status != 'Upcoming'
+                      onPressed: () => desc.status != 'Upcoming'
                           ? Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => ComingSoon()),
@@ -202,7 +184,7 @@ class _DescriptionState extends State<Description> {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    widget.desc.summary,
+                    desc.summary,
                     style: TextStyle(color: Colors.grey),
                   ),
                   Row(
@@ -219,14 +201,14 @@ class _DescriptionState extends State<Description> {
                       Column(
                         children: [
                           Text(
-                            "start: " + widget.desc.episodeStart,
+                            "start: " + desc.episodeStart,
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
                             ),
                           ),
                           Text(
-                            "end: " + widget.desc.episodeEnd,
+                            "end: " + desc.episodeEnd,
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -244,16 +226,16 @@ class _DescriptionState extends State<Description> {
       ],
     );
   }
+}
 
-  _showBottomModal(context) {
-    return showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        return AppBottomModal.create(context);
-      },
-    );
-  }
+showBottomModal(context) {
+  return showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (context) {
+      return AppBottomModal.create(context);
+    },
+  );
 }
 
 String firstCharacterUpper(String text) {
