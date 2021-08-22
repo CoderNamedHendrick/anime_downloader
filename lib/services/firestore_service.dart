@@ -5,25 +5,24 @@ import 'package:flutter/material.dart';
 class FirestoreService {
   FirestoreService._();
   static final instance = FirestoreService._();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> setData({
-    @required String path,
-    @required String email,
+  void create({
     @required String uid,
+    @required String email,
   }) async {
-    final reference = FirebaseFirestore.instance.doc(path);
-    await reference.set(
-      {
-        'email': email,
-        'id': uid,
-        'saved': [],
-        'playlist': [],
-      },
-      SetOptions(
-        merge: true,
-        mergeFields: ['saved'],
-      ),
-    );
+    try {
+      await _firestore.collection('users').doc('$uid').set(
+        {
+          'email': '$email',
+          'id': '$uid',
+          'playlist': [],
+          'saved': [],
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> addFavourite({

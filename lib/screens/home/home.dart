@@ -11,6 +11,7 @@ import 'package:anime_downloader/model/popular.dart';
 import 'package:anime_downloader/model/recent_search.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:anime_downloader/services/auth.dart';
+import 'package:anime_downloader/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -64,6 +65,12 @@ class _HomeState extends State<Home> {
     return StreamBuilder<User>(
         stream: auth.authStateChanges,
         builder: (context, snapshot) {
+          final user = snapshot.data;
+          if (user != null) {
+            FirestoreDatabase(uid: user.uid, email: user.email)
+                .create()
+                .then((value) => print('finished'));
+          }
           return Scaffold(
             appBar: AppBar(
               title: Text(
@@ -72,7 +79,7 @@ class _HomeState extends State<Home> {
               ),
               elevation: 0,
               actions: [
-                snapshot.data == null
+                user == null
                     ? TextButton(
                         child: Text(
                           "Sign-in",

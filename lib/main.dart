@@ -1,7 +1,6 @@
 import 'package:anime_downloader/model/recent_search.dart';
 import 'package:anime_downloader/screens/home_page.dart';
 import 'package:anime_downloader/services/auth.dart';
-import 'package:anime_downloader/services/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -45,14 +44,7 @@ class Main extends StatelessWidget {
             ),
           ),
         ),
-        home: Provider<Database>(
-          create: (_) => FirestoreDatabase(
-            uid: Provider.of<AuthBase>(context, listen: false).currentUser.uid,
-            email:
-                Provider.of<AuthBase>(context, listen: false).currentUser.email,
-          ),
-          child: HomeScreen(),
-        ),
+        home: HomeScreen(),
       ),
     );
   }
