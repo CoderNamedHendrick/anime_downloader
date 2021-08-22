@@ -1,12 +1,13 @@
 import 'package:anime_downloader/services/firebase_model.dart';
 import 'package:anime_downloader/services/firestore_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 abstract class Database {
   Future<void> create();
-  Future<void> addFavourite(FavouriteModel favourite);
-  Future<void> deleteFavourite(FavouriteModel favourite);
-  Stream<List<FavouriteModel>> favouriteStream({@required String favouriteId});
+  Future<void> addSaved(FavouriteModel favourite);
+  Future<void> deleteSaved(FavouriteModel favourite);
+  Stream<List<FavouriteModel>> savedStream();
 }
 
 class FirestoreDatabase implements Database {
@@ -21,9 +22,9 @@ class FirestoreDatabase implements Database {
   }
 
   @override
-  Future<void> addFavourite(FavouriteModel favourite) async {
+  Future<void> addSaved(FavouriteModel favourite) async {
     try {
-      await _service.addFavourite(
+      await _service.addSaved(
         uid: uid,
         data: favourite.toMap(),
       );
@@ -33,9 +34,9 @@ class FirestoreDatabase implements Database {
   }
 
   @override
-  Future<void> deleteFavourite(FavouriteModel favourite) async {
+  Future<void> deleteSaved(FavouriteModel favourite) async {
     try {
-      await _service.deleteFavourite(
+      await _service.deleteSaved(
         uid: uid,
         data: favourite.toMap(),
       );
@@ -45,10 +46,10 @@ class FirestoreDatabase implements Database {
   }
 
   @override
-  Stream<List<FavouriteModel>> favouriteStream({String favouriteId}) {
-    return _service.favoriteStream(
+  Stream<List<FavouriteModel>> savedStream() {
+    Stream<DocumentSnapshot> snapshot = _service.savedStream(
       uid: uid,
-      builder: (data) => FavouriteModel.fromMap(data),
     );
+    snapshot.map((event) => );
   }
 }

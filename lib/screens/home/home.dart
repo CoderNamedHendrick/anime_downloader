@@ -9,6 +9,7 @@ import 'package:anime_downloader/model/box.dart';
 import 'package:anime_downloader/model/latest.dart';
 import 'package:anime_downloader/model/popular.dart';
 import 'package:anime_downloader/model/recent_search.dart';
+import 'package:anime_downloader/screens/home/saved.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:anime_downloader/services/auth.dart';
 import 'package:anime_downloader/services/database.dart';
@@ -26,7 +27,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var _height;
   bool isLoading = false;
   Future<void> _signOut(BuildContext context) async {
     try {
@@ -105,7 +105,10 @@ class _HomeState extends State<Home> {
                     'Saved',
                     style: textTheme2.bodyText1,
                   ),
-                  onPressed: () async {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) => Saved()));
+                  },
                 ),
               ],
             ),

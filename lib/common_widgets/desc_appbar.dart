@@ -50,8 +50,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             IconButton(
               icon: Icon(Icons.save_rounded),
               onPressed: () {
-                FirestoreDatabase(uid: user.uid, email: user.email)
-                    .addFavourite(
+                FirestoreDatabase(uid: user.uid, email: user.email).addSaved(
                   FavouriteModel(img: widget.imgUrl, link: widget.link),
                 );
                 setState(

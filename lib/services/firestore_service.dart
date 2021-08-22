@@ -31,7 +31,7 @@ class FirestoreService {
     }
   }
 
-  Future<void> addFavourite({
+  Future<void> addSaved({
     @required String uid,
     @required Map<String, dynamic> data,
   }) async {
@@ -45,7 +45,7 @@ class FirestoreService {
     }
   }
 
-  Future<void> deleteFavourite({
+  Future<void> deleteSaved({
     @required String uid,
     @required Map<String, dynamic> data,
   }) async {
@@ -55,16 +55,11 @@ class FirestoreService {
     });
   }
 
-  Stream<List<T>> favoriteStream<T>({
+  Stream<DocumentSnapshot> savedStream<T>({
     @required String uid,
-    @required T builder(Map<String, dynamic> data),
   }) {
     final reference = _firestore.collection('users').doc('$uid');
     final snapshots = reference.snapshots();
-    print(snapshots.toList());
-    // return snapshots.map((snapshot) {
-    //   final result = snapshot['saved'].map((snap) => builder(snap)).toList();
-    //   return result;
-    // });
+    return snapshots;
   }
 }
