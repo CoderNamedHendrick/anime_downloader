@@ -74,7 +74,6 @@ class _SavedBuildState extends State<SavedBuild> {
         }
         if (snapshot.hasData) {
           final savedList = snapshot.data.get('saved');
-          print(savedList.length);
           return savedList.length == 0
               ? Center(
                   child: Text(
