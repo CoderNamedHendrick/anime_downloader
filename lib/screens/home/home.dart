@@ -100,16 +100,18 @@ class _HomeState extends State<Home> {
                           setState(() {});
                         },
                       ),
-                TextButton(
-                  child: Text(
-                    'Saved',
-                    style: textTheme2.bodyText1,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) => Saved()));
-                  },
-                ),
+                user == null
+                    ? Container()
+                    : TextButton(
+                        child: Text(
+                          'Saved',
+                          style: textTheme2.bodyText1,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => Saved()));
+                        },
+                      ),
               ],
             ),
             body: Container(

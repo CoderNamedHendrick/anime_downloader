@@ -7,7 +7,7 @@ abstract class Database {
   Future<void> create();
   Future<void> addSaved(FavouriteModel favourite);
   Future<void> deleteSaved(FavouriteModel favourite);
-  Stream<List<FavouriteModel>> savedStream();
+  Stream<DocumentSnapshot> savedStream();
 }
 
 class FirestoreDatabase implements Database {
@@ -46,10 +46,7 @@ class FirestoreDatabase implements Database {
   }
 
   @override
-  Stream<List<FavouriteModel>> savedStream() {
-    Stream<DocumentSnapshot> snapshot = _service.savedStream(
-      uid: uid,
-    );
-    snapshot.map((event) => );
+  Stream<DocumentSnapshot> savedStream() {
+    return _service.savedStream(uid: uid);
   }
 }
