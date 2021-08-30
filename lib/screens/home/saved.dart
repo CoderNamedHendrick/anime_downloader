@@ -107,23 +107,29 @@ class _SavedBuildState extends State<SavedBuild> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 150,
-                              width: 125,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                      "${savedList[index]['img']}"),
+                            Flexible(
+                              flex: 3,
+                              child: Container(
+                                height: 150,
+                                width: 125,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                        "${savedList[index]['img']}"),
+                                  ),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4),
-                              child: Text(
-                                '${savedList[index]['link'].replaceAll("/category/", "")}',
-                                style: Theme.of(context).textTheme.subtitle1,
+                            Flexible(
+                              flex: 2,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                child: Text(
+                                  '${savedList[index]['link'].replaceAll("/category/", "")}',
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
                               ),
                             ),
                           ],
