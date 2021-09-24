@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "950651690842",
+    "project_id": "anime-dom",
+    "storage_bucket": "anime-dom.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950651690842:android:2eae388dab023c47dadd63",
+        "android_client_info": {
+          "package_name": "com.hendrick.anime_downloader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950651690842-2827t3h7svl2d7tuedefmaqtfi26p4q2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hendrick.anime_downloader",
+            "certificate_hash": "aa725a65b2d0c0ae1479b8d8968a2181d4151a26"
+          }
+        },
+        {
+          "client_id": "950651690842-ij0d0e22snc8940qiqr6hk4vn6nb2a1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7izzcxA7eiQj6vEr1sR32g75UEoQJMxg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950651690842-ij0d0e22snc8940qiqr6hk4vn6nb2a1j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
