@@ -30,6 +30,8 @@
 .pub-cache/
 .pub/
 /build/
+/potaru.jks
+.fvm/flutter_sdk
 *.env
 
 # Web related
