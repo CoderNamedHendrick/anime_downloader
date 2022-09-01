@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class MaterialHomeScaffold extends StatelessWidget {
   const MaterialHomeScaffold({
-    Key key,
-    @required this.currentTab,
-    @required this.onSelectTab,
-    @required this.navigatorKeys,
-    @required this.widgetBuilders,
-  }) : super(key: key);
+    super.key,
+    required this.currentTab,
+    required this.onSelectTab,
+    required this.navigatorKeys,
+    required this.widgetBuilders,
+  });
 
   final TabItem currentTab;
   final ValueChanged<TabItem> onSelectTab;
@@ -22,10 +22,10 @@ class MaterialHomeScaffold extends StatelessWidget {
         index: currentTab.index,
         children: [
           Builder(
-            builder: (context) => widgetBuilders[TabItem.values[0]](context),
+            builder: widgetBuilders[TabItem.values[0]]!,
           ),
           Builder(
-            builder: (context) => widgetBuilders[TabItem.values[1]](context),
+            builder: widgetBuilders[TabItem.values[1]]!,
           ),
         ],
       ),
@@ -45,20 +45,13 @@ class MaterialHomeScaffold extends StatelessWidget {
     final itemData = TabItemData.allTabs[tabItem];
     final color = currentTab == tabItem ? Colors.white : Colors.grey[500];
     final iconSize = currentTab == tabItem ? 28.0 : 18.0;
-    final textSize = currentTab == tabItem ? 12.0 : 10.0;
     return BottomNavigationBarItem(
       icon: Icon(
-        itemData.icon,
+        itemData?.icon,
         color: color,
         size: iconSize,
       ),
-      title: Text(
-        itemData.title,
-        style: TextStyle(
-          color: color,
-          fontSize: textSize,
-        ),
-      ),
+      label: itemData?.title,
     );
   }
 }

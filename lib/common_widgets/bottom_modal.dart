@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 class AppBottomModal extends StatefulWidget {
   const AppBottomModal(
-      {Key key, @required this.manager, @required this.isLoading});
+      {Key? key, required this.manager, required this.isLoading});
   final SignInManager manager;
   final bool isLoading;
 

@@ -6,8 +6,8 @@ import 'package:anime_downloader/services/api_response.dart';
 import 'package:rxdart/rxdart.dart';
 
 class GenresBloc {
-  NameLinkRepository _genresRepository;
-  StreamController _genresController;
+  late NameLinkRepository _genresRepository;
+  late StreamController<ApiResponse<List<NameLinkModel>>> _genresController;
 
   StreamSink<ApiResponse<List<NameLinkModel>>> get genresSink =>
       _genresController.sink;
@@ -33,6 +33,6 @@ class GenresBloc {
   }
 
   dispose() {
-    _genresController?.close();
+    _genresController.close();
   }
 }

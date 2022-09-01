@@ -7,11 +7,11 @@ import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatefulWidget {
   const CustomAppBar({
-    Key key,
-    @required this.size2,
-    @required this.imgUrl,
-    @required this.link,
-    @required this.textTheme2,
+    Key? key,
+    required this.size2,
+    required this.imgUrl,
+    required this.link,
+    required this.textTheme2,
   }) : super(key: key);
 
   final Size size2;
@@ -27,7 +27,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
-    return StreamBuilder<User>(
+    return StreamBuilder<User?>(
       stream: auth.authStateChanges,
       builder: (context, snapshot) {
         final user = snapshot.data;
@@ -50,7 +50,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             IconButton(
               icon: Icon(Icons.save_rounded),
               onPressed: () {
-                FirestoreDatabase(uid: user.uid, email: user.email).addSaved(
+                FirestoreDatabase(uid: user?.uid ?? '', email: user?.email ?? '').addSaved(
                   FavouriteModel(img: widget.imgUrl, link: widget.link),
                 );
                 setState(

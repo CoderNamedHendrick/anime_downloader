@@ -3,10 +3,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:twitter_login/twitter_login.dart';
 
 abstract class AuthBase {
-  User get currentUser;
-  Stream<User> get authStateChanges;
-  Future<User> signInWithGoogle();
-  Future<User> signInWithTwitter();
+  User? get currentUser;
+  Stream<User?> get authStateChanges;
+  Future<User?> signInWithGoogle();
+  Future<User?> signInWithTwitter();
   Future<void> signOut();
 }
 
@@ -14,13 +14,13 @@ class Auth implements AuthBase {
   final _firebaseAuth = FirebaseAuth.instance;
 
   @override
-  Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
+  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
   @override
-  User get currentUser => _firebaseAuth.currentUser;
+  User? get currentUser => _firebaseAuth.currentUser;
 
   @override
-  Future<User> signInWithGoogle() async {
+  Future<User?> signInWithGoogle() async {
     final googleSignIn = GoogleSignIn();
     final googleUser = await googleSignIn.signIn();
     if (googleUser != null) {
@@ -47,7 +47,7 @@ class Auth implements AuthBase {
   }
 
   @override
-  Future<User> signInWithTwitter() async {
+  Future<User?> signInWithTwitter() async {
     final twitterLogin = TwitterLogin(
       apiKey: 'imJr3lVDEHUatITQkLwBoPwZs',
       apiSecretKey: 'Q90mEFWSoTlJVAEfk6JVqIs9E4xcHxqCqTOj3lGuBBfiDQKqjc',
@@ -58,8 +58,8 @@ class Auth implements AuthBase {
       case TwitterLoginStatus.loggedIn:
         final userCredential = await _firebaseAuth.signInWithCredential(
           TwitterAuthProvider.credential(
-              accessToken: authResult.authToken,
-              secret: authResult.authTokenSecret),
+              accessToken: authResult.authToken ?? '',
+              secret: authResult.authTokenSecret ?? ''),
         );
         return userCredential.user;
       case TwitterLoginStatus.cancelledByUser:
@@ -72,7 +72,6 @@ class Auth implements AuthBase {
           code: 'ERROR_TWITTER_LOGIN_FAILED',
           message: authResult.errorMessage,
         );
-        break;
       default:
         throw UnimplementedError();
     }

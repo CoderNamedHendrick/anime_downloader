@@ -5,8 +5,8 @@ import 'package:anime_downloader/repository/description_repository.dart';
 import 'package:anime_downloader/services/api_response.dart';
 
 class PopularBloc {
-  DescriptionRepository _popularRepository;
-  StreamController _popularController;
+  late DescriptionRepository _popularRepository;
+  late StreamController<ApiResponse<List<PopularModel>>> _popularController;
 
   StreamSink<ApiResponse<List<PopularModel>>> get popularSink =>
       _popularController.sink;

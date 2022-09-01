@@ -1,7 +1,6 @@
 import 'package:anime_downloader/services/firebase_model.dart';
 import 'package:anime_downloader/services/firestore_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 
 abstract class Database {
   Future<void> create();
@@ -11,7 +10,7 @@ abstract class Database {
 }
 
 class FirestoreDatabase implements Database {
-  FirestoreDatabase({@required this.uid, @required this.email});
+  FirestoreDatabase({required this.uid, required this.email});
   final String uid;
   final String email;
   final _service = FirestoreService.instance;

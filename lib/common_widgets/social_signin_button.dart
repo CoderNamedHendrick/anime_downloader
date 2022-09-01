@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 
 class SocialSignInButton extends CustomRaisedButton {
   SocialSignInButton({
-    @required String assetName,
-    @required String text,
-    Color color,
-    Color textColor,
-    VoidCallback onPressed,
-  })  : assert(assetName != null),
-        assert(text != null),
-        super(
+    required String assetName,
+    required String text,
+    Color? color,
+    Color? textColor,
+    VoidCallback? onPressed,
+  }) : super(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[

@@ -5,8 +5,8 @@ import 'package:anime_downloader/repository/name_link_repository.dart';
 import 'package:anime_downloader/services/api_response.dart';
 
 class EpisodeBloc {
-  NameLinkRepository _episodeRepository;
-  StreamController _episodeController;
+  late NameLinkRepository _episodeRepository;
+  late StreamController<ApiResponse<List<NameLinkModel>>> _episodeController;
 
   StreamSink<ApiResponse<List<NameLinkModel>>> get episodeSink =>
       _episodeController.sink;
@@ -14,13 +14,13 @@ class EpisodeBloc {
   Stream<ApiResponse<List<NameLinkModel>>> get episodeStream =>
       _episodeController.stream;
 
-  EpisodeBloc({String start, String end, String id, String name}) {
+  EpisodeBloc({required String start, required String end, required String id, required String name}) {
     _episodeController = StreamController<ApiResponse<List<NameLinkModel>>>();
     _episodeRepository = NameLinkRepository();
     fetchEpisodes(start: start, end: end, id: id, name: name);
   }
 
-  fetchEpisodes({String start, String end, String id, String name}) async {
+  fetchEpisodes({required String start, required String end, required String id, required String name}) async {
     episodeSink.add(ApiResponse.loading('Fetching Episodes'));
     try {
       List<NameLinkModel> episodes = await _episodeRepository.fetchEpisodes(

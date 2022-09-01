@@ -1,12 +1,11 @@
 import 'package:anime_downloader/screens/home/coming_soon.dart';
 import 'package:anime_downloader/screens/home/desc_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
 class PopularHorizontalList extends StatelessWidget {
-  const PopularHorizontalList({this.title, this.list});
+  const PopularHorizontalList({required this.title, required this.list});
   final String title;
   final List list;
 
@@ -135,7 +134,7 @@ class PopularHorizontalListSkeleton extends StatelessWidget {
 }
 
 class LatestHorizontalList extends StatelessWidget {
-  const LatestHorizontalList({this.title, this.list});
+  const LatestHorizontalList({required this.title, required this.list});
   final String title;
   final List list;
 
@@ -206,7 +205,7 @@ class LatestHorizontalList extends StatelessWidget {
 }
 
 class LatestHorizontalListSkeleton extends StatelessWidget {
-  const LatestHorizontalListSkeleton({Key key}) : super(key: key);
+  const LatestHorizontalListSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -234,7 +233,6 @@ class LatestHorizontalListSkeleton extends StatelessWidget {
                   width: 8.0,
                 ),
                 itemBuilder: (context, index) {
-                  var textTheme2 = Theme.of(context).textTheme;
                   return Container(
                     width: 140,
                     child: Column(

@@ -5,8 +5,8 @@ import 'package:anime_downloader/repository/latest_repository.dart';
 import 'package:anime_downloader/services/api_response.dart';
 
 class LatestAnimeBloc {
-  LatestAnimeRepository _latestRepository;
-  StreamController _latestController;
+  late LatestAnimeRepository _latestRepository;
+  late StreamController<ApiResponse<List<LatestAnimeModel>>> _latestController;
 
   StreamSink<ApiResponse<List<LatestAnimeModel>>> get latestSink =>
       _latestController.sink;

@@ -4,7 +4,6 @@ import 'package:anime_downloader/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +16,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(RecentSearchAdapter());
   await Hive.openBox<RecentSearch>('recentSearches');
-  await runApp(Main());
+  runApp(Main());
 }
 
 class Main extends StatelessWidget {

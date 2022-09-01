@@ -12,7 +12,6 @@ import 'package:anime_downloader/screens/home/search_screen.dart';
 import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CheckHistoryBloc {
@@ -29,14 +28,14 @@ class CheckHistoryBloc {
 }
 
 class Search extends StatefulWidget {
-  const Search({Key key}) : super(key: key);
+  const Search({super.key});
   @override
   _SearchState createState() => _SearchState();
 }
 
 class _SearchState extends State<Search> {
-  GenresBloc _bloc;
-  CheckHistoryBloc _historyBloc;
+  late final GenresBloc _bloc;
+  late final CheckHistoryBloc _historyBloc;
   TextEditingController _controller = TextEditingController();
   bool searchHistory = false;
 
@@ -133,23 +132,21 @@ class _SearchState extends State<Search> {
         stream: _bloc.genresStream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            switch (snapshot.data.status) {
+            switch (snapshot.data!.status) {
               case Status.LOADING:
                 return Loading(
-                  loadingMessage: snapshot.data.message,
+                  loadingMessage: snapshot.data!.message,
                 );
-                break;
+
               case Status.COMPLETED:
                 return Genres(
-                  list: snapshot.data.data,
+                  list: snapshot.data!.data,
                 );
-                break;
               case Status.ERROR:
                 return Error(
-                  errorMessage: snapshot.data.message,
+                  errorMessage: snapshot.data!.message,
                   onRetryPressed: () => _bloc.fetchGenres(),
                 );
-                break;
             }
           }
           return Container();
@@ -179,7 +176,7 @@ class _SearchState extends State<Search> {
                     deleteRecent(boxList[index]);
                     setState(() {});
                   },
-                  icon: FaIcon(FontAwesomeIcons.times, color: Colors.white),
+                  icon: FaIcon(FontAwesomeIcons.xmark, color: Colors.white),
                 ),
               );
             },
@@ -203,12 +200,12 @@ class _SearchState extends State<Search> {
 
 class Genres extends StatelessWidget {
   final List list;
-  const Genres({Key key, this.list}) : super(key: key);
+  const Genres({super.key, required this.list});
 
   @override
   Widget build(BuildContext context) {
     List<Widget> genres() {
-      List<Widget> _chips = List(list.length);
+      List<Widget> _chips = <Widget>[];
       for (int index = 0; index < list.length; index++) {
         print(list[index]);
         _chips[index] = Padding(
@@ -221,13 +218,6 @@ class Genres extends StatelessWidget {
               context,
               list[index].link,
             ),
-            // onPressed: () => Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => SearchScreen(
-            //       search: list[index].link,
-            //     ),
-            //   ),
-            // ),
           ),
         );
       }

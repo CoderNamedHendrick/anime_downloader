@@ -2,12 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class SearchHistoryTile extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final String title;
   final String imgUrl;
-  final Widget trailing;
+  final Widget? trailing;
 
-  const SearchHistoryTile({this.onTap, this.title, this.imgUrl, this.trailing});
+  const SearchHistoryTile(
+      {this.onTap, required this.title, required this.imgUrl, this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class SearchHistoryTile extends StatelessWidget {
               ),
             ],
           ),
-          trailing,
+          if (trailing != null) trailing!,
         ],
       ),
     );

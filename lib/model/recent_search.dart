@@ -5,11 +5,11 @@ part 'recent_search.g.dart';
 @HiveType(typeId: 0)
 class RecentSearch extends HiveObject {
   @HiveField(0)
-  String title;
+  late String title;
 
   @HiveField(1)
-  String imgUrl;
+  late String imgUrl;
 
   @HiveField(2)
-  String link;
+  late String link;
 }

@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 class FirestoreService {
   FirestoreService._();
@@ -8,8 +6,8 @@ class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   void create({
-    @required String uid,
-    @required String email,
+    required String uid,
+    required String email,
   }) async {
     try {
       await _firestore.collection('users').doc('$uid').set(
@@ -32,8 +30,8 @@ class FirestoreService {
   }
 
   Future<void> addSaved({
-    @required String uid,
-    @required Map<String, dynamic> data,
+    required String uid,
+    required Map<String, dynamic> data,
   }) async {
     try {
       final reference = _firestore.collection('users').doc('$uid');
@@ -46,8 +44,8 @@ class FirestoreService {
   }
 
   Future<void> deleteSaved({
-    @required String uid,
-    @required Map<String, dynamic> data,
+    required String uid,
+    required Map<String, dynamic> data,
   }) async {
     final reference = _firestore.collection('users').doc('$uid');
     await reference.update({
@@ -56,7 +54,7 @@ class FirestoreService {
   }
 
   Stream<DocumentSnapshot> savedStream<T>({
-    @required String uid,
+    required String uid,
   }) {
     final reference = _firestore.collection('users').doc('$uid');
     final snapshots = reference.snapshots();

@@ -11,15 +11,17 @@ import 'package:flutter/material.dart';
 
 class DescriptionScreen extends StatefulWidget {
   const DescriptionScreen({
-    Key key,
-    this.link,
-    this.imageUrl,
+    Key? key,
+    required this.link,
+    required this.imageUrl,
   }) : super(key: key);
   final String link;
   final String imageUrl;
 
-  static Future<void> show(BuildContext context,
-      {String link, String imageUrl, Database database}) async {
+  static void show(BuildContext context,
+      {required String link,
+      required String imageUrl,
+      Database? database}) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => DescriptionScreen(
@@ -35,7 +37,7 @@ class DescriptionScreen extends StatefulWidget {
 }
 
 class _DescriptionScreenState extends State<DescriptionScreen> {
-  DescriptionBloc _bloc;
+  late DescriptionBloc _bloc;
 
   @override
   void initState() {
@@ -54,26 +56,23 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
           stream: _bloc.descriptionStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              switch (snapshot.data.status) {
+              switch (snapshot.data!.status) {
                 case Status.LOADING:
                   return Loading(
-                    loadingMessage: snapshot.data.message,
+                    loadingMessage: snapshot.data!.message,
                   );
-                  break;
                 case Status.COMPLETED:
                   return Description(
-                    desc: snapshot.data.data,
+                    desc: snapshot.data!.data,
                     imageUrl: widget.imageUrl,
                     link: widget.link,
                   );
-                  break;
                 case Status.ERROR:
                   return Error(
-                    errorMessage: snapshot.data.message,
+                    errorMessage: snapshot.data!.message,
                     onRetryPressed: () =>
                         _bloc.fetchDescription(link: widget.link),
                   );
-                  break;
               }
             }
             return Container();
@@ -91,8 +90,11 @@ class _DescriptionScreenState extends State<DescriptionScreen> {
 }
 
 class Description extends StatelessWidget {
-  const Description({Key key, this.desc, this.imageUrl, this.link})
-      : super(key: key);
+  const Description(
+      {super.key,
+      required this.desc,
+      required this.imageUrl,
+      required this.link});
   final DescriptionModel desc;
   final String imageUrl;
   final String link;
@@ -239,7 +241,7 @@ showBottomModal(context) {
 }
 
 String firstCharacterUpper(String text) {
-  List arrayPieces = List();
+  List arrayPieces = [];
 
   String outPut = '';
   text.split(' ').forEach((separatedWord) {

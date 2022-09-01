@@ -6,9 +6,11 @@
    <application
        android:requestLegacyExternalStorage="true"
         android:label="Pōtaru"
+       android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -27,10 +29,6 @@
                  screen fades out. A splash screen is useful to avoid any visual
                  gap between the end of Android's launch screen and the painting of
                  Flutter's first frame. -->
-            <meta-data
-              android:name="io.flutter.embedding.android.SplashScreenDrawable"
-              android:resource="@drawable/launch_background"
-              />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -50,21 +48,20 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+       <!-- Begin FlutterDownloader customization -->
+       <!-- disable default Initializer -->
        <provider
-           android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
-           android:authorities="${applicationId}.flutter_downloader.provider"
+           android:name="androidx.startup.InitializationProvider"
+           android:authorities="${applicationId}.androidx-startup"
            android:exported="false"
-           android:grantUriPermissions="true">
+           tools:node="merge">
            <meta-data
-               android:name="android.support.FILE_PROVIDER_PATHS"
-               android:resource="@xml/provider_paths"/>
+               android:name="androidx.work.WorkManagerInitializer"
+               android:value="androidx.startup"
+               tools:node="remove" />
        </provider>
 
-       <provider
-           android:name="androidx.work.impl.WorkManagerInitializer"
-           android:authorities="${applicationId}.workmanager-init"
-           tools:node="remove" />
-
+       <!-- declare customized Initializer -->
        <provider
            android:name="vn.hunghd.flutterdownloader.FlutterDownloaderInitializer"
            android:authorities="${applicationId}.flutter-downloader-init"
@@ -74,5 +71,7 @@
                android:name="vn.hunghd.flutterdownloader.MAX_CONCURRENT_TASKS"
                android:value="5" />
        </provider>
+       <!-- End FlutterDownloader customization -->
+
    </application>
 </manifest>

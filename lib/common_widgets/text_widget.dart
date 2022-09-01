@@ -2,15 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {
-  String title;
-  String input;
-  String type;
-  TextWidget(
-      {@required String title, @required String input, @required String type}) {
-    this.title = title;
-    this.input = input;
-    this.type = type;
-  }
+  final String title;
+  final String input;
+  final String type;
+  const TextWidget({super.key, required this.title, required this.input, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -56,5 +51,7 @@ class TextWidget extends StatelessWidget {
         ),
       );
     }
+
+    return const SizedBox.shrink();
   }
 }

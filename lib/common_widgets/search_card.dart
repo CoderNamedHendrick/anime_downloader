@@ -7,12 +7,12 @@ import 'package:skeleton_text/skeleton_text.dart';
 
 class SearchCard extends StatelessWidget {
   const SearchCard({
-    Key key,
-    this.title,
-    this.releaseDate,
-    this.imgUrl,
-    this.link,
-  }) : super(key: key);
+    super.key,
+    required this.title,
+    required this.releaseDate,
+    required this.imgUrl,
+    required this.link,
+  });
 
   final String title;
   final String releaseDate;
@@ -100,7 +100,7 @@ class SearchCard extends StatelessWidget {
 }
 
 class SearchCardSkeleton extends StatelessWidget {
-  const SearchCardSkeleton({Key key}) : super(key: key);
+  const SearchCardSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -153,6 +153,5 @@ class SearchCardSkeleton extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

@@ -6,14 +6,14 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class LibraryScreen extends StatefulWidget {
-  const LibraryScreen({Key key}) : super(key: key);
+  const LibraryScreen({super.key});
 
   @override
   _LibraryScreenState createState() => _LibraryScreenState();
 }
 
 class _LibraryScreenState extends State<LibraryScreen> {
-  List folders;
+  List? folders;
   var dir;
 
   @override
@@ -36,7 +36,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
         await dir.createSync(recursive: true);
       }
     } catch (e) {
-      print(e.message);
+      print(e.toString());
     }
     // } on FileSystemException{
     //   final storagedir = await getExternalStorageDirectories(type: StorageDirectory.movies);
@@ -70,11 +70,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
               ),
             )
           : ListView.builder(
-              itemCount: folders.length,
+              itemCount: folders!.length,
               itemBuilder: (context, index) => Card(
                 child: ListTile(
                   title: Text(
-                    '${folders[index].path}'
+                    '${folders![index].path}'
                         .replaceAll("${dir.path.toString()}", ""),
                   ),
                   leading: Icon(Icons.folder),
@@ -82,7 +82,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => FolderContents(
-                        dir: folders[index].path,
+                        dir: folders![index].path,
                       ),
                     ),
                   ),

@@ -7,7 +7,7 @@ import 'package:anime_downloader/services/api_response.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key key, @required this.search}) : super(key: key);
+  const SearchScreen({super.key, required this.search});
   final String search;
 
   static Future<void> show(BuildContext context, String link) async {
@@ -52,22 +52,19 @@ class _SearchScreenState extends State<SearchScreen> {
           stream: _bloc.searchListStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              switch (snapshot.data.status) {
+              switch (snapshot.data!.status) {
                 case Status.LOADING:
                   return SearchListSkeleton();
-                  break;
                 case Status.COMPLETED:
                   return SearchList(
-                    searchList: snapshot.data.data,
+                    searchList: snapshot.data!.data,
                   );
-                  break;
                 case Status.ERROR:
                   return Error(
-                    errorMessage: snapshot.data.message,
+                    errorMessage: snapshot.data!.message,
                     onRetryPressed: () =>
                         _bloc.fetchSearchList(name: widget.search),
                   );
-                  break;
               }
             }
             return Container();
@@ -85,7 +82,7 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 class SearchList extends StatelessWidget {
-  const SearchList({Key key, this.searchList}) : super(key: key);
+  const SearchList({super.key, required this.searchList});
   final List<SearchModel> searchList;
 
   @override

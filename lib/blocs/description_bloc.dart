@@ -5,9 +5,8 @@ import 'package:anime_downloader/repository/description_repository.dart';
 import 'package:anime_downloader/services/api_response.dart';
 
 class DescriptionBloc {
-  DescriptionRepository _descriptionRepository;
-
-  StreamController _descriptionController;
+  late DescriptionRepository _descriptionRepository;
+  late StreamController<ApiResponse<DescriptionModel>> _descriptionController;
 
   StreamSink<ApiResponse<DescriptionModel>> get descriptionSink =>
       _descriptionController.sink;
@@ -15,13 +14,13 @@ class DescriptionBloc {
   Stream<ApiResponse<DescriptionModel>> get descriptionStream =>
       _descriptionController.stream;
 
-  DescriptionBloc({String link}) {
+  DescriptionBloc({required String link}) {
     _descriptionController = StreamController<ApiResponse<DescriptionModel>>();
     _descriptionRepository = DescriptionRepository();
     fetchDescription(link: link);
   }
 
-  fetchDescription({String link}) async {
+  fetchDescription({required String link}) async {
     descriptionSink.add(ApiResponse.loading('Fetching Description'));
     try {
       DescriptionModel desc =
@@ -34,6 +33,6 @@ class DescriptionBloc {
   }
 
   dispose() {
-    _descriptionController?.close();
+    _descriptionController.close();
   }
 }

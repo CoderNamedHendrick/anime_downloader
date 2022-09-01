@@ -1,6 +1,6 @@
 class FavouriteModel {
-  String img;
-  String link;
+  String? img;
+  String? link;
 
   FavouriteModel({this.img, this.link});
 

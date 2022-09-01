@@ -5,9 +5,9 @@ import 'package:anime_downloader/repository/search_repository.dart';
 import 'package:anime_downloader/services/api_response.dart';
 
 class SearchBloc {
-  SearchRepository _searchRepository;
+  late SearchRepository _searchRepository;
 
-  StreamController _searchListController;
+  late StreamController<ApiResponse<List<SearchModel>>> _searchListController;
 
   StreamSink<ApiResponse<List<SearchModel>>> get searchListSink =>
       _searchListController.sink;
@@ -15,13 +15,13 @@ class SearchBloc {
   Stream<ApiResponse<List<SearchModel>>> get searchListStream =>
       _searchListController.stream;
 
-  SearchBloc({String name}) {
+  SearchBloc({required String name}) {
     _searchListController = StreamController<ApiResponse<List<SearchModel>>>();
     _searchRepository = SearchRepository();
     fetchSearchList(name: name);
   }
 
-  fetchSearchList({String name}) async {
+  fetchSearchList({required String name}) async {
     searchListSink.add(ApiResponse.loading('Fetching Anime'));
     try {
       List<SearchModel> searches = await _searchRepository.search(name: name);
@@ -33,6 +33,6 @@ class SearchBloc {
   }
 
   dispose() {
-    _searchListController?.close();
+    _searchListController.close();
   }
 }

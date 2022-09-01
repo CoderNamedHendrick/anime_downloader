@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Saved extends StatelessWidget {
-  const Saved({Key key}) : super(key: key);
+  const Saved({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class Saved extends StatelessWidget {
 }
 
 class SavedBuild extends StatefulWidget {
-  const SavedBuild({Key key}) : super(key: key);
+  const SavedBuild({super.key});
 
   @override
   _SavedBuildState createState() => _SavedBuildState();
@@ -38,9 +38,9 @@ class SavedBuild extends StatefulWidget {
 class _SavedBuildState extends State<SavedBuild> {
   Future<void> _deleteSavedAnime(
     BuildContext context, {
-    String title,
-    FirestoreDatabase database,
-    FavouriteModel favourite,
+    required String title,
+    required FirestoreDatabase database,
+    required FavouriteModel favourite,
   }) async {
     final didRequestDelete = await showAlertDialog(
       context,
@@ -57,10 +57,10 @@ class _SavedBuildState extends State<SavedBuild> {
 
   @override
   Widget build(BuildContext context) {
-    final User user = Provider.of<AuthBase>(context, listen: false).currentUser;
+    final User? user = Provider.of<AuthBase>(context, listen: false).currentUser;
     final database = FirestoreDatabase(
-      uid: user.uid,
-      email: user.email,
+      uid: user?.uid ?? '',
+      email: user?.email ?? '',
     );
     return StreamBuilder<DocumentSnapshot>(
       stream: database.savedStream(),
@@ -73,7 +73,7 @@ class _SavedBuildState extends State<SavedBuild> {
           return Text('Loading');
         }
         if (snapshot.hasData) {
-          final savedList = snapshot.data.get('saved');
+          final savedList = snapshot.data?.get('saved');
           return savedList.length == 0
               ? Center(
                   child: Text(

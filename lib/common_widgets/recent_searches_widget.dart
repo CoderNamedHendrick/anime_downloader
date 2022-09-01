@@ -7,7 +7,7 @@ class RecentSearchWidget extends StatelessWidget {
   final String imgUrl;
   final String link;
 
-  const RecentSearchWidget({this.title, this.imgUrl, this.link});
+  const RecentSearchWidget({required this.title, required this.imgUrl, required this.link});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

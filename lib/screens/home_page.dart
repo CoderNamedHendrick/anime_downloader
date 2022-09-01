@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _select(TabItem tabItem) {
     if (tabItem == _currentTab) {
       // pop to first route
-      navigatorKeys[tabItem].currentState.popUntil((route) => route.isFirst);
+      navigatorKeys[tabItem]?.currentState?.popUntil((route) => route.isFirst);
     } else {
       setState(() => _currentTab = tabItem);
     }
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async =>
-          !await navigatorKeys[_currentTab].currentState.maybePop(),
+          !await navigatorKeys[_currentTab]!.currentState!.maybePop(),
       child: MaterialHomeScaffold(
         currentTab: _currentTab,
         onSelectTab: _select,

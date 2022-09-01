@@ -15,12 +15,11 @@ import 'package:anime_downloader/services/auth.dart';
 import 'package:anime_downloader/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key key}) : super(key: key);
+  const Home({super.key});
 
   @override
   _HomeState createState() => _HomeState();
@@ -48,8 +47,8 @@ class _HomeState extends State<Home> {
     }
   }
 
-  PopularBloc _bloc;
-  LatestAnimeBloc _latestAnimeBloc;
+  late final PopularBloc _bloc;
+  late final LatestAnimeBloc _latestAnimeBloc;
 
   @override
   void initState() {
@@ -62,12 +61,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final textTheme2 = Theme.of(context).textTheme;
     final auth = Provider.of<AuthBase>(context, listen: false);
-    return StreamBuilder<User>(
+    return StreamBuilder<User?>(
         stream: auth.authStateChanges,
         builder: (context, snapshot) {
           final user = snapshot.data;
           if (user != null) {
-            FirestoreDatabase(uid: user.uid, email: user.email)
+            FirestoreDatabase(uid: user.uid, email: user.email ?? '')
                 .create()
                 .then((value) => print('finished'));
           }
@@ -154,26 +153,20 @@ class _HomeState extends State<Home> {
                               stream: _latestAnimeBloc.latestStream,
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
-                                  switch (snapshot.data.status) {
+                                  switch (snapshot.data!.status) {
                                     case Status.LOADING:
-                                      // return Loading(
-                                      //   loadingMessage: snapshot.data.message,
-                                      // );
                                       return LatestHorizontalListSkeleton();
-                                      break;
                                     case Status.COMPLETED:
                                       return LatestHorizontalList(
                                         title: 'Latest',
-                                        list: snapshot.data.data,
+                                        list: snapshot.data!.data,
                                       );
-                                      break;
                                     case Status.ERROR:
                                       return Error(
-                                        errorMessage: snapshot.data.message,
+                                        errorMessage: snapshot.data!.message,
                                         onRetryPressed: () =>
                                             _latestAnimeBloc.fetchLatest(),
                                       );
-                                      break;
                                   }
                                 }
                                 return Container();
@@ -188,23 +181,20 @@ class _HomeState extends State<Home> {
                               stream: _bloc.popularStream,
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
-                                  switch (snapshot.data.status) {
+                                  switch (snapshot.data!.status) {
                                     case Status.LOADING:
                                       return PopularHorizontalListSkeleton();
-                                      break;
                                     case Status.COMPLETED:
                                       return PopularHorizontalList(
                                         title: 'Trending',
-                                        list: snapshot.data.data,
+                                        list: snapshot.data!.data,
                                       );
-                                      break;
                                     case Status.ERROR:
                                       return Error(
-                                        errorMessage: snapshot.data.message,
+                                        errorMessage: snapshot.data!.message,
                                         onRetryPressed: () =>
                                             _bloc.fetchPopular(),
                                       );
-                                      break;
                                   }
                                 }
                                 return Container();

@@ -5,14 +5,14 @@ import 'package:open_file/open_file.dart';
 
 class FolderContents extends StatefulWidget {
   final String dir;
-  const FolderContents({Key key, this.dir}) : super(key: key);
+  const FolderContents({super.key, required this.dir});
 
   @override
   _FolderContentsState createState() => _FolderContentsState();
 }
 
 class _FolderContentsState extends State<FolderContents> {
-  List files;
+  List? files;
 
   @override
   void initState() {
@@ -42,18 +42,18 @@ class _FolderContentsState extends State<FolderContents> {
               loadingMessage: 'Fetching Episodes',
             )
           : ListView.builder(
-              itemCount: files.length,
+              itemCount: files?.length,
               itemBuilder: (context, index) => Card(
                 child: ListTile(
                     title: Text(
-                      '${files[index].path}'.replaceAll("${widget.dir}/", ""),
+                      '${files?[index]?.path}'.replaceAll("${widget.dir}/", ""),
                     ),
                     leading: Icon(Icons.play_circle_outline_sharp),
                     trailing: Icon(Icons.chevron_right_sharp),
                     onTap: () {
-                      print(files[index].path);
+                      print(files?[index]?.path);
                       try {
-                        OpenFile.open(files[index].path, type: "video/mp4");
+                        OpenFile.open(files?[index]?.path, type: "video/mp4");
                       } catch (e){
                         print(e);
                       }
