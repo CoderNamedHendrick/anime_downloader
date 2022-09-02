@@ -206,17 +206,18 @@ class Genres extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> genres() {
       List<Widget> _chips = <Widget>[];
-      for (int index = 0; index < list.length; index++) {
-        print(list[index]);
-        _chips[index] = Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-          child: ActionChip(
-            label: Text(list[index].name),
-            labelStyle: TextStyle(fontSize: 18),
-            elevation: 4,
-            onPressed: () => SearchScreen.show(
-              context,
-              list[index].link,
+      for (var genre in list) {
+        _chips.add(
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: ActionChip(
+              label: Text(genre.name),
+              labelStyle: TextStyle(fontSize: 18),
+              elevation: 4,
+              onPressed: () => SearchScreen.show(
+                context,
+                genre.link,
+              ),
             ),
           ),
         );

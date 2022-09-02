@@ -3,7 +3,7 @@
     package="com.hendrick.anime_downloader">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
-   <application
+    <application
        android:requestLegacyExternalStorage="true"
         android:label="Pōtaru"
        android:name="${applicationName}"
