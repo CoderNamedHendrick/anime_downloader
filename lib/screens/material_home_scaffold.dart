@@ -34,8 +34,23 @@ class MaterialHomeScaffold extends StatelessWidget {
           _buildItem(TabItem.HOME),
           _buildItem(TabItem.SEARCH),
         ],
+        currentIndex: currentTab.index,
         onTap: (index) => onSelectTab(TabItem.values[index]),
+        unselectedIconTheme: IconThemeData(
+          color: Colors.grey[500], size: 18,
+        ),
+        selectedIconTheme: IconThemeData(
+          color: Colors.white, size: 28,
+        ),
         backgroundColor: Theme.of(context).primaryColor,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey[500],
+        selectedLabelStyle: TextStyle(
+          color: Colors.white,
+        ),
+        unselectedLabelStyle: TextStyle(
+          color: Colors.grey[500],
+        ),
         elevation: 6,
       ),
     );
@@ -43,13 +58,9 @@ class MaterialHomeScaffold extends StatelessWidget {
 
   BottomNavigationBarItem _buildItem(TabItem tabItem) {
     final itemData = TabItemData.allTabs[tabItem];
-    final color = currentTab == tabItem ? Colors.white : Colors.grey[500];
-    final iconSize = currentTab == tabItem ? 28.0 : 18.0;
     return BottomNavigationBarItem(
       icon: Icon(
         itemData?.icon,
-        color: color,
-        size: iconSize,
       ),
       label: itemData?.title,
     );

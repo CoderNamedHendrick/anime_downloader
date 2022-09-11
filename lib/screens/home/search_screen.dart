@@ -90,7 +90,7 @@ class SearchList extends StatelessWidget {
     print(searchList.length);
     return searchList.length == 0
         ? GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
+            onTap: Navigator.of(context).pop,
             child: Container(
               color: Theme.of(context).primaryColor,
               height: double.infinity,

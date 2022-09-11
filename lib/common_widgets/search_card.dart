@@ -19,7 +19,7 @@ class SearchCard extends StatelessWidget {
   final String imgUrl;
   final String link;
 
-  Future<void> addRecentSearch(String title, String imgUrl, String link) async {
+  void addRecentSearch(String title, String imgUrl, String link) {
     final recentSearch = RecentSearch()
       ..title = title
       ..imgUrl = imgUrl
@@ -46,55 +46,56 @@ class SearchCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
-          child: Card(
-            shadowColor: Colors.grey,
-            elevation: 8,
-            child: Container(
-              child: Column(
-                children: [
-                  Flexible(
-                    flex: 7,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(imgUrl),
-                          fit: BoxFit.cover,
+        child: Card(
+          shadowColor: Colors.grey,
+          elevation: 8,
+          child: Container(
+            child: Column(
+              children: [
+                Flexible(
+                  flex: 7,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(imgUrl),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        TextWidget(
+                          title: 'Name',
+                          input: title,
+                          type: 'searchScreen',
                         ),
-                      ),
+                        TextWidget(
+                          title: 'Release',
+                          input: releaseDate,
+                          type: 'searchScreen',
+                        ),
+                      ],
                     ),
                   ),
-                  Flexible(
-                    flex: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          TextWidget(
-                            title: 'Name',
-                            input: title,
-                            type: 'searchScreen',
-                          ),
-                          TextWidget(
-                            title: 'Release',
-                            input: releaseDate,
-                            type: 'searchScreen',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          onTap: () {
-            addRecentSearch(title, imgUrl, link);
-            return DescriptionScreen.show(
-              context,
-              link: link,
-              imageUrl: imgUrl,
-            );
-          }),
+        ),
+        onTap: () {
+          addRecentSearch(title, imgUrl, link);
+          return DescriptionScreen.show(
+            context,
+            link: link,
+            imageUrl: imgUrl,
+          );
+        },
+      ),
     );
   }
 }
