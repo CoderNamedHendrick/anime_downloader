@@ -10,6 +10,7 @@ class LatestAnimeBloc {
 
   StreamSink<ApiResponse<List<LatestAnimeModel>>> get latestSink =>
       _latestController.sink;
+
   Stream<ApiResponse<List<LatestAnimeModel>>> get latestStream =>
       _latestController.stream;
 
@@ -19,7 +20,7 @@ class LatestAnimeBloc {
     fetchLatest();
   }
 
-  fetchLatest({String page: "1"}) async {
+  Future<void> fetchLatest({String page = "1"}) async {
     latestSink.add(ApiResponse.loading('Fetching Latest Anime'));
     try {
       List<LatestAnimeModel> latest =

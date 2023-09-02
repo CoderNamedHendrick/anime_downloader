@@ -19,7 +19,7 @@ class RecentSearchWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.secondary,
             width: MediaQuery.of(context).size.width / 2.2,
             child: Row(
               children: [

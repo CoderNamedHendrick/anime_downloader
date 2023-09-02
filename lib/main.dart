@@ -28,8 +28,14 @@ class Main extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Pōtaru',
         theme: ThemeData(
-          primaryColor: const Color(0xff282828),
-          accentColor: Colors.grey[700],
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.grey,
+          ),
+          appBarTheme: AppBarTheme(
+            color: const Color(0xff282828),
+            foregroundColor: Colors.white,
+          ),
           textTheme: TextTheme(
             bodyText1: TextStyle(
               color: Colors.white,

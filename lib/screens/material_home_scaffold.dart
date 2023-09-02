@@ -29,40 +29,43 @@ class MaterialHomeScaffold extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
+      bottomNavigationBar: NavigationBar(
+        destinations: [
           _buildItem(TabItem.HOME),
           _buildItem(TabItem.SEARCH),
         ],
-        currentIndex: currentTab.index,
-        onTap: (index) => onSelectTab(TabItem.values[index]),
-        unselectedIconTheme: IconThemeData(
-          color: Colors.grey[500], size: 18,
-        ),
-        selectedIconTheme: IconThemeData(
-          color: Colors.white, size: 28,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey[500],
-        selectedLabelStyle: TextStyle(
-          color: Colors.white,
-        ),
-        unselectedLabelStyle: TextStyle(
-          color: Colors.grey[500],
-        ),
+        selectedIndex: currentTab.index,
+        onDestinationSelected: (page) => onSelectTab(TabItem.values[page]),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        // currentIndex: currentTab.index,
+        // onTap: (index) => onSelectTab(TabItem.values[index]),
+        // unselectedIconTheme: IconThemeData(
+        //   color: Colors.grey[500], size: 18,
+        // ),
+        // selectedIconTheme: IconThemeData(
+        //   color: Colors.white, size: 28,
+        // ),
+        // backgroundColor: Theme.of(context).primaryColor,
+        // selectedItemColor: Colors.white,
+        // unselectedItemColor: Colors.grey[500],
+        // selectedLabelStyle: TextStyle(
+        //   color: Colors.white,
+        // ),
+        // unselectedLabelStyle: TextStyle(
+        //   color: Colors.grey[500],
+        // ),
         elevation: 6,
       ),
     );
   }
 
-  BottomNavigationBarItem _buildItem(TabItem tabItem) {
+  Widget _buildItem(TabItem tabItem) {
     final itemData = TabItemData.allTabs[tabItem];
-    return BottomNavigationBarItem(
+    return NavigationDestination(
       icon: Icon(
         itemData?.icon,
       ),
-      label: itemData?.title,
+      label: itemData!.title,
     );
   }
 }
